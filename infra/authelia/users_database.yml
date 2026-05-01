@@ -1,0 +1,59 @@
+---
+# Authelia Users Database
+#
+# Groups:
+#   admins — full access to everything, 2FA always required
+#   family — access to all personal apps, 2FA required for vault
+#   kids   — access to Jellyfin + Kavita only, no 2FA
+#   guests — temporary accounts, Jellyfin read-only, no 2FA
+#
+# Generate password hashes with:
+#   docker run --rm authelia/authelia:4.38 \
+#     authelia crypto hash generate argon2 --password 'your_password'
+#
+# Add new users with:
+#   bash /srv/mystackmint/infra/authelia/add-user.sh <username> <group>
+
+users:
+  # --- Admins ---
+  admin:
+    displayname: "Admin"
+    # REPLACE: run the hash generation command above
+    password: "$argon2id$v=19$m=65536,t=3,p=4$REPLACE_THIS_HASH_FOR_ADMIN"
+    email: admin@mystackmint.com
+    groups:
+      - admins
+      - family
+
+  # --- Family members ---
+  family1:
+    displayname: "Family Member 1"
+    # REPLACE: run the hash generation command above
+    password: "$argon2id$v=19$m=65536,t=3,p=4$REPLACE_THIS_HASH_FOR_FAMILY1"
+    email: family1@mystackmint.com
+    groups:
+      - family
+
+  family2:
+    displayname: "Family Member 2"
+    # REPLACE: run the hash generation command above
+    password: "$argon2id$v=19$m=65536,t=3,p=4$REPLACE_THIS_HASH_FOR_FAMILY2"
+    email: family2@mystackmint.com
+    groups:
+      - family
+
+  # --- Kids (access: Jellyfin + Kavita only) ---
+  # kid1:
+  #   displayname: "Kid 1"
+  #   password: "$argon2id$v=19$m=65536,t=3,p=4$REPLACE_THIS_HASH"
+  #   email: kid1@mystackmint.com
+  #   groups:
+  #     - kids
+
+  # --- Guests (temporary, limited access: Jellyfin read-only) ---
+  # guest1:
+  #   displayname: "Guest"
+  #   password: "$argon2id$v=19$m=65536,t=3,p=4$REPLACE_THIS_HASH"
+  #   email: guest@mystackmint.com
+  #   groups:
+  #     - guests

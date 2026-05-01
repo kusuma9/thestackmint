@@ -1,0 +1,78 @@
+http:
+  middlewares:
+
+    # Apply to all public-facing services
+    security-headers:
+      headers:
+        sslRedirect: true
+        forceSTSHeader: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "strict-origin-when-cross-origin"
+        permissionsPolicy: "camera=(), microphone=(), geolocation=()"
+        customResponseHeaders:
+          X-Robots-Tag: "noindex,nofollow"
+          Server: ""
+
+    # Tailscale-only access (admin services)
+    # Tailscale CGNAT range: 100.64.0.0/10
+    # Also allows localhost for healthchecks
+    tailscale-only:
+      ipAllowList:
+        sourceRange:
+          - "100.64.0.0/10"
+          - "127.0.0.1/32"
+
+    # Authelia forward auth — 1FA (most personal apps)
+    # Usage: traefik.http.routers.<name>.middlewares=authelia@file,security-headers@file
+    authelia:
+      forwardAuth:
+        address: "http://authelia:9091/api/authz/forward-auth"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "Remote-User"
+          - "Remote-Groups"
+          - "Remote-Email"
+          - "Remote-Name"
+
+    # Authelia forward auth — 2FA required
+    # Usage: traefik.http.routers.<name>.middlewares=authelia-2fa@file,security-headers@file
+    authelia-2fa:
+      forwardAuth:
+        address: "http://authelia:9091/api/authz/forward-auth?authelia_url=https://auth.mystackmint.com/"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "Remote-User"
+          - "Remote-Groups"
+          - "Remote-Email"
+          - "Remote-Name"
+
+    # Combined: Tailscale IP check + 2FA auth (admin infra tools)
+    # Usage: traefik.http.routers.<name>.middlewares=admin-only@file,security-headers@file
+    admin-only:
+      chain:
+        middlewares:
+          - tailscale-only
+          - authelia-2fa
+
+    # Rate limiting — apply to login-heavy or public endpoints
+    rate-limit:
+      rateLimit:
+        average: 100
+        period: 1m
+        burst: 50
+
+    # CrowdSec bouncer — blocks IPs flagged by threat intelligence feeds
+    # Runs as a Traefik plugin; applied globally on the websecure entrypoint
+    # Deploy infra/crowdsec/ first, then populate CROWDSEC_BOUNCER_API_KEY in traefik/.env
+    crowdsec:
+      plugin:
+        bouncer:
+          enabled: true
+          crowdsecMode: stream
+          crowdsecLapiHost: crowdsec:8080
+          crowdsecLapiKey: '{{ env "CROWDSEC_BOUNCER_API_KEY" }}'

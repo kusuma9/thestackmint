@@ -1,0 +1,27 @@
+networks:
+  infra-net:
+    external: true
+
+volumes:
+  crowdsec-db:
+  crowdsec-config:
+  nginx-logs:
+    external: true
+    name: nginx-logs
+
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    restart: unless-stopped
+    environment:
+      - COLLECTIONS=crowdsecurity/nginx crowdsecurity/linux
+      - CUSTOM_HOSTNAME=mystackmint
+      - BOUNCER_KEY_nginx=${CROWDSEC_BOUNCER_API_KEY}
+    volumes:
+      - crowdsec-db:/var/lib/crowdsec/data
+      - crowdsec-config:/etc/crowdsec
+      # Read Nginx access logs from the shared named volume
+      - nginx-logs:/var/log/nginx:ro
+    networks:
+      - infra-net

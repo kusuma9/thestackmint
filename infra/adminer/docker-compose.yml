@@ -1,0 +1,23 @@
+networks:
+  infra-net:
+    external: true
+  personal-net:
+    external: true
+
+services:
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    restart: unless-stopped
+    networks:
+      - infra-net    # reaches gitea-db, woodpecker-db, authelia-redis
+      - personal-net # reaches nextcloud-db, immich-db, mealie-db, etc.
+    ports:
+      - "127.0.0.1:8023:8080"
+    environment:
+      - ADMINER_DESIGN=dracula
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080"]
+      interval: 60s
+      timeout: 5s
+      retries: 3

@@ -1,0 +1,23 @@
+networks:
+  personal-net:
+    external: true
+
+services:
+  actual-budget:
+    image: actualbudget/actual-server:latest
+    container_name: actual-budget
+    restart: unless-stopped
+    networks:
+      - personal-net
+    ports:
+      - "127.0.0.1:8012:5006"
+    volumes:
+      - actual_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:5006"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  actual_data:

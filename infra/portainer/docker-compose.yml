@@ -1,0 +1,24 @@
+networks:
+  infra-net:
+    external: true
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    networks:
+      - infra-net
+    ports:
+      - "127.0.0.1:8018:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - portainer_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:9000"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  portainer_data:

@@ -1,0 +1,85 @@
+networks:
+  personal-net:
+    external: true
+
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:release
+    container_name: immich-server
+    restart: unless-stopped
+    networks:
+      - personal-net
+    ports:
+      - "127.0.0.1:8006:2283"
+    environment:
+      - DB_HOSTNAME=immich-db
+      - DB_USERNAME=immich
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE_NAME=immich
+      - REDIS_HOSTNAME=immich-redis
+      - UPLOAD_LOCATION=/usr/src/app/upload
+      - IMMICH_VERSION=release
+    volumes:
+      - immich_upload:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      immich-db:
+        condition: service_healthy
+      immich-redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:2283/api/server/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:release
+    container_name: immich-ml
+    restart: unless-stopped
+    networks:
+      - personal-net
+    volumes:
+      - immich_ml_cache:/cache
+    environment:
+      - IMMICH_VERSION=release
+
+  immich-db:
+    image: tensorchord/pgvecto-rs:pg16-v0.2.0
+    container_name: immich-db
+    restart: unless-stopped
+    networks:
+      - personal-net
+    environment:
+      - POSTGRES_DB=immich
+      - POSTGRES_USER=immich
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--data-checksums
+    volumes:
+      - immich_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U immich -d immich"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  immich-redis:
+    image: redis:7-alpine
+    container_name: immich-redis
+    restart: unless-stopped
+    networks:
+      - personal-net
+    volumes:
+      - immich_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  immich_upload:
+  immich_ml_cache:
+  immich_db:
+  immich_redis:

@@ -1,0 +1,18 @@
+server {
+    listen 443 ssl;
+    server_name cloud.mystackmint.com;
+
+    include snippets/ssl.conf;
+    include snippets/security-headers.conf;
+
+    rewrite ^/.well-known/carddav /remote.php/dav/ permanent;
+    rewrite ^/.well-known/caldav  /remote.php/dav/ permanent;
+
+    location / {
+        include snippets/authelia-auth.conf;
+        include snippets/proxy-params.conf;
+        proxy_pass http://127.0.0.1:8005;
+    }
+
+    include snippets/authelia-location.conf;
+}

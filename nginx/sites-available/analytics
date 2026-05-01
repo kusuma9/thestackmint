@@ -1,0 +1,16 @@
+server {
+    listen 443 ssl;
+    server_name analytics.mystackmint.com;
+
+    include snippets/ssl.conf;
+    include snippets/security-headers.conf;
+    include snippets/admin-auth.conf;
+
+    location / {
+        include snippets/authelia-auth.conf;
+        include snippets/proxy-params.conf;
+        proxy_pass http://127.0.0.1:8022;
+    }
+
+    include snippets/authelia-location.conf;
+}

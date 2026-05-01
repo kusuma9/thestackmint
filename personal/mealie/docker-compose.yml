@@ -1,0 +1,54 @@
+networks:
+  personal-net:
+    external: true
+
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    container_name: mealie
+    restart: unless-stopped
+    networks:
+      - personal-net
+    ports:
+      - "127.0.0.1:8013:9000"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - BASE_URL=https://recipes.mystackmint.com
+      - DB_ENGINE=postgres
+      - POSTGRES_USER=mealie
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_SERVER=mealie-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=mealie
+      - ALLOW_SIGNUP=false
+      - DEFAULT_EMAIL=${MEALIE_ADMIN_EMAIL}
+      - DEFAULT_PASSWORD=${MEALIE_ADMIN_PASSWORD}
+    volumes:
+      - mealie_data:/app/data
+    depends_on:
+      mealie-db:
+        condition: service_healthy
+
+  mealie-db:
+    image: postgres:16-alpine
+    container_name: mealie-db
+    restart: unless-stopped
+    networks:
+      - personal-net
+    environment:
+      - POSTGRES_DB=mealie
+      - POSTGRES_USER=mealie
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - mealie_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mealie"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mealie_data:
+  mealie_db:

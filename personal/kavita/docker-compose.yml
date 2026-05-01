@@ -1,0 +1,21 @@
+networks:
+  personal-net:
+    external: true
+
+services:
+  kavita:
+    image: jvmilazz0/kavita:latest
+    container_name: kavita
+    restart: unless-stopped
+    networks:
+      - personal-net
+    ports:
+      - "127.0.0.1:8009:5000"
+    volumes:
+      - kavita_data:/kavita/config
+      - /media/books:/books:ro
+      - /media/manga:/manga:ro
+      - /media/comics:/comics:ro
+
+volumes:
+  kavita_data:

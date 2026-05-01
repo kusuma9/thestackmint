@@ -1,0 +1,20 @@
+networks:
+  infra-net:
+    external: true
+
+services:
+  glances:
+    image: nicolargo/glances:latest-full
+    container_name: glances
+    restart: unless-stopped
+    pid: host
+    networks:
+      - infra-net
+    ports:
+      - "127.0.0.1:8021:61208"
+    environment:
+      - GLANCES_OPT=-w
+      - TZ=UTC
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/os-release:/etc/os-release:ro

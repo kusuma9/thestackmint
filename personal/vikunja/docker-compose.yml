@@ -1,0 +1,54 @@
+networks:
+  personal-net:
+    external: true
+
+services:
+  vikunja:
+    image: vikunja/vikunja:latest
+    container_name: vikunja
+    restart: unless-stopped
+    networks:
+      - personal-net
+    ports:
+      - "127.0.0.1:8011:3456"
+    environment:
+      - VIKUNJA_DATABASE_TYPE=postgres
+      - VIKUNJA_DATABASE_HOST=vikunja-db
+      - VIKUNJA_DATABASE_DATABASE=vikunja
+      - VIKUNJA_DATABASE_USER=vikunja
+      - VIKUNJA_DATABASE_PASSWORD=${DB_PASSWORD}
+      - VIKUNJA_SERVICE_JWTSECRET=${JWT_SECRET}
+      - VIKUNJA_SERVICE_FRONTENDURL=https://tasks.mystackmint.com
+      - VIKUNJA_MAILER_ENABLED=true
+      - VIKUNJA_MAILER_HOST=${SMTP_HOST}
+      - VIKUNJA_MAILER_PORT=587
+      - VIKUNJA_MAILER_USERNAME=${SMTP_USERNAME}
+      - VIKUNJA_MAILER_PASSWORD=${SMTP_PASSWORD}
+      - VIKUNJA_MAILER_FROMEMAIL=vikunja@mystackmint.com
+    volumes:
+      - vikunja_files:/app/vikunja/files
+    depends_on:
+      vikunja-db:
+        condition: service_healthy
+
+  vikunja-db:
+    image: postgres:16-alpine
+    container_name: vikunja-db
+    restart: unless-stopped
+    networks:
+      - personal-net
+    environment:
+      - POSTGRES_DB=vikunja
+      - POSTGRES_USER=vikunja
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - vikunja_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vikunja"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  vikunja_files:
+  vikunja_db:

@@ -1,0 +1,25 @@
+networks:
+  personal-net:
+    external: true
+
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+    networks:
+      - personal-net
+    ports:
+      - "127.0.0.1:8008:4533"
+    user: "1000:1000"
+    environment:
+      - ND_SCANSCHEDULE=1h
+      - ND_LOGLEVEL=info
+      - ND_SESSIONTIMEOUT=24h
+      - ND_BASEURL=https://music.mystackmint.com
+    volumes:
+      - navidrome_data:/data
+      - /media/music:/music:ro
+
+volumes:
+  navidrome_data:

@@ -1,0 +1,64 @@
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+api:
+  dashboard: true
+  insecure: false
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+  websecure:
+    address: ":443"
+    http:
+      middlewares:
+        - crowdsec@file
+      tls:
+        certResolver: cloudflare
+        domains:
+          - main: "mystackmint.com"
+            sans:
+              - "*.mystackmint.com"
+
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: "satish.technology9@gmail.com"
+      storage: /acme.json
+      dnsChallenge:
+        provider: cloudflare
+        # Wait for DNS propagation before checking
+        delayBeforeCheck: 10
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+
+providers:
+  docker:
+    exposedByDefault: false
+    network: traefik-public
+  file:
+    directory: /config
+    watch: true
+
+log:
+  level: INFO
+  format: common
+
+accessLog:
+  filePath: "/var/log/traefik/access.log"
+  format: common
+  bufferingSize: 100
+
+experimental:
+  plugins:
+    bouncer:
+      moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
+      version: "v1.3.5"

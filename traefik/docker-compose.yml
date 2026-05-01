@@ -1,0 +1,53 @@
+networks:
+  traefik-public:
+    external: true
+
+volumes:
+  traefik-logs:
+    name: traefik-logs
+
+services:
+  traefik:
+    image: traefik:v3.2
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - traefik-public
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      - CROWDSEC_BOUNCER_API_KEY=${CROWDSEC_BOUNCER_API_KEY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/traefik.yml:ro
+      - ./config:/config:ro
+      - ./acme.json:/acme.json
+      - traefik-logs:/var/log/traefik
+    labels:
+      - "traefik.enable=true"
+      # Dashboard router
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.mystackmint.com`)"
+      - "traefik.http.routers.dashboard.entrypoints=websecure"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      # Tailscale IP check + basic auth — avoids Authelia circular dependency
+      - "traefik.http.routers.dashboard.middlewares=tailscale-only@file,dashboard-auth@docker,security-headers@file"
+      # Basic auth for dashboard — generate with: htpasswd -nb admin password
+      - "traefik.http.middlewares.dashboard-auth.basicauth.users=${TRAEFIK_DASHBOARD_USERS}"
+      - "traefik.docker.network=traefik-public"
+
+  # Routing verification — remove after confirming SSL + routing works
+  whoami:
+    image: traefik/whoami:v1.10
+    container_name: whoami
+    restart: unless-stopped
+    networks:
+      - traefik-public
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`test.mystackmint.com`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.docker.network=traefik-public"

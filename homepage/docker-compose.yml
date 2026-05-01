@@ -1,0 +1,25 @@
+networks:
+  infra-net:
+    external: true
+
+services:
+  homepage:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mystackmint-homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    networks:
+      - infra-net
+    ports:
+      - "127.0.0.1:8000:80"
+    environment:
+      - UPTIME_KUMA_SLUG=${UPTIME_KUMA_SLUG:-default}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

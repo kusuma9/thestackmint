@@ -5,9 +5,6 @@ networks:
 volumes:
   crowdsec-db:
   crowdsec-config:
-  nginx-logs:
-    external: true
-    name: nginx-logs
 
 services:
   crowdsec:
@@ -21,7 +18,6 @@ services:
     volumes:
       - crowdsec-db:/var/lib/crowdsec/data
       - crowdsec-config:/etc/crowdsec
-      # Read Nginx access logs from the shared named volume
-      - nginx-logs:/var/log/nginx:ro
+      - /var/log/nginx:/var/log/nginx:ro
     networks:
       - infra-net

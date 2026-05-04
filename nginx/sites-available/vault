@@ -6,7 +6,6 @@ server {
     include snippets/security-headers.conf;
 
     location /admin {
-        include snippets/admin-auth.conf;
         include snippets/authelia-auth.conf;
         include snippets/proxy-params.conf;
         proxy_pass http://127.0.0.1:8004;

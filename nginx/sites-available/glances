@@ -4,7 +4,6 @@ server {
 
     include snippets/ssl.conf;
     include snippets/security-headers.conf;
-    include snippets/admin-auth.conf;
 
     location / {
         include snippets/authelia-auth.conf;

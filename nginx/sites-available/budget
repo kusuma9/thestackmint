@@ -5,6 +5,10 @@ server {
     include snippets/ssl.conf;
     include snippets/security-headers.conf;
 
+    # Required for Actual Budget WASM/SharedArrayBuffer
+    add_header Cross-Origin-Opener-Policy "same-origin" always;
+    add_header Cross-Origin-Embedder-Policy "require-corp" always;
+
     location / {
         include snippets/authelia-auth.conf;
         include snippets/proxy-params.conf;

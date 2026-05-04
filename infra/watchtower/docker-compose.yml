@@ -11,16 +11,11 @@ services:
       - infra-net
     environment:
       - TZ=UTC
-      # Check for updates weekly (Sundays at 3am)
+      - DOCKER_API_VERSION=1.41
       - WATCHTOWER_SCHEDULE=0 0 3 * * SUN
       - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_INCLUDE_RESTARTING=false
       - WATCHTOWER_ROLLING_RESTART=true
       - WATCHTOWER_TIMEOUT=60s
-      # Ntfy notifications on updates
-      - WATCHTOWER_NOTIFICATION_URL=${NTFY_NOTIFICATION_URL}
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      # Dry-run: set to "true" to preview updates without applying
       - WATCHTOWER_NO_PULL=false
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

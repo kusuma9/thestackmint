@@ -5,11 +5,6 @@
 
 server:
   address: 'tcp://0.0.0.0:9091'
-  trusted_proxies:
-    - 127.0.0.0/8
-    - 10.0.0.0/8
-    - 172.16.0.0/12
-    - 192.168.0.0/16
 
 log:
   level: info
@@ -68,10 +63,7 @@ access_control:
       policy: bypass
 
     # Admin-only infra tools — 2FA + admin group required
-    # These are ALSO locked to Tailscale IP via Nginx allow/deny (admin-auth.conf snippet)
     - domain:
-        - "git.mystackmint.com"
-        - "ci.mystackmint.com"
         - "db.mystackmint.com"
         - "portainer.mystackmint.com"
         - "glances.mystackmint.com"
@@ -105,8 +97,6 @@ access_control:
         - "files.mystackmint.com"
         - "tasks.mystackmint.com"
         - "budget.mystackmint.com"
-        - "recipes.mystackmint.com"
-        - "home.mystackmint.com"
         - "links.mystackmint.com"
         - "pdf.mystackmint.com"
         - "read.mystackmint.com"
@@ -119,7 +109,6 @@ access_control:
 
 session:
   name: authelia_session
-  domain: mystackmint.com
   same_site: lax
   # Default 4h; family members can tick "remember me" for 7-day sessions.
   # Admins should NOT tick remember me — 2FA re-auth provides the protection.
@@ -147,19 +136,5 @@ storage:
 
 notifier:
   disable_startup_check: false
-  # --- SMTP (recommended for family use — enables password reset emails) ---
-  # Password is injected via AUTHELIA_NOTIFIER_SMTP_PASSWORD env var.
-  # For Gmail: create an App Password at myaccount.google.com/apppasswords
-  smtp:
-    host: smtp.gmail.com
-    port: 587
-    username: satish.technology9@gmail.com
-    sender: "MyStackMint Auth <no-reply@mystackmint.com>"
-    require_tls: true
-    tls:
-      skip_verify: false
-      minimum_version: TLS1.2
-  # --- Filesystem fallback (no email needed, notifications go to a log file) ---
-  # Uncomment below and comment out smtp above if you don't have SMTP configured:
-  # filesystem:
-  #   filename: /config/logs/notification.txt
+  filesystem:
+    filename: /config/logs/notification.txt

@@ -124,24 +124,6 @@ export const tools: Tool[] = [
     category: 'Productivity',
     tags: ['budget', 'finance', 'money', 'tracking'],
   },
-  {
-    id: 'mealie',
-    name: 'Mealie',
-    description: 'Recipe manager and meal planner for the household',
-    url: 'https://recipes.mystackmint.com',
-    icon: '🍳',
-    category: 'Productivity',
-    tags: ['recipes', 'cooking', 'meal-planning', 'food'],
-  },
-  {
-    id: 'grocy',
-    name: 'Grocy',
-    description: 'Household management — groceries, chores, inventory',
-    url: 'https://home.mystackmint.com',
-    icon: '🏠',
-    category: 'Productivity',
-    tags: ['groceries', 'household', 'inventory', 'chores'],
-  },
 
   // --- Utilities ---
   {
@@ -209,26 +191,6 @@ export const tools: Tool[] = [
     icon: '📉',
     category: 'DevOps & SaaS',
     tags: ['analytics', 'stats', 'traffic', 'saas', 'privacy'],
-    adminOnly: true,
-  },
-  {
-    id: 'gitea',
-    name: 'Gitea',
-    description: 'Self-hosted Git for infrastructure and SaaS source code',
-    url: 'https://git.mystackmint.com',
-    icon: '🐙',
-    category: 'DevOps & SaaS',
-    tags: ['git', 'code', 'repositories', 'ci', 'devops'],
-    adminOnly: true,
-  },
-  {
-    id: 'woodpecker',
-    name: 'Woodpecker CI',
-    description: 'Continuous integration and automated deployments',
-    url: 'https://ci.mystackmint.com',
-    icon: '⚙️',
-    category: 'DevOps & SaaS',
-    tags: ['ci', 'cd', 'pipelines', 'deploy', 'devops'],
     adminOnly: true,
   },
   {

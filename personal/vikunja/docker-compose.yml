@@ -18,6 +18,7 @@ services:
       - VIKUNJA_DATABASE_USER=vikunja
       - VIKUNJA_DATABASE_PASSWORD=${DB_PASSWORD}
       - VIKUNJA_SERVICE_JWTSECRET=${JWT_SECRET}
+      - VIKUNJA_SERVICE_PUBLICURL=https://tasks.mystackmint.com/
       - VIKUNJA_SERVICE_FRONTENDURL=https://tasks.mystackmint.com
       - VIKUNJA_MAILER_ENABLED=true
       - VIKUNJA_MAILER_HOST=${SMTP_HOST}

@@ -18,8 +18,6 @@ All infrastructure lives on the Hetzner VPS at `/srv/mystackmint/` mirroring thi
 ```bash
 apt install nginx certbot python3-certbot-dns-cloudflare
 bash scripts/setup-docker-networks.sh   # create the 3 Docker networks
-bash scripts/harden.sh                  # security hardening
-bash scripts/setup-tailscale.sh         # VPN for admin access
 # Issue wildcard SSL cert first:
 chmod 600 /etc/cloudflare.ini
 certbot certonly --dns-cloudflare \
@@ -81,8 +79,6 @@ docker compose build --no-cache && docker compose up -d
 Browser → Cloudflare (DNS + DDoS proxy) → Hetzner VPS :443 → Nginx (host) → 127.0.0.1:PORT → Docker container
 ```
 
-Admin services additionally require **Tailscale VPN** (100.64.0.0/10 IP range enforced by `nginx/snippets/admin-auth.conf`).
-
 ### Nginx on Host
 Nginx is installed via `apt install nginx`, **not** as a Docker container. Each service binds to a `127.0.0.1:PORT` on the host so only nginx can reach it.
 
@@ -115,8 +111,6 @@ SSL is a single wildcard cert (`*.mystackmint.com`) issued by certbot with the C
 | 8016 | linkwarden | 3000 |
 | 8017 | filebrowser | 80 |
 | 8018 | portainer | 9000 |
-| 8019 | gitea | 3000 |
-| 8020 | woodpecker-server | 8000 |
 | 8021 | glances | 61208 |
 | 8022 | umami | 3000 |
 | 8023 | adminer | 8080 |
@@ -134,8 +128,8 @@ SSL is a single wildcard cert (`*.mystackmint.com`) issued by certbot with the C
 │                         #   stirling-pdf, linkwarden, vikunja, paperless-ngx,
 │                         #   filebrowser
 ├── saas/                 # SaaS: template/, new-saas-app.sh, umami/ (analytics)
-├── infra/                # authelia, uptime-kuma, gitea (+ woodpecker), ntfy,
-│                         #   portainer, watchtower, glances, backup/, crowdsec/
+├── infra/                # authelia, uptime-kuma, ntfy,
+│                         #   portainer, watchtower, glances, backup/
 └── scripts/              # harden.sh, verify-security.sh, setup-*.sh
 ```
 
@@ -144,7 +138,7 @@ SSL is a single wildcard cert (`*.mystackmint.com`) issued by certbot with the C
 |---------|---------|
 | `personal-net` | Isolated to personal/family apps |
 | `saas-net` | Isolated to SaaS projects + Umami |
-| `infra-net` | Isolated to Authelia, Uptime Kuma, Gitea, Ntfy, Portainer |
+| `infra-net` | Isolated to Authelia, Uptime Kuma, Ntfy, Portainer |
 
 Create all networks once: `bash scripts/setup-docker-networks.sh`
 
@@ -171,12 +165,10 @@ DB and Redis containers have **no `ports:` section** — they are only reachable
 | `pdf.*` | Stirling PDF | Family |
 | `links.*` | Linkwarden | Family |
 | `files.*` | Filebrowser | Family |
-| `git.*` | Gitea | Admin + Tailscale + 2FA |
-| `ci.*` | Woodpecker CI | Admin + Tailscale + 2FA |
-| `portainer.*` | Portainer | Admin + Tailscale + 2FA |
-| `glances.*` | Glances | Admin + Tailscale + 2FA |
-| `analytics.*` | Umami | Admin + Tailscale + 2FA |
-| `db.*` | Adminer | Admin + Tailscale + 2FA |
+| `portainer.*` | Portainer | Admin + 2FA |
+| `glances.*` | Glances | Admin + 2FA |
+| `analytics.*` | Umami | Admin + 2FA |
+| `db.*` | Adminer | Admin + 2FA |
 
 ## Key Patterns
 
@@ -190,7 +182,6 @@ DB and Redis containers have **no `ports:` section** — they are only reachable
 | `snippets/proxy-params.conf` | Standard proxy headers + WebSocket support |
 | `snippets/authelia-auth.conf` | Forward auth → Authelia (inside location block) |
 | `snippets/authelia-location.conf` | Internal `/authelia` location (at server level) |
-| `snippets/admin-auth.conf` | `allow 100.64.0.0/10; deny all;` — Tailscale only |
 
 **Authelia groups:**
 - `admins` — everything, 2FA always
@@ -199,11 +190,6 @@ DB and Redis containers have **no `ports:` section** — they are only reachable
 - `guests` — Jellyfin read-only only
 
 **Secrets rule:** `.env` files are never committed. Every stack has `.env.example` with all required keys documented. The `.gitignore` excludes all `.env` files.
-
-**Git strategy:**
-- **GitHub** — SaaS source code, Astro homepage
-- **Gitea** (self-hosted, admin-only) — Docker Compose configs, Nginx/Authelia configs, scripts
-- Conventional commits: `feat(service):`, `fix(service):`, `security(service):`
 
 **New SaaS app:**
 ```bash
@@ -222,8 +208,7 @@ bash saas/new-saas-app.sh myapp
 | `backup-alerts` | restic backup success/failure |
 | `uptime-alerts` | Uptime Kuma downtime |
 | `update-alerts` | Watchtower container updates |
-| `security-alerts` | Fail2ban bans, new Authelia logins |
-| `deploy-alerts` | Woodpecker CI deploy results |
+| `security-alerts` | New Authelia logins |
 
 ## Deployment Priority Order
 1. Nginx host install + wildcard SSL cert — nothing works without this
@@ -236,5 +221,4 @@ bash saas/new-saas-app.sh myapp
 8. `infra/uptime-kuma/` — monitoring
 9. `infra/ntfy/` — push notifications
 10. `infra/portainer/` + `infra/watchtower/` — maintenance tooling
-11. `infra/gitea/` — SaaS workflow (Phase 4)
-12. Remaining personal apps + `saas/umami/`
+11. Remaining personal apps + `saas/umami/`

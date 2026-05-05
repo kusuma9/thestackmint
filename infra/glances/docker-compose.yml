@@ -1,6 +1,8 @@
 networks:
   infra-net:
     external: true
+  coolify:
+    external: true
 
 services:
   glances:
@@ -10,8 +12,17 @@ services:
     pid: host
     networks:
       - infra-net
+      - coolify
     ports:
       - "127.0.0.1:8021:61208"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.glances.rule=Host(`glances.mystackmint.com`)"
+      - "traefik.http.routers.glances.entrypoints=https"
+      - "traefik.http.routers.glances.tls=true"
+      - "traefik.http.routers.glances.tls.certresolver=letsencrypt"
+      - "traefik.http.services.glances.loadbalancer.server.port=61208"
+      - "traefik.http.routers.glances.middlewares=authelia@docker"
     environment:
       - GLANCES_OPT=-w
       - TZ=UTC

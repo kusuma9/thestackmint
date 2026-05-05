@@ -1,6 +1,8 @@
 networks:
   personal-net:
     external: true
+  coolify:
+    external: true
 
 services:
   actual-budget:
@@ -9,8 +11,17 @@ services:
     restart: unless-stopped
     networks:
       - personal-net
+      - coolify
     ports:
       - "127.0.0.1:8012:5006"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.actual-budget.rule=Host(`budget.mystackmint.com`)"
+      - "traefik.http.routers.actual-budget.entrypoints=https"
+      - "traefik.http.routers.actual-budget.tls=true"
+      - "traefik.http.routers.actual-budget.tls.certresolver=letsencrypt"
+      - "traefik.http.services.actual-budget.loadbalancer.server.port=5006"
+      - "traefik.http.routers.actual-budget.middlewares=authelia@docker"
     volumes:
       - actual_data:/data
     healthcheck:

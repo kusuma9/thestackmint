@@ -119,7 +119,7 @@ session:
     - domain: mystackmint.com
       authelia_url: https://auth.mystackmint.com/
   redis:
-    host: redis
+    host: authelia-redis
     port: 6379
     database_index: 0
     maximum_active_connections: 8

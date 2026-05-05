@@ -15,17 +15,14 @@ FROM nginx:1.27-alpine AS runner
 # Remove default nginx config
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Use nginx template directory — envsubst runs at container start
-# substituting ${UPTIME_KUMA_SLUG} before nginx loads the config
-COPY nginx.conf /etc/nginx/templates/default.conf.template
+# Copy config directly — no envsubst template so nginx variables are preserved
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Non-root user — nginx pid must be in a writable location
 RUN touch /run/nginx.pid && \
     chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/templates /etc/nginx/conf.d /run/nginx.pid
-
-ENV UPTIME_KUMA_SLUG=default
 
 USER nginx
 

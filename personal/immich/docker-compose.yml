@@ -1,6 +1,8 @@
 networks:
   personal-net:
     external: true
+  coolify:
+    external: true
 
 services:
   immich-server:
@@ -9,8 +11,17 @@ services:
     restart: unless-stopped
     networks:
       - personal-net
+      - coolify
     ports:
       - "127.0.0.1:8006:2283"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.immich.rule=Host(`photos.mystackmint.com`)"
+      - "traefik.http.routers.immich.entrypoints=https"
+      - "traefik.http.routers.immich.tls=true"
+      - "traefik.http.routers.immich.tls.certresolver=letsencrypt"
+      - "traefik.http.services.immich.loadbalancer.server.port=2283"
+      - "traefik.http.routers.immich.middlewares=authelia@docker"
     environment:
       - DB_HOSTNAME=immich-db
       - DB_USERNAME=immich

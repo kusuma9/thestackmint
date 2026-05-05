@@ -3,6 +3,8 @@
 networks:
   saas-net:
     external: true
+  coolify:
+    external: true
 
 services:
   umami:
@@ -11,8 +13,17 @@ services:
     restart: unless-stopped
     networks:
       - saas-net
+      - coolify
     ports:
       - "127.0.0.1:8022:3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.umami.rule=Host(`analytics.mystackmint.com`)"
+      - "traefik.http.routers.umami.entrypoints=https"
+      - "traefik.http.routers.umami.tls=true"
+      - "traefik.http.routers.umami.tls.certresolver=letsencrypt"
+      - "traefik.http.services.umami.loadbalancer.server.port=3000"
+      - "traefik.http.routers.umami.middlewares=authelia@docker"
     environment:
       - DATABASE_URL=postgresql://umami:${DB_PASSWORD}@umami-db:5432/umami
       - DATABASE_TYPE=postgresql

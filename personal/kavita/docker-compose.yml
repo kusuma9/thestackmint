@@ -1,6 +1,8 @@
 networks:
   personal-net:
     external: true
+  coolify:
+    external: true
 
 services:
   kavita:
@@ -9,8 +11,17 @@ services:
     restart: unless-stopped
     networks:
       - personal-net
+      - coolify
     ports:
       - "127.0.0.1:8009:5000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kavita.rule=Host(`books.mystackmint.com`)"
+      - "traefik.http.routers.kavita.entrypoints=https"
+      - "traefik.http.routers.kavita.tls=true"
+      - "traefik.http.routers.kavita.tls.certresolver=letsencrypt"
+      - "traefik.http.services.kavita.loadbalancer.server.port=5000"
+      - "traefik.http.routers.kavita.middlewares=authelia@docker"
     volumes:
       - kavita_data:/kavita/config
       - /media/books:/books:ro

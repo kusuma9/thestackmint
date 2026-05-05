@@ -1,6 +1,8 @@
 networks:
   personal-net:
     external: true
+  coolify:
+    external: true
 
 services:
   vaultwarden:
@@ -9,8 +11,17 @@ services:
     restart: unless-stopped
     networks:
       - personal-net
+      - coolify
     ports:
       - "127.0.0.1:8004:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vaultwarden.rule=Host(`vault.mystackmint.com`)"
+      - "traefik.http.routers.vaultwarden.entrypoints=https"
+      - "traefik.http.routers.vaultwarden.tls=true"
+      - "traefik.http.routers.vaultwarden.tls.certresolver=letsencrypt"
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+      - "traefik.http.routers.vaultwarden.middlewares=authelia@docker"
     environment:
       - DOMAIN=https://vault.mystackmint.com
       - SIGNUPS_ALLOWED=false

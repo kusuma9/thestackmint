@@ -1,6 +1,8 @@
 networks:
   infra-net:
     external: true
+  coolify:
+    external: true
 
 services:
   authelia:
@@ -9,8 +11,20 @@ services:
     restart: unless-stopped
     networks:
       - infra-net
+      - coolify
     ports:
       - "127.0.0.1:8001:9091"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.authelia.rule=Host(`auth.mystackmint.com`)"
+      - "traefik.http.routers.authelia.entrypoints=https"
+      - "traefik.http.routers.authelia.tls=true"
+      - "traefik.http.routers.authelia.tls.certresolver=letsencrypt"
+      - "traefik.http.services.authelia.loadbalancer.server.port=9091"
+      # Middleware definition — referenced by all protected services as authelia@docker
+      - "traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/authz/forward-auth"
+      - "traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true"
+      - "traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email"
     volumes:
       - ./configuration.yml:/config/configuration.yml:ro
       - ./users_database.yml:/config/users_database.yml

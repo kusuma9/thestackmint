@@ -5,10 +5,45 @@ server {
     include snippets/ssl.conf;
     include snippets/security-headers.conf;
 
-    location / {
+    # PUBLIC — landing page (unauthenticated users see the login UI)
+    location = / {
         include snippets/proxy-params.conf;
         proxy_pass http://127.0.0.1:8000;
     }
+
+    # PUBLIC — Astro static assets (JS, CSS, images in /_astro/)
+    location /_astro/ {
+        include snippets/proxy-params.conf;
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    # PUBLIC — favicon
+    location = /favicon.svg {
+        include snippets/proxy-params.conf;
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    # PROTECTED — dashboard, homelab, saas all require Authelia auth.
+    # Unauthenticated requests are redirected to auth.mystackmint.com.
+    location /dashboard {
+        include snippets/authelia-auth.conf;
+        include snippets/proxy-params.conf;
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    location /homelab {
+        include snippets/authelia-auth.conf;
+        include snippets/proxy-params.conf;
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    location /saas {
+        include snippets/authelia-auth.conf;
+        include snippets/proxy-params.conf;
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    include snippets/authelia-location.conf;
 }
 
 server {

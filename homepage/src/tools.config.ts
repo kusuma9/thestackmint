@@ -3,8 +3,10 @@ export type ToolCategory =
   | 'Photos & Media'
   | 'Security & Auth'
   | 'Productivity'
-  | 'Utilities'
+  | 'Finance & Home'
   | 'DevOps & SaaS';
+
+export type ToolSection = 'homelab' | 'saas';
 
 export interface Tool {
   id: string;
@@ -13,6 +15,7 @@ export interface Tool {
   url: string;
   icon: string;
   category: ToolCategory;
+  section: ToolSection;
   tags: string[];
   adminOnly?: boolean;
 }
@@ -22,8 +25,16 @@ export const CATEGORIES: ToolCategory[] = [
   'Photos & Media',
   'Security & Auth',
   'Productivity',
-  'Utilities',
+  'Finance & Home',
   'DevOps & SaaS',
+];
+
+export const HOMELAB_CATEGORIES: ToolCategory[] = [
+  'Files & Storage',
+  'Photos & Media',
+  'Security & Auth',
+  'Productivity',
+  'Finance & Home',
 ];
 
 export const tools: Tool[] = [
@@ -35,6 +46,7 @@ export const tools: Tool[] = [
     url: 'https://cloud.mystackmint.com',
     icon: '☁️',
     category: 'Files & Storage',
+    section: 'homelab',
     tags: ['files', 'calendar', 'contacts', 'sync', 'cloud'],
   },
   {
@@ -44,6 +56,7 @@ export const tools: Tool[] = [
     url: 'https://files.mystackmint.com',
     icon: '📂',
     category: 'Files & Storage',
+    section: 'homelab',
     tags: ['files', 'storage', 'browser'],
   },
   {
@@ -53,6 +66,7 @@ export const tools: Tool[] = [
     url: 'https://docs.mystackmint.com',
     icon: '🗂️',
     category: 'Files & Storage',
+    section: 'homelab',
     tags: ['documents', 'ocr', 'scan', 'receipts', 'paperless'],
   },
 
@@ -64,6 +78,7 @@ export const tools: Tool[] = [
     url: 'https://photos.mystackmint.com',
     icon: '🖼️',
     category: 'Photos & Media',
+    section: 'homelab',
     tags: ['photos', 'backup', 'mobile', 'gallery', 'ai'],
   },
   {
@@ -73,6 +88,7 @@ export const tools: Tool[] = [
     url: 'https://media.mystackmint.com',
     icon: '🎬',
     category: 'Photos & Media',
+    section: 'homelab',
     tags: ['media', 'movies', 'tv', 'streaming'],
   },
   {
@@ -82,7 +98,18 @@ export const tools: Tool[] = [
     url: 'https://music.mystackmint.com',
     icon: '🎵',
     category: 'Photos & Media',
+    section: 'homelab',
     tags: ['music', 'audio', 'streaming', 'subsonic'],
+  },
+  {
+    id: 'kavita',
+    name: 'Kavita',
+    description: 'Read manga, comics, and ebooks in the browser',
+    url: 'https://books.mystackmint.com',
+    icon: '📖',
+    category: 'Photos & Media',
+    section: 'homelab',
+    tags: ['books', 'ebooks', 'manga', 'comics', 'reading'],
   },
 
   // --- Security & Auth ---
@@ -93,6 +120,7 @@ export const tools: Tool[] = [
     url: 'https://vault.mystackmint.com',
     icon: '🔑',
     category: 'Security & Auth',
+    section: 'homelab',
     tags: ['passwords', 'vault', 'bitwarden', '2fa', 'security'],
   },
   {
@@ -102,6 +130,7 @@ export const tools: Tool[] = [
     url: 'https://auth.mystackmint.com',
     icon: '🛡️',
     category: 'Security & Auth',
+    section: 'homelab',
     tags: ['sso', 'auth', '2fa', 'totp', 'security'],
   },
 
@@ -113,27 +142,8 @@ export const tools: Tool[] = [
     url: 'https://tasks.mystackmint.com',
     icon: '✅',
     category: 'Productivity',
+    section: 'homelab',
     tags: ['tasks', 'todos', 'projects', 'kanban'],
-  },
-  {
-    id: 'actual-budget',
-    name: 'Actual Budget',
-    description: 'Privacy-first family budget and finance tracker',
-    url: 'https://budget.mystackmint.com',
-    icon: '💰',
-    category: 'Productivity',
-    tags: ['budget', 'finance', 'money', 'tracking'],
-  },
-
-  // --- Utilities ---
-  {
-    id: 'kavita',
-    name: 'Kavita',
-    description: 'Read manga, comics, and ebooks in the browser',
-    url: 'https://books.mystackmint.com',
-    icon: '📖',
-    category: 'Utilities',
-    tags: ['books', 'ebooks', 'manga', 'comics', 'reading'],
   },
   {
     id: 'stirling-pdf',
@@ -141,7 +151,8 @@ export const tools: Tool[] = [
     description: 'All-in-one PDF editor, merger, and converter',
     url: 'https://pdf.mystackmint.com',
     icon: '📄',
-    category: 'Utilities',
+    category: 'Productivity',
+    section: 'homelab',
     tags: ['pdf', 'documents', 'convert', 'merge', 'tools'],
   },
   {
@@ -150,36 +161,41 @@ export const tools: Tool[] = [
     description: 'Bookmark manager with auto-archiving and tagging',
     url: 'https://links.mystackmint.com',
     icon: '🔖',
-    category: 'Utilities',
+    category: 'Productivity',
+    section: 'homelab',
     tags: ['bookmarks', 'links', 'archive', 'reading'],
   },
+
+  // --- Finance & Home ---
   {
-    id: 'uptime-kuma',
-    name: 'Uptime Kuma',
-    description: 'Service monitoring dashboard and public status page',
-    url: 'https://status.mystackmint.com',
-    icon: '📈',
-    category: 'Utilities',
-    tags: ['monitoring', 'status', 'uptime', 'alerts'],
+    id: 'actual-budget',
+    name: 'Actual Budget',
+    description: 'Privacy-first family budget and finance tracker',
+    url: 'https://budget.mystackmint.com',
+    icon: '💰',
+    category: 'Finance & Home',
+    section: 'homelab',
+    tags: ['budget', 'finance', 'money', 'tracking'],
   },
   {
-    id: 'ntfy',
-    name: 'Ntfy',
-    description: 'Self-hosted push notifications — backups, alerts, deploys',
-    url: 'https://ntfy.mystackmint.com',
-    icon: '🔔',
-    category: 'Utilities',
-    tags: ['notifications', 'push', 'alerts', 'mobile'],
+    id: 'mealie',
+    name: 'Mealie',
+    description: 'Recipe manager and meal planner for the whole family',
+    url: 'https://recipes.mystackmint.com',
+    icon: '🍽️',
+    category: 'Finance & Home',
+    section: 'homelab',
+    tags: ['recipes', 'food', 'meal', 'planning'],
   },
   {
-    id: 'glances',
-    name: 'Glances',
-    description: 'Real-time server resource monitor — CPU, RAM, disk, network',
-    url: 'https://glances.mystackmint.com',
-    icon: '📊',
-    category: 'Utilities',
-    tags: ['monitoring', 'resources', 'cpu', 'ram', 'server'],
-    adminOnly: true,
+    id: 'grocy',
+    name: 'Grocy',
+    description: 'Grocery management and household chores tracker',
+    url: 'https://home.mystackmint.com',
+    icon: '🛒',
+    category: 'Finance & Home',
+    section: 'homelab',
+    tags: ['grocery', 'shopping', 'household', 'chores'],
   },
 
   // --- DevOps & SaaS ---
@@ -190,16 +206,18 @@ export const tools: Tool[] = [
     url: 'https://analytics.mystackmint.com',
     icon: '📉',
     category: 'DevOps & SaaS',
+    section: 'saas',
     tags: ['analytics', 'stats', 'traffic', 'saas', 'privacy'],
     adminOnly: true,
   },
   {
     id: 'adminer',
     name: 'Adminer',
-    description: 'Web-based database admin — connect to any PostgreSQL or MariaDB instance',
+    description: 'Web-based database admin — PostgreSQL and MariaDB',
     url: 'https://db.mystackmint.com',
     icon: '🗄️',
     category: 'DevOps & SaaS',
+    section: 'saas',
     tags: ['database', 'postgres', 'sql', 'admin', 'devops'],
     adminOnly: true,
   },
@@ -210,7 +228,39 @@ export const tools: Tool[] = [
     url: 'https://portainer.mystackmint.com',
     icon: '🐳',
     category: 'DevOps & SaaS',
+    section: 'saas',
     tags: ['docker', 'containers', 'management', 'devops'],
+    adminOnly: true,
+  },
+  {
+    id: 'uptime-kuma',
+    name: 'Uptime Kuma',
+    description: 'Service monitoring dashboard and public status page',
+    url: 'https://status.mystackmint.com',
+    icon: '📈',
+    category: 'DevOps & SaaS',
+    section: 'saas',
+    tags: ['monitoring', 'status', 'uptime', 'alerts'],
+  },
+  {
+    id: 'ntfy',
+    name: 'Ntfy',
+    description: 'Self-hosted push notifications — backups, alerts, deploys',
+    url: 'https://ntfy.mystackmint.com',
+    icon: '🔔',
+    category: 'DevOps & SaaS',
+    section: 'saas',
+    tags: ['notifications', 'push', 'alerts', 'mobile'],
+  },
+  {
+    id: 'glances',
+    name: 'Glances',
+    description: 'Real-time server resource monitor — CPU, RAM, disk, network',
+    url: 'https://glances.mystackmint.com',
+    icon: '📊',
+    category: 'DevOps & SaaS',
+    section: 'saas',
+    tags: ['monitoring', 'resources', 'cpu', 'ram', 'server'],
     adminOnly: true,
   },
 ];

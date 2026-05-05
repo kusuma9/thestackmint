@@ -1,0 +1,73 @@
+---
+import DashLayout from '../../layouts/DashLayout.astro';
+import AppCard from '../../components/AppCard.astro';
+import { tools } from '../../tools.config';
+
+const saasTools = tools.filter((t) => t.section === 'saas');
+---
+
+<DashLayout title="SaaS Products — MyStackMint">
+
+  <main class="px-4 lg:px-8 py-8 max-w-7xl mx-auto">
+
+    <!-- Breadcrumb + heading -->
+    <div class="mb-10">
+      <nav class="text-xs font-mono text-muted mb-2">
+        <a href="/dashboard" class="hover:text-cyan transition-colors">Dashboard</a>
+        <span class="mx-1.5 opacity-40">/</span>
+        <span class="text-white">SaaS Products</span>
+      </nav>
+      <h2 class="text-2xl font-bold text-white">
+        🚀 <span class="text-cyan">SaaS</span> Products
+      </h2>
+      <p class="text-sm text-muted mt-1">
+        Hosted SaaS applications, analytics, and infrastructure tools.
+      </p>
+    </div>
+
+    <!-- App grid -->
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+
+      {saasTools.map((tool) => (
+        <AppCard tool={tool} accentColor="cyan" />
+      ))}
+
+      <!-- Add New SaaS App (admin placeholder) -->
+      <div
+        class="flex flex-col items-center justify-center gap-3 p-6 rounded-xl
+               border border-dashed border-border/50 bg-surface/40
+               text-center opacity-50 cursor-default select-none"
+        title="Admin only — use new-saas-app.sh to scaffold"
+      >
+        <div class="w-10 h-10 rounded-xl border border-dashed border-muted/30
+                    flex items-center justify-center text-muted text-xl">
+          +
+        </div>
+        <div>
+          <p class="text-sm font-medium text-muted/70">Add SaaS App</p>
+          <p class="text-[11px] font-mono text-muted/40 mt-0.5">Admin only</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Info banner -->
+    <div class="mt-10 flex gap-3 bg-cyan/5 border border-cyan/15 rounded-xl px-5 py-4 max-w-lg">
+      <svg class="w-4 h-4 text-cyan flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <div>
+        <p class="text-xs text-cyan/80 leading-relaxed">
+          To scaffold a new SaaS app, run
+          <code class="font-mono bg-cyan/10 px-1 py-0.5 rounded text-[11px]">
+            bash saas/new-saas-app.sh myapp
+          </code>
+          on the VPS. Then add it to <code class="font-mono bg-cyan/10 px-1 py-0.5 rounded text-[11px]">tools.config.ts</code>.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+</DashLayout>

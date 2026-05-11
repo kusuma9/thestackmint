@@ -22,6 +22,7 @@ services:
       - "traefik.http.routers.jellyfin.tls.certresolver=letsencrypt"
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
       - "traefik.http.routers.jellyfin.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
     environment:
       - JELLYFIN_PublishedServerUrl=https://media.mystackmint.com
     volumes:

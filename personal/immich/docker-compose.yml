@@ -22,6 +22,7 @@ services:
       - "traefik.http.routers.immich.tls.certresolver=letsencrypt"
       - "traefik.http.services.immich.loadbalancer.server.port=2283"
       - "traefik.http.routers.immich.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
     environment:
       - DB_HOSTNAME=immich-db
       - DB_USERNAME=immich

@@ -25,6 +25,7 @@ services:
       - "traefik.http.routers.adminer.tls.certresolver=letsencrypt"
       - "traefik.http.services.adminer.loadbalancer.server.port=8080"
       - "traefik.http.routers.adminer.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
     environment:
       - ADMINER_DESIGN=dracula
     healthcheck:

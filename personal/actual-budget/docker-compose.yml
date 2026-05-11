@@ -22,6 +22,7 @@ services:
       - "traefik.http.routers.actual-budget.tls.certresolver=letsencrypt"
       - "traefik.http.services.actual-budget.loadbalancer.server.port=5006"
       - "traefik.http.routers.actual-budget.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
     volumes:
       - actual_data:/data
     healthcheck:

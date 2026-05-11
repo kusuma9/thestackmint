@@ -22,6 +22,7 @@ services:
       - "traefik.http.routers.vikunja.tls.certresolver=letsencrypt"
       - "traefik.http.services.vikunja.loadbalancer.server.port=3456"
       - "traefik.http.routers.vikunja.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
     environment:
       - VIKUNJA_DATABASE_TYPE=postgres
       - VIKUNJA_DATABASE_HOST=vikunja-db

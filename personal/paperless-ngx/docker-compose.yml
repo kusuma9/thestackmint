@@ -22,6 +22,7 @@ services:
       - "traefik.http.routers.paperless.tls.certresolver=letsencrypt"
       - "traefik.http.services.paperless.loadbalancer.server.port=8000"
       - "traefik.http.routers.paperless.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
     environment:
       - PAPERLESS_REDIS=redis://paperless-redis:6379
       - PAPERLESS_DBHOST=paperless-db

@@ -21,6 +21,7 @@ services:
       - "traefik.http.routers.ntfy.tls=true"
       - "traefik.http.routers.ntfy.tls.certresolver=letsencrypt"
       - "traefik.http.services.ntfy.loadbalancer.server.port=80"
+      - "traefik.docker.network=coolify"
     command: serve
     environment:
       - TZ=UTC

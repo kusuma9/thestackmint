@@ -22,6 +22,7 @@ services:
       - "traefik.http.routers.stirling-pdf.tls.certresolver=letsencrypt"
       - "traefik.http.services.stirling-pdf.loadbalancer.server.port=8080"
       - "traefik.http.routers.stirling-pdf.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
     environment:
       - DOCKER_ENABLE_SECURITY=false
       - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false

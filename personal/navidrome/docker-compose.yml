@@ -22,6 +22,7 @@ services:
       - "traefik.http.routers.navidrome.tls.certresolver=letsencrypt"
       - "traefik.http.services.navidrome.loadbalancer.server.port=4533"
       - "traefik.http.routers.navidrome.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
     user: "1000:1000"
     environment:
       - ND_SCANSCHEDULE=1h

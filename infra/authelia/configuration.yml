@@ -59,15 +59,11 @@ access_control:
     # Public — no authentication required
     - domain: "auth.mystackmint.com"
       policy: bypass
-    - domain: "status.mystackmint.com"
-      policy: bypass
 
     # Admin-only infra tools — 2FA + admin group required
     - domain:
         - "db.mystackmint.com"
         - "portainer.mystackmint.com"
-        - "glances.mystackmint.com"
-        - "analytics.mystackmint.com"
       policy: two_factor
       subject: "group:admins"
 
@@ -101,7 +97,6 @@ access_control:
         - "pdf.mystackmint.com"
         - "read.mystackmint.com"
         - "docs.mystackmint.com"
-        - "ntfy.mystackmint.com"
       policy: one_factor
       subject:
         - "group:admins"

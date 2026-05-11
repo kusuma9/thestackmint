@@ -4,7 +4,8 @@ export type ToolCategory =
   | 'Security & Auth'
   | 'Productivity'
   | 'Finance & Home'
-  | 'DevOps & SaaS';
+  | 'DevOps & SaaS'
+  | 'Products';
 
 export type ToolSection = 'homelab' | 'saas';
 
@@ -27,6 +28,7 @@ export const CATEGORIES: ToolCategory[] = [
   'Productivity',
   'Finance & Home',
   'DevOps & SaaS',
+  'Products',
 ];
 
 export const HOMELAB_CATEGORIES: ToolCategory[] = [
@@ -176,6 +178,18 @@ export const tools: Tool[] = [
     category: 'Finance & Home',
     section: 'homelab',
     tags: ['budget', 'finance', 'money', 'tracking'],
+  },
+
+  // --- Products ---
+  {
+    id: 'codefinderhub',
+    name: 'India Pincode & IFSC Finder',
+    description: 'Look up Indian postal pincodes and bank IFSC codes instantly',
+    url: 'https://codefinderhub.com/',
+    icon: '📮',
+    category: 'Products',
+    section: 'saas',
+    tags: ['pincode', 'ifsc', 'india', 'banking', 'postal', 'lookup'],
   },
 
   // --- DevOps & SaaS ---

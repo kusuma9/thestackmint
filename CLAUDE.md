@@ -1,57 +1,31 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI assistants when working with code in this repository.
 
 ## Project Overview
 
-**MyStackMint.com** is a self-hosted personal & SaaS platform on a Hetzner VPS (Ubuntu 24.04). Each service is a Docker Compose stack. **Nginx is installed on the host** (not in Docker) as the reverse proxy. The unified homepage (`homepage/`) is the only custom-developed frontend.
-
-Reference documents in `G:\Development\Claude\HomeLab\Docs\`:
-- `mystackmint-execution-plan.html` — original 6-prompt execution plan
-- Second document — security enhancements, roles/groups, Git strategy, 4 additional prompts (7–10)
+**MyStackMint.com** is a self-hosted personal & SaaS platform on a Hetzner VPS (Ubuntu 24.04). Each service is a Docker Compose stack. **Coolify manages Traefik** as the reverse proxy — there is no Nginx on the host. The unified homepage (`homepage/`) is the only custom-developed frontend.
 
 ## Working with the Infrastructure
 
-All infrastructure lives on the Hetzner VPS at `/srv/mystackmint/` mirroring this repo's structure.
-
-**First-time server setup (run in order):**
-```bash
-apt install nginx certbot python3-certbot-dns-cloudflare
-bash scripts/setup-docker-networks.sh   # create the 3 Docker networks
-# Issue wildcard SSL cert first:
-chmod 600 /etc/cloudflare.ini
-certbot certonly --dns-cloudflare \
-  --dns-cloudflare-credentials /etc/cloudflare.ini \
-  --email satish.technology9@gmail.com --agree-tos --no-eff-email \
-  -d 'mystackmint.com' -d '*.mystackmint.com'
-# Deploy nginx configs:
-cd nginx && sudo bash install.sh
-# Start core services:
-cd infra/authelia && cp .env.example .env && docker compose up -d
-cd infra/backup && bash backup.sh       # first manual backup test
-```
+All infrastructure lives on the Hetzner VPS at `/srv/mystackmint/` mirroring this repo's structure. SSH: `ssh -i C:\SSH\id_ed25519 root@77.42.127.150`
 
 **Deploy a stack:**
 ```bash
 cd /srv/mystackmint/<service>/
 docker compose up -d
-docker compose logs -f     # watch startup
-docker compose ps          # verify running
+docker compose logs -f
+docker compose ps
 ```
 
-**Restart / pull updates:**
+**Update a running stack:**
 ```bash
 docker compose pull && docker compose up -d
 ```
 
-**Validate a compose file:**
-```bash
-docker compose config
-```
-
-**Verify security posture:**
-```bash
-bash scripts/verify-security.sh
+**Sync a local file change to VPS:**
+```powershell
+scp -i C:\SSH\id_ed25519 -P 22 "local\path\file" "root@77.42.127.150:/srv/mystackmint/path/file"
 ```
 
 ## Unified Homepage (Astro)
@@ -67,35 +41,47 @@ npm run preview    # preview build locally
 
 **Docker deploy:**
 ```bash
+cd /srv/mystackmint/homepage
 docker compose build --no-cache && docker compose up -d
 ```
 
-**Adding a tool:** edit `homepage/src/tools.config.ts` — one object per tool (`id`, `name`, `description`, `url`, `icon`, `category`, `tags[]`, optional `adminOnly`). No other file changes needed.
+**Adding a tool:** edit `homepage/src/tools.config.ts` — one object per tool (`id`, `name`, `description`, `url`, `icon`, `category`, `section`, `tags[]`, optional `adminOnly`). Rebuild the Docker image after changes.
 
 ## Architecture
 
 ### Traffic Flow
 ```
-Browser → Cloudflare (DNS + DDoS proxy) → Hetzner VPS :443 → Nginx (host) → 127.0.0.1:PORT → Docker container
+Browser → Cloudflare (DNS + DDoS proxy) → Hetzner VPS :443 → Traefik (coolify-proxy) → Docker container
 ```
 
-### Nginx on Host
-Nginx is installed via `apt install nginx`, **not** as a Docker container. Each service binds to a `127.0.0.1:PORT` on the host so only nginx can reach it.
+### Traefik via Coolify
+Traefik (`coolify-proxy`) is managed by Coolify and holds ports 80/443. Services are discovered via Docker labels. **There is no Nginx on the host.**
 
-Site configs live in `nginx/sites-available/` (one file per service). Deploy with:
-```bash
-sudo bash nginx/install.sh
+Every service that Traefik routes to must:
+1. Be on the `coolify` Docker network
+2. Have `traefik.enable=true` label
+3. Have `traefik.docker.network=coolify` label — **required for all services on multiple networks**, otherwise Traefik may pick the wrong network IP and return 504
+4. Have router, TLS, and service labels
+5. Have `traefik.http.routers.<name>.middlewares=authelia@docker` for auth-protected routes
+
+**Standard Traefik label block:**
+```yaml
+labels:
+  - "traefik.enable=true"
+  - "traefik.http.routers.<name>.rule=Host(`<subdomain>.mystackmint.com`)"
+  - "traefik.http.routers.<name>.entrypoints=https"
+  - "traefik.http.routers.<name>.tls=true"
+  - "traefik.http.routers.<name>.tls.certresolver=letsencrypt"
+  - "traefik.http.services.<name>.loadbalancer.server.port=<internal-port>"
+  - "traefik.http.routers.<name>.middlewares=authelia@docker"
+  - "traefik.docker.network=coolify"
 ```
-
-SSL is a single wildcard cert (`*.mystackmint.com`) issued by certbot with the Cloudflare DNS plugin. All site configs reference the same cert via `include snippets/ssl.conf`.
 
 ### Port Map
 | Host Port | Service | Internal Port |
 |-----------|---------|--------------|
-| 8000 | homepage | 80 |
+| — | homepage | 80 (Traefik only, no host port) |
 | 8001 | authelia | 9091 |
-| 8002 | uptime-kuma | 3001 |
-| 8003 | ntfy | 80 |
 | 8004 | vaultwarden | 80 |
 | 8005 | nextcloud | 80 |
 | 8006 | immich-server | 2283 |
@@ -105,31 +91,21 @@ SSL is a single wildcard cert (`*.mystackmint.com`) issued by certbot with the C
 | 8010 | paperless | 8000 |
 | 8011 | vikunja | 3456 |
 | 8012 | actual-budget | 5006 |
-| 8013 | mealie | 9000 |
-| 8014 | grocy | 80 |
 | 8015 | stirling-pdf | 8080 |
 | 8016 | linkwarden | 3000 |
 | 8017 | filebrowser | 80 |
 | 8018 | portainer | 9000 |
-| 8021 | glances | 61208 |
-| 8022 | umami | 3000 |
 | 8023 | adminer | 8080 |
 
 ### Server Directory Structure
 ```
 /srv/mystackmint/
-├── nginx/                # Host nginx configs (install.sh deploys to /etc/nginx/)
-│   ├── sites-available/  # One file per service — source of truth
-│   ├── snippets/         # ssl.conf, security-headers.conf, authelia-*.conf, etc.
-│   └── conf.d/           # websocket-upgrade.conf (http-level map)
 ├── homepage/             # Astro static site at root domain
 ├── personal/             # Family apps: nextcloud, immich, jellyfin, vaultwarden,
-│                         #   mealie, grocy, actual-budget, navidrome, kavita,
-│                         #   stirling-pdf, linkwarden, vikunja, paperless-ngx,
-│                         #   filebrowser
-├── saas/                 # SaaS: template/, new-saas-app.sh, umami/ (analytics)
-├── infra/                # authelia, uptime-kuma, ntfy,
-│                         #   portainer, watchtower, glances, backup/
+│                         #   actual-budget, navidrome, kavita, stirling-pdf,
+│                         #   linkwarden, vikunja, paperless-ngx, filebrowser
+├── saas/                 # SaaS: template/, new-saas-app.sh
+├── infra/                # authelia, portainer, watchtower, adminer, backup/
 └── scripts/              # harden.sh, verify-security.sh, setup-*.sh
 ```
 
@@ -137,20 +113,19 @@ SSL is a single wildcard cert (`*.mystackmint.com`) issued by certbot with the C
 | Network | Purpose |
 |---------|---------|
 | `personal-net` | Isolated to personal/family apps |
-| `saas-net` | Isolated to SaaS projects + Umami |
-| `infra-net` | Isolated to Authelia, Uptime Kuma, Ntfy, Portainer |
+| `saas-net` | Isolated to SaaS projects |
+| `infra-net` | Isolated to Authelia, Portainer, Adminer |
+| `coolify` | Traefik routing network — all services must join this |
 
 Create all networks once: `bash scripts/setup-docker-networks.sh`
 
-DB and Redis containers have **no `ports:` section** — they are only reachable by services on the same Docker network.
+DB and Redis containers have **no `ports:` section** — reachable only by services on the same Docker network.
 
 ### Subdomain Map
 | Subdomain | App | Access |
 |-----------|-----|--------|
 | `mystackmint.com` | Homepage | Public |
-| `status.*` | Uptime Kuma | Public |
 | `auth.*` | Authelia SSO | Public (login page) |
-| `ntfy.*` | Ntfy | Public (native app auth) |
 | `vault.*` | Vaultwarden | Family + 2FA |
 | `cloud.*` | Nextcloud | Family |
 | `photos.*` | Immich | Family |
@@ -160,28 +135,14 @@ DB and Redis containers have **no `ports:` section** — they are only reachable
 | `docs.*` | Paperless-NGX | Family |
 | `tasks.*` | Vikunja | Family |
 | `budget.*` | Actual Budget | Family |
-| `recipes.*` | Mealie | Family |
-| `home.*` | Grocy | Family |
 | `pdf.*` | Stirling PDF | Family |
 | `links.*` | Linkwarden | Family |
 | `files.*` | Filebrowser | Family |
+| `read.*` | Read (reserved) | Family |
 | `portainer.*` | Portainer | Admin + 2FA |
-| `glances.*` | Glances | Admin + 2FA |
-| `analytics.*` | Umami | Admin + 2FA |
 | `db.*` | Adminer | Admin + 2FA |
 
 ## Key Patterns
-
-**Adding a new service to nginx:** create `nginx/sites-available/<name>` following the pattern in existing files, then run `sudo bash nginx/install.sh`.
-
-**Nginx snippet reference:**
-| Snippet | Use case |
-|---------|----------|
-| `snippets/ssl.conf` | Wildcard cert + TLS settings |
-| `snippets/security-headers.conf` | CSP, HSTS, etc. — include in every server block |
-| `snippets/proxy-params.conf` | Standard proxy headers + WebSocket support |
-| `snippets/authelia-auth.conf` | Forward auth → Authelia (inside location block) |
-| `snippets/authelia-location.conf` | Internal `/authelia` location (at server level) |
 
 **Authelia groups:**
 - `admins` — everything, 2FA always
@@ -189,7 +150,9 @@ DB and Redis containers have **no `ports:` section** — they are only reachable
 - `kids` — Jellyfin + Kavita only
 - `guests` — Jellyfin read-only only
 
-**Secrets rule:** `.env` files are never committed. Every stack has `.env.example` with all required keys documented. The `.gitignore` excludes all `.env` files.
+**Secrets rule:** `.env` files are never committed. Every stack has `.env.example` with all required keys. The `.gitignore` excludes all `.env` files.
+
+**Jellyfin:** Pinned to `jellyfin/jellyfin:10.8.13` — the `latest` (10.10.x) tag has a broken startup wizard and cannot create the initial admin account via API.
 
 **New SaaS app:**
 ```bash
@@ -202,23 +165,8 @@ bash saas/new-saas-app.sh myapp
 - All compose configs: `/srv/mystackmint/`
 - Excludes Jellyfin/Navidrome raw media (metadata only)
 
-## Ntfy Alert Topics
-| Topic | Trigger |
-|-------|---------|
-| `backup-alerts` | restic backup success/failure |
-| `uptime-alerts` | Uptime Kuma downtime |
-| `update-alerts` | Watchtower container updates |
-| `security-alerts` | New Authelia logins |
-
-## Deployment Priority Order
-1. Nginx host install + wildcard SSL cert — nothing works without this
-2. `infra/authelia/` — set up before any personal apps
-3. `infra/backup/` — set up before adding real data
-4. `homepage/` — Astro dashboard
-5. `personal/vaultwarden/` — store all subsequent credentials here
-6. `personal/immich/` — family photo backup
-7. `personal/nextcloud/` — files, calendar, contacts
-8. `infra/uptime-kuma/` — monitoring
-9. `infra/ntfy/` — push notifications
-10. `infra/portainer/` + `infra/watchtower/` — maintenance tooling
-11. Remaining personal apps + `saas/umami/`
+## Deployment Notes
+- Coolify manages Traefik — do not install or configure Nginx
+- Always add `traefik.docker.network=coolify` to any service on more than one Docker network
+- Homepage has no host port binding — it routes through Traefik only
+- Authelia middleware is defined on the `authelia` container itself via Docker labels and referenced as `authelia@docker` by all protected services

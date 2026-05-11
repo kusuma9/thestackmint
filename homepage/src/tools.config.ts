@@ -177,26 +177,6 @@ export const tools: Tool[] = [
     section: 'homelab',
     tags: ['budget', 'finance', 'money', 'tracking'],
   },
-  {
-    id: 'mealie',
-    name: 'Mealie',
-    description: 'Recipe manager and meal planner for the whole family',
-    url: 'https://recipes.mystackmint.com',
-    icon: '🍽️',
-    category: 'Finance & Home',
-    section: 'homelab',
-    tags: ['recipes', 'food', 'meal', 'planning'],
-  },
-  {
-    id: 'grocy',
-    name: 'Grocy',
-    description: 'Grocery management and household chores tracker',
-    url: 'https://home.mystackmint.com',
-    icon: '🛒',
-    category: 'Finance & Home',
-    section: 'homelab',
-    tags: ['grocery', 'shopping', 'household', 'chores'],
-  },
 
   // --- DevOps & SaaS ---
   {

@@ -47,8 +47,20 @@ function renderResults(results: Tool[]) {
     li.dataset.index = String(i);
     li.dataset.url = tool.url;
 
+    const isPath = tool.icon.startsWith('/') || tool.icon.startsWith('http');
+
+    const iconHtml = isPath
+      ? `<div class="flex-shrink-0 w-9 h-9 rounded-xl bg-surface2 border border-border
+                     flex items-center justify-center">
+           <img src="${tool.icon}" alt="" width="24" height="24"
+                style="width:24px;height:24px;object-fit:contain;"
+                loading="eager"
+                onerror="this.style.display='none';" />
+         </div>`
+      : `<span class="text-2xl w-9 text-center flex-shrink-0" aria-hidden="true">${tool.icon}</span>`;
+
     li.innerHTML = `
-      <span class="text-2xl w-8 text-center flex-shrink-0" aria-hidden="true">${tool.icon}</span>
+      ${iconHtml}
       <div class="flex flex-col min-w-0">
         <span class="text-sm font-semibold text-white truncate">${tool.name}</span>
         <span class="text-xs text-muted truncate">${tool.description}</span>

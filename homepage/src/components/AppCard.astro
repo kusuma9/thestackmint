@@ -7,27 +7,55 @@ interface Props {
 }
 
 const { tool, accentColor = 'cyan' } = Astro.props;
-const glow = accentColor === 'mint'
-  ? 'hover:shadow-[0_4px_32px_rgba(0,229,160,0.12)] hover:border-mint/40'
-  : 'hover:shadow-[0_4px_32px_rgba(0,196,255,0.12)] hover:border-cyan/40';
+
+const hoverBorder = accentColor === 'mint' ? 'hover:border-mint/40' : 'hover:border-cyan/40';
 const btnClass = accentColor === 'mint'
-  ? 'bg-mint/10 text-mint hover:bg-mint hover:text-bg'
-  : 'bg-cyan/10 text-cyan hover:bg-cyan hover:text-bg';
+  ? 'bg-mint/10 text-mint hover:bg-mint hover:text-bg border border-mint/20 hover:border-mint'
+  : 'bg-cyan/10 text-cyan hover:bg-cyan hover:text-bg border border-cyan/20 hover:border-cyan';
+
+const isPath = tool.icon.startsWith('/') || tool.icon.startsWith('http');
 ---
 
 <div
   class:list={[
-    'group flex flex-col gap-3 p-5 rounded-xl border border-border bg-surface',
-    'transition-all duration-200 hover:-translate-y-0.5',
-    glow,
+    'group flex flex-col gap-3 p-4 rounded-xl border border-border bg-surface',
+    'transition-all duration-150 hover:bg-surface2',
+    hoverBorder,
   ]}
 >
-  <!-- Icon + admin badge -->
-  <div class="flex items-start justify-between">
-    <span class="text-3xl leading-none" aria-hidden="true">{tool.icon}</span>
+  <!-- Top row: logo + admin badge -->
+  <div class="flex items-start justify-between gap-2">
+
+    <!-- Logo container — neutral -->
+    <div class="w-12 h-12 rounded-xl bg-surface2 border border-border flex items-center justify-center
+                flex-shrink-0 transition-colors duration-150 group-hover:border-border/80">
+      {isPath ? (
+        <>
+          <img
+            src={tool.icon}
+            alt={tool.name}
+            width="32"
+            height="32"
+            class="w-8 h-8 object-contain"
+            loading="lazy"
+            draggable="false"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          />
+          <span
+            class="hidden w-8 h-8 items-center justify-center text-sm font-bold text-muted"
+            aria-hidden="true"
+          >
+            {tool.name.charAt(0)}
+          </span>
+        </>
+      ) : (
+        <span class="text-2xl leading-none" aria-hidden="true">{tool.icon}</span>
+      )}
+    </div>
+
     {tool.adminOnly && (
-      <span class="text-[9px] font-mono uppercase tracking-widest text-muted/60 bg-surface2
-                   border border-border/50 px-1.5 py-0.5 rounded-full">
+      <span class="text-[9px] font-mono uppercase tracking-widest text-muted/50 bg-surface2
+                   border border-border/50 px-1.5 py-0.5 rounded-full self-start mt-1">
         admin
       </span>
     )}
@@ -35,7 +63,7 @@ const btnClass = accentColor === 'mint'
 
   <!-- Name + description -->
   <div class="flex flex-col gap-1 flex-1">
-    <span class="font-semibold text-white text-sm leading-snug">
+    <span class="font-semibold text-white text-sm leading-tight truncate">
       {tool.name}
     </span>
     <span class="text-muted text-xs leading-relaxed line-clamp-2">

@@ -12,6 +12,7 @@ export default {
         mint: '#00e5a0',
         'mint-dark': '#00c4a0',
         cyan: '#00c4ff',
+        purple: '#8B5CF6',
         muted: '#6b6b8a',
       },
       fontFamily: {

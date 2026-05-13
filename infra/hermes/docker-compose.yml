@@ -1,0 +1,62 @@
+networks:
+  hermes-net:
+    driver: bridge
+  infra-net:
+    external: true
+  coolify:
+    external: true
+
+services:
+  hermes-agent:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-agent
+    command: gateway run
+    restart: unless-stopped
+    networks:
+      - hermes-net
+    volumes:
+      - hermes_home:/home/hermes/.hermes
+      - hermes_agent_src:/opt/hermes
+    environment:
+      - HERMES_HOME=/home/hermes/.hermes
+      - HERMES_UID=1000
+      - HERMES_GID=1000
+    env_file:
+      - .env
+
+  hermes-webui:
+    image: ghcr.io/nesquena/hermes-webui:latest
+    container_name: hermes
+    depends_on:
+      - hermes-agent
+    restart: unless-stopped
+    networks:
+      - hermes-net
+      - infra-net
+      - coolify
+    ports:
+      - "127.0.0.1:8024:8787"
+    volumes:
+      - hermes_home:/home/hermeswebui/.hermes
+      - hermes_agent_src:/home/hermeswebui/.hermes/hermes-agent
+    environment:
+      - HERMES_WEBUI_HOST=0.0.0.0
+      - HERMES_WEBUI_PORT=8787
+      - HERMES_WEBUI_STATE_DIR=/home/hermeswebui/.hermes/webui
+      - WANTED_UID=1000
+      - WANTED_GID=1000
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hermes.rule=Host(`hermes.mystackmint.com`)"
+      - "traefik.http.routers.hermes.entrypoints=https"
+      - "traefik.http.routers.hermes.tls=true"
+      - "traefik.http.routers.hermes.tls.certresolver=letsencrypt"
+      - "traefik.http.services.hermes.loadbalancer.server.port=8787"
+      - "traefik.http.routers.hermes.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
+
+volumes:
+  hermes_home:
+  hermes_agent_src:

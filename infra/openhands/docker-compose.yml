@@ -6,13 +6,13 @@ services:
     ports:
       - "8025:3000"
     environment:
-      - SANDBOX_RUNTIME_CONTAINER_IMAGE=ghcr.io/all-hands-ai/runtime:latest
-      - WORKSPACE_MOUNT_PATH=/opt/workspace
+      - SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime:0.59-nikolaik
+      - SANDBOX_VOLUMES=/opt/workspace:/workspace:rw
       - LLM_MODEL=${LLM_MODEL:-anthropic/claude-sonnet-4-6}
       - LLM_API_KEY=${LLM_API_KEY}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/workspace:/opt/workspace:cached
+      - /opt/workspace:/opt/workspace
       - openhands_state:/root/.openhands
     labels:
       - "traefik.enable=true"

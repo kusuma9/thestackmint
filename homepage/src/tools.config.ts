@@ -213,6 +213,18 @@ export const tools: Tool[] = [
     tags: ['ai', 'agent', 'llm', 'automation', 'terminal', 'telegram'],
     adminOnly: true,
   },
+  {
+    id: 'openhands',
+    name: 'OpenHands',
+    description: 'Self-hosted AI coding agent — Anthropic, OpenRouter & more, switchable per session',
+    url: 'https://agents.mystackmint.com',
+    icon: '/icons/openhands.png',
+    brandColor: '0EA5E9',
+    category: 'AI Agents',
+    section: 'ai-agents',
+    tags: ['ai', 'coding', 'agent', 'llm', 'anthropic', 'openrouter'],
+    adminOnly: true,
+  },
 
   // --- Products ---
   {

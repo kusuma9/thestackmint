@@ -65,6 +65,7 @@ access_control:
         - "db.mystackmint.com"
         - "portainer.mystackmint.com"
         - "hermes.mystackmint.com"
+        - "agents.mystackmint.com"
       policy: two_factor
       subject: "group:admins"
 

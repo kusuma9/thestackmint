@@ -1,0 +1,34 @@
+services:
+  openhands:
+    image: ghcr.io/all-hands-ai/openhands:latest
+    container_name: openhands
+    restart: unless-stopped
+    ports:
+      - "8025:3000"
+    environment:
+      - SANDBOX_RUNTIME_CONTAINER_IMAGE=ghcr.io/all-hands-ai/runtime:latest
+      - WORKSPACE_MOUNT_PATH=/opt/workspace
+      - LLM_MODEL=${LLM_MODEL:-anthropic/claude-sonnet-4-6}
+      - LLM_API_KEY=${LLM_API_KEY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/workspace:/opt/workspace:cached
+      - openhands_state:/root/.openhands
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.openhands.rule=Host(`agents.mystackmint.com`)"
+      - "traefik.http.routers.openhands.entrypoints=https"
+      - "traefik.http.routers.openhands.tls=true"
+      - "traefik.http.routers.openhands.tls.certresolver=letsencrypt"
+      - "traefik.http.services.openhands.loadbalancer.server.port=3000"
+      - "traefik.http.routers.openhands.middlewares=authelia@docker"
+      - "traefik.docker.network=coolify"
+    networks:
+      - coolify
+
+volumes:
+  openhands_state:
+
+networks:
+  coolify:
+    external: true

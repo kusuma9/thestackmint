@@ -40,6 +40,7 @@ export const HOMELAB_CATEGORIES: ToolCategory[] = [
   'Security & Auth',
   'Productivity',
   'Finance & Home',
+  'DevOps & SaaS',
 ];
 
 export const AI_AGENT_CATEGORIES: ToolCategory[] = [
@@ -200,19 +201,6 @@ export const tools: Tool[] = [
     tags: ['budget', 'finance', 'money', 'tracking'],
   },
 
-  // --- Products ---
-  {
-    id: 'codefinderhub',
-    name: 'India Pincode & IFSC Finder',
-    description: 'Look up Indian postal pincodes and bank IFSC codes instantly',
-    url: 'https://codefinderhub.com/',
-    icon: '/icons/codefinderhub.svg',
-    brandColor: 'F59E0B',
-    category: 'Products',
-    section: 'saas',
-    tags: ['pincode', 'ifsc', 'india', 'banking', 'postal', 'lookup'],
-  },
-
   // --- DevOps & SaaS ---
   {
     id: 'adminer',
@@ -222,7 +210,7 @@ export const tools: Tool[] = [
     icon: '/icons/adminer.svg',
     brandColor: 'E05D18',
     category: 'DevOps & SaaS',
-    section: 'saas',
+    section: 'homelab',
     tags: ['database', 'postgres', 'sql', 'admin', 'devops'],
     adminOnly: true,
   },
@@ -234,8 +222,21 @@ export const tools: Tool[] = [
     icon: '/icons/portainer.svg',
     brandColor: '13BEF9',
     category: 'DevOps & SaaS',
-    section: 'saas',
+    section: 'homelab',
     tags: ['docker', 'containers', 'management', 'devops'],
     adminOnly: true,
+  },
+
+  // --- SaaS Products (own apps) ---
+  {
+    id: 'codefinderhub',
+    name: 'India Pincode & IFSC Finder',
+    description: 'Look up Indian postal pincodes and bank IFSC codes instantly',
+    url: 'https://codefinderhub.com/',
+    icon: '/icons/codefinderhub.svg',
+    brandColor: 'F59E0B',
+    category: 'Products',
+    section: 'saas',
+    tags: ['pincode', 'ifsc', 'india', 'banking', 'postal', 'lookup'],
   },
 ];

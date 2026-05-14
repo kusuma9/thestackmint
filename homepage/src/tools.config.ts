@@ -200,32 +200,6 @@ export const tools: Tool[] = [
     tags: ['budget', 'finance', 'money', 'tracking'],
   },
 
-  // --- AI Agents ---
-  {
-    id: 'hermes',
-    name: 'Hermes Agent',
-    description: 'Autonomous AI agent with web terminal — model & Telegram setup',
-    url: 'https://hermes.mystackmint.com',
-    icon: '/icons/hermes.jpg',
-    brandColor: '7C3AED',
-    category: 'AI Agents',
-    section: 'ai-agents',
-    tags: ['ai', 'agent', 'llm', 'automation', 'terminal', 'telegram'],
-    adminOnly: true,
-  },
-  {
-    id: 'openhands',
-    name: 'OpenHands',
-    description: 'Self-hosted AI coding agent — Anthropic, OpenRouter & more, switchable per session',
-    url: 'https://agents.mystackmint.com',
-    icon: '/icons/openhands.png',
-    brandColor: '0EA5E9',
-    category: 'AI Agents',
-    section: 'ai-agents',
-    tags: ['ai', 'coding', 'agent', 'llm', 'anthropic', 'openrouter'],
-    adminOnly: true,
-  },
-
   // --- Products ---
   {
     id: 'codefinderhub',

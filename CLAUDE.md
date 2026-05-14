@@ -96,7 +96,6 @@ labels:
 | 8017 | filebrowser | 80 |
 | 8018 | portainer | 9000 |
 | 8023 | adminer | 8080 |
-| 8024 | hermes | 9119 |
 | 8025 | openhands | 3000 |
 
 ### Server Directory Structure
@@ -143,8 +142,6 @@ DB and Redis containers have **no `ports:` section** — reachable only by servi
 | `read.*` | Read (reserved) | Family |
 | `portainer.*` | Portainer | Admin + 2FA |
 | `db.*` | Adminer | Admin + 2FA |
-| `hermes.*` | Hermes Agent | Admin + 2FA |
-| `agents.*` | OpenHands | Admin + 2FA |
 
 ## Key Patterns
 

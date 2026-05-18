@@ -1,8 +1,6 @@
 networks:
   hermes-net:
     driver: bridge
-  infra-net:
-    external: true
   coolify:
     external: true
 
@@ -10,41 +8,47 @@ services:
   hermes-agent:
     image: nousresearch/hermes-agent:latest
     container_name: hermes-agent
-    command: gateway run
+    command: ["gateway", "run"]
     restart: unless-stopped
     networks:
       - hermes-net
     volumes:
-      - hermes_home:/home/hermes/.hermes
-      - hermes_agent_src:/opt/hermes
+      - hermes-agent-data:/opt/data
     environment:
-      - HERMES_HOME=/home/hermes/.hermes
-      - HERMES_UID=1000
-      - HERMES_GID=1000
+      - API_SERVER_HOST=0.0.0.0
+      - API_SERVER_ENABLED=true
+      - HERMES_DASHBOARD=1
+      - HERMES_DASHBOARD_HOST=0.0.0.0
+      - HERMES_DASHBOARD_PORT=9119
     env_file:
       - .env
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -fsS http://localhost:8642/health || exit 1']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
-  hermes-webui:
-    image: ghcr.io/nesquena/hermes-webui:latest
+  hermes-workspace:
+    image: ghcr.io/outsourc-e/hermes-workspace:latest
     container_name: hermes
     depends_on:
-      - hermes-agent
+      hermes-agent:
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - hermes-net
-      - infra-net
       - coolify
     ports:
-      - "127.0.0.1:8024:8787"
+      - "127.0.0.1:8024:3000"
     volumes:
-      - hermes_home:/home/hermeswebui/.hermes
-      - hermes_agent_src:/home/hermeswebui/.hermes/hermes-agent
+      - hermes-agent-data:/home/workspace/.hermes
+      - hermes-workspace-files:/workspace
     environment:
-      - HERMES_WEBUI_HOST=0.0.0.0
-      - HERMES_WEBUI_PORT=8787
-      - HERMES_WEBUI_STATE_DIR=/home/hermeswebui/.hermes/webui
-      - WANTED_UID=1000
-      - WANTED_GID=1000
+      - HERMES_API_URL=http://hermes-agent:8642
+      - HERMES_DASHBOARD_URL=http://hermes-agent:9119
+      - COOKIE_SECURE=true
+      - TRUST_PROXY=1
     env_file:
       - .env
     labels:
@@ -53,10 +57,10 @@ services:
       - "traefik.http.routers.hermes.entrypoints=https"
       - "traefik.http.routers.hermes.tls=true"
       - "traefik.http.routers.hermes.tls.certresolver=letsencrypt"
-      - "traefik.http.services.hermes.loadbalancer.server.port=8787"
+      - "traefik.http.services.hermes.loadbalancer.server.port=3000"
       - "traefik.http.routers.hermes.middlewares=authelia@docker"
       - "traefik.docker.network=coolify"
 
 volumes:
-  hermes_home:
-  hermes_agent_src:
+  hermes-agent-data:
+  hermes-workspace-files:

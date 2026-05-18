@@ -46,8 +46,12 @@ services:
       - hermes-agent-data:/home/workspace/.hermes
       - hermes-workspace-files:/workspace
     environment:
+      - HERMES_HOME=/home/workspace/.hermes
+      - HERMES_WORKSPACE_DIR=/workspace
       - HERMES_API_URL=http://hermes-agent:8642
       - HERMES_DASHBOARD_URL=http://hermes-agent:9119
+      - HERMES_API_TOKEN=${API_SERVER_KEY}
+      - CLAUDE_DASHBOARD_TOKEN=${API_SERVER_KEY}
       - COOKIE_SECURE=true
       - TRUST_PROXY=1
     env_file:

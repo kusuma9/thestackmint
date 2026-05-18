@@ -32,6 +32,7 @@ services:
   hermes-workspace:
     image: ghcr.io/outsourc-e/hermes-workspace:latest
     container_name: hermes
+    user: root
     depends_on:
       hermes-agent:
         condition: service_healthy

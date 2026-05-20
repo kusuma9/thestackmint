@@ -98,7 +98,7 @@ labels:
 | 8023 | adminer | 8080 |
 | 8024 | hermes-workspace | 3000 |
 | 8025 | openhands | 3000 |
-| 8026 | hermes-agent | 8642 |
+| 8026 | hermes-agent | 9119 |
 
 ### Server Directory Structure
 ```

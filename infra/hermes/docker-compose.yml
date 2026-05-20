@@ -40,7 +40,7 @@ services:
       - "traefik.http.routers.hermes-agent.entrypoints=https"
       - "traefik.http.routers.hermes-agent.tls=true"
       - "traefik.http.routers.hermes-agent.tls.certresolver=letsencrypt"
-      - "traefik.http.services.hermes-agent.loadbalancer.server.port=8642"
+      - "traefik.http.services.hermes-agent.loadbalancer.server.port=9119"
       - "traefik.http.routers.hermes-agent.middlewares=authelia@docker"
       - "traefik.docker.network=coolify"
 

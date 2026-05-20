@@ -239,4 +239,30 @@ export const tools: Tool[] = [
     section: 'saas',
     tags: ['pincode', 'ifsc', 'india', 'banking', 'postal', 'lookup'],
   },
+
+  // --- AI Agents ---
+  {
+    id: 'hermes-workspace',
+    name: 'Hermes Workspace',
+    description: 'AI agent workspace — chat, memory, skills, and mission orchestration',
+    url: 'https://hermesworkspace.mystackmint.com',
+    icon: '/icons/hermes.svg',
+    brandColor: '7C3AED',
+    category: 'AI Agents',
+    section: 'ai-agents',
+    tags: ['ai', 'agents', 'chat', 'llm', 'workspace', 'memory', 'skills'],
+    adminOnly: true,
+  },
+  {
+    id: 'hermes-agent',
+    name: 'Hermes Agent',
+    description: 'AI agent gateway — models, memory, skills, and autonomous task execution',
+    url: 'https://hermes.mystackmint.com',
+    icon: '/icons/hermes.svg',
+    brandColor: '7C3AED',
+    category: 'AI Agents',
+    section: 'ai-agents',
+    tags: ['ai', 'agent', 'gateway', 'api', 'llm', 'autonomous'],
+    adminOnly: true,
+  },
 ];

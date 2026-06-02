@@ -1,7 +1,6 @@
 export type ToolCategory =
   | 'Security & Auth'
   | 'DevOps & SaaS'
-  | 'AI Agents'
   | 'Products';
 
 export type ToolSection = 'homelab' | 'saas' | 'ai-agents';
@@ -22,17 +21,12 @@ export interface Tool {
 export const CATEGORIES: ToolCategory[] = [
   'Security & Auth',
   'DevOps & SaaS',
-  'AI Agents',
   'Products',
 ];
 
 export const HOMELAB_CATEGORIES: ToolCategory[] = [
   'Security & Auth',
   'DevOps & SaaS',
-];
-
-export const AI_AGENT_CATEGORIES: ToolCategory[] = [
-  'AI Agents',
 ];
 
 export const tools: Tool[] = [
@@ -88,29 +82,4 @@ export const tools: Tool[] = [
     tags: ['pincode', 'ifsc', 'india', 'banking', 'postal', 'lookup'],
   },
 
-  // --- AI Agents ---
-  {
-    id: 'hermes-workspace',
-    name: 'Hermes Workspace',
-    description: 'AI agent workspace — chat, memory, skills, and mission orchestration',
-    url: 'https://hermesworkspace.mystackmint.com',
-    icon: '/icons/hermes.svg',
-    brandColor: '7C3AED',
-    category: 'AI Agents',
-    section: 'ai-agents',
-    tags: ['ai', 'agents', 'chat', 'llm', 'workspace', 'memory', 'skills'],
-    adminOnly: true,
-  },
-  {
-    id: 'hermes-agent',
-    name: 'Hermes Agent',
-    description: 'AI agent gateway — models, memory, skills, and autonomous task execution',
-    url: 'https://hermes.mystackmint.com',
-    icon: '/icons/hermes.svg',
-    brandColor: '7C3AED',
-    category: 'AI Agents',
-    section: 'ai-agents',
-    tags: ['ai', 'agent', 'gateway', 'api', 'llm', 'autonomous'],
-    adminOnly: true,
-  },
 ];

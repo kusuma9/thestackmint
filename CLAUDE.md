@@ -84,8 +84,6 @@ labels:
 | 8001 | authelia | 9091 |
 | 8018 | portainer | 9000 |
 | 8023 | adminer | 8080 |
-| 8024 | hermes-workspace | 3000 |
-| 8026 | hermes-agent | 9119 |
 
 ### Server Directory Structure
 ```
@@ -114,8 +112,6 @@ DB and Redis containers have **no `ports:` section** — reachable only by servi
 | `auth.*` | Authelia SSO | Public (login page) |
 | `portainer.*` | Portainer | Admin + 2FA |
 | `db.*` | Adminer | Admin + 2FA |
-| `hermesworkspace.*` | Hermes Workspace | Admin + 2FA |
-| `hermes.*` | Hermes Agent | Admin + 2FA |
 
 ## Key Patterns
 

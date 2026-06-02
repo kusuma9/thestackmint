@@ -4,7 +4,6 @@ import { tools } from '../../tools.config';
 
 const homelabCount = tools.filter((t) => t.section === 'homelab').length;
 const saasCount = tools.filter((t) => t.section === 'saas').length;
-const aiAgentCount = tools.filter((t) => t.section === 'ai-agents').length;
 ---
 
 <DashLayout title="Dashboard — MyStackMint">
@@ -122,57 +121,6 @@ const aiAgentCount = tools.filter((t) => t.section === 'ai-agents').length;
           <span class="text-[9px] font-mono uppercase tracking-widest text-cyan/40 bg-cyan/5
                        border border-cyan/10 px-1.5 py-0.5 rounded-full">
             {saasCount} apps
-          </span>
-        </div>
-      </a>
-
-      <!-- AI Agents -->
-      <a
-        href="/ai-agents"
-        class="group relative flex flex-col gap-5 p-8 rounded-2xl border border-border bg-surface
-               overflow-hidden transition-all duration-300
-               hover:border-purple/40 hover:-translate-y-1
-               hover:shadow-[0_8px_48px_rgba(139,92,246,0.14)]
-               focus-visible:outline-2 focus-visible:outline-purple"
-      >
-        <!-- Background glow -->
-        <div
-          class="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-transparent
-                 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          aria-hidden="true"
-        ></div>
-
-        <!-- Icon -->
-        <div class="relative w-14 h-14 rounded-xl bg-purple/10 border border-purple/20
-                    flex items-center justify-center text-2xl
-                    group-hover:bg-purple/15 group-hover:border-purple/40 transition-all duration-300">
-          🤖
-        </div>
-
-        <!-- Text -->
-        <div class="relative flex flex-col gap-2 flex-1">
-          <h2 class="text-xl font-bold text-white group-hover:text-purple transition-colors duration-200">
-            AI Agents
-          </h2>
-          <p class="text-muted text-sm leading-relaxed">
-            Autonomous AI agents, LLM tools, and automation services.
-          </p>
-        </div>
-
-        <!-- Arrow -->
-        <div class="relative flex items-center gap-2 text-purple/60 text-sm font-mono
-                    group-hover:text-purple group-hover:gap-3 transition-all duration-200">
-          Enter
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
-        </div>
-
-        <!-- Corner tag -->
-        <div class="absolute top-4 right-4 flex gap-1">
-          <span class="text-[9px] font-mono uppercase tracking-widest text-purple/40 bg-purple/5
-                       border border-purple/10 px-1.5 py-0.5 rounded-full">
-            {aiAgentCount} agents
           </span>
         </div>
       </a>

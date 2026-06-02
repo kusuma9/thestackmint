@@ -4,7 +4,7 @@ This file provides guidance to AI assistants when working with code in this repo
 
 ## Project Overview
 
-**MyStackMint.com** is a self-hosted personal & SaaS platform on a Hetzner VPS (Ubuntu 24.04). Each service is a Docker Compose stack. **Coolify manages Traefik** as the reverse proxy — there is no Nginx on the host. The unified homepage (`homepage/`) is the only custom-developed frontend.
+**MyStackMint.com** is a self-hosted SaaS platform on a Hetzner VPS (Ubuntu 24.04). Each service is a Docker Compose stack. **Coolify manages Traefik** as the reverse proxy — there is no Nginx on the host. The unified homepage (`homepage/`) is the only custom-developed frontend.
 
 ## Working with the Infrastructure
 
@@ -82,40 +82,23 @@ labels:
 |-----------|---------|--------------|
 | — | homepage | 80 (Traefik only, no host port) |
 | 8001 | authelia | 9091 |
-| 8004 | vaultwarden | 80 |
-| 8005 | nextcloud | 80 |
-| 8006 | immich-server | 2283 |
-| 8007 | jellyfin | 8096 |
-| 8008 | navidrome | 4533 |
-| 8009 | kavita | 5000 |
-| 8010 | paperless | 8000 |
-| 8011 | vikunja | 3456 |
-| 8012 | actual-budget | 5006 |
-| 8015 | stirling-pdf | 8080 |
-| 8016 | linkwarden | 3000 |
-| 8017 | filebrowser | 80 |
 | 8018 | portainer | 9000 |
 | 8023 | adminer | 8080 |
 | 8024 | hermes-workspace | 3000 |
-| 8025 | openhands | 3000 |
 | 8026 | hermes-agent | 9119 |
 
 ### Server Directory Structure
 ```
 /srv/mystackmint/
 ├── homepage/             # Astro static site at root domain
-├── personal/             # Family apps: nextcloud, immich, jellyfin, vaultwarden,
-│                         #   actual-budget, navidrome, kavita, stirling-pdf,
-│                         #   linkwarden, vikunja, paperless-ngx, filebrowser
-├── saas/                 # SaaS: template/, new-saas-app.sh
-├── infra/                # authelia, portainer, watchtower, adminer, backup/
+├── saas/                 # SaaS: umami/, template/, new-saas-app.sh
+├── infra/                # authelia, portainer, adminer
 └── scripts/              # harden.sh, verify-security.sh, setup-*.sh
 ```
 
 ### Docker Networks
 | Network | Purpose |
 |---------|---------|
-| `personal-net` | Isolated to personal/family apps |
 | `saas-net` | Isolated to SaaS projects |
 | `infra-net` | Isolated to Authelia, Portainer, Adminer |
 | `coolify` | Traefik routing network — all services must join this |
@@ -129,19 +112,6 @@ DB and Redis containers have **no `ports:` section** — reachable only by servi
 |-----------|-----|--------|
 | `mystackmint.com` | Homepage | Public |
 | `auth.*` | Authelia SSO | Public (login page) |
-| `vault.*` | Vaultwarden | Family + 2FA |
-| `cloud.*` | Nextcloud | Family |
-| `photos.*` | Immich | Family |
-| `media.*` | Jellyfin | Family + Kids + Guests |
-| `music.*` | Navidrome | Family + Kids |
-| `books.*` | Kavita | Family + Kids |
-| `docs.*` | Paperless-NGX | Family |
-| `tasks.*` | Vikunja | Family |
-| `budget.*` | Actual Budget | Family |
-| `pdf.*` | Stirling PDF | Family |
-| `links.*` | Linkwarden | Family |
-| `files.*` | Filebrowser | Family |
-| `read.*` | Read (reserved) | Family |
 | `portainer.*` | Portainer | Admin + 2FA |
 | `db.*` | Adminer | Admin + 2FA |
 | `hermesworkspace.*` | Hermes Workspace | Admin + 2FA |
@@ -151,24 +121,14 @@ DB and Redis containers have **no `ports:` section** — reachable only by servi
 
 **Authelia groups:**
 - `admins` — everything, 2FA always
-- `family` — all personal apps, 2FA for vault
-- `kids` — Jellyfin + Kavita only
-- `guests` — Jellyfin read-only only
 
 **Secrets rule:** `.env` files are never committed. Every stack has `.env.example` with all required keys. The `.gitignore` excludes all `.env` files.
-
-**Jellyfin:** Pinned to `jellyfin/jellyfin:10.8.13` — the `latest` (10.10.x) tag has a broken startup wizard and cannot create the initial admin account via API.
 
 **New SaaS app:**
 ```bash
 bash saas/new-saas-app.sh myapp
 # → creates saas/myapp/ with all APP_NAME placeholders replaced
 ```
-
-**Backup scope** (restic → Hetzner Object Storage, cron daily 2am + weekly verify):
-- All Docker named volumes: `/var/lib/docker/volumes/`
-- All compose configs: `/srv/mystackmint/`
-- Excludes Jellyfin/Navidrome raw media (metadata only)
 
 ## Deployment Notes
 - Coolify manages Traefik — do not install or configure Nginx

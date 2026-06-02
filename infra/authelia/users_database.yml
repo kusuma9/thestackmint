@@ -3,9 +3,6 @@
 #
 # Groups:
 #   admins — full access to everything, 2FA always required
-#   family — access to all personal apps, 2FA required for vault
-#   kids   — access to Jellyfin + Kavita only, no 2FA
-#   guests — temporary accounts, Jellyfin read-only, no 2FA
 #
 # Generate password hashes with:
 #   docker run --rm authelia/authelia:4.38 \
@@ -15,35 +12,9 @@
 #   bash /srv/mystackmint/infra/authelia/add-user.sh <username> <group>
 
 users:
-  # --- Admins ---
   admin:
     displayname: "Admin"
     password: "$argon2id$v=19$m=65536,t=3,p=4$WUTSbtD1f0dylJwgCfBvfg$xsd3UB0SfU6O8MWOvjnxOMa4VpCki2I81XEhuC4NqXc"
     email: satish.technology9@gmail.com
     groups:
       - admins
-      - family
-
-  # --- Family ---
-  family:
-    displayname: "Family"
-    password: "$argon2id$v=19$m=65536,t=3,p=4$sxErdJqJ1Zo4f76jVfaT+A$UXaGnNJ7q/oJ56tcCamJGRKOTQcYRMrG6OvgS2k4BvM"
-    email: family@mystackmint.com
-    groups:
-      - family
-
-  # --- Kids (access: Jellyfin + Kavita + Navidrome only) ---
-  kids:
-    displayname: "Kids"
-    password: "$argon2id$v=19$m=65536,t=3,p=4$cjmoAPaLZSaKAvwtvErapg$YNC8Cna//K+YDuhXLrgnqG0L0ekL2vB+Z0YiB1C/Qw4"
-    email: kids@mystackmint.com
-    groups:
-      - kids
-
-  # --- Guests (access: Jellyfin only) ---
-  guest:
-    displayname: "Guest"
-    password: "$argon2id$v=19$m=65536,t=3,p=4$9FW03FpLIZg/TSDGdgp2Xw$fMH4+/nbapF84JonaG7XK0T6vtY7JIUBhzGuF/EpQm4"
-    email: guest@mystackmint.com
-    groups:
-      - guests

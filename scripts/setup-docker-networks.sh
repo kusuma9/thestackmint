@@ -3,7 +3,7 @@
 # Run this once before deploying any stacks.
 set -euo pipefail
 
-NETWORKS=(personal-net infra-net saas-net)
+NETWORKS=(infra-net saas-net)
 
 for net in "${NETWORKS[@]}"; do
   if docker network inspect "$net" &>/dev/null; then

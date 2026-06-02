@@ -9,28 +9,8 @@ type HeartBeat = { status: 0 | 1 | 2 | 3; time: string; msg?: string };
 
 // Map Uptime Kuma monitor name → tool id (add your monitor names here)
 const MONITOR_MAP: Record<string, string> = {
-  nextcloud: 'nextcloud',
-  immich: 'immich',
-  jellyfin: 'jellyfin',
-  vaultwarden: 'vaultwarden',
   authelia: 'authelia',
-  gitea: 'gitea',
-  woodpecker: 'woodpecker',
-  'uptime-kuma': 'uptime-kuma',
-  vikunja: 'vikunja',
-  mealie: 'mealie',
-  navidrome: 'navidrome',
-  kavita: 'kavita',
-  'stirling-pdf': 'stirling-pdf',
-  linkwarden: 'linkwarden',
-  ntfy: 'ntfy',
   portainer: 'portainer',
-  filebrowser: 'filebrowser',
-  paperless: 'paperless',
-  glances: 'glances',
-  grocy: 'grocy',
-  'actual-budget': 'actual-budget',
-  umami: 'umami',
   adminer: 'adminer',
 };
 

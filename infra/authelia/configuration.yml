@@ -69,46 +69,10 @@ access_control:
       policy: two_factor
       subject: "group:admins"
 
-    # Vaultwarden — 2FA required for both admin and family
-    - domain: "vault.mystackmint.com"
-      policy: two_factor
-      subject:
-        - "group:admins"
-        - "group:family"
-
-    # Kids + guests — Jellyfin, music, books only (1FA)
-    - domain:
-        - "media.mystackmint.com"
-        - "music.mystackmint.com"
-        - "books.mystackmint.com"
-      policy: one_factor
-      subject:
-        - "group:admins"
-        - "group:family"
-        - "group:kids"
-        - "group:guests"
-
-    # Family + admin — all personal productivity apps (1FA)
-    - domain:
-        - "cloud.mystackmint.com"
-        - "photos.mystackmint.com"
-        - "files.mystackmint.com"
-        - "tasks.mystackmint.com"
-        - "budget.mystackmint.com"
-        - "links.mystackmint.com"
-        - "pdf.mystackmint.com"
-        - "read.mystackmint.com"
-        - "docs.mystackmint.com"
-      policy: one_factor
-      subject:
-        - "group:admins"
-        - "group:family"
-
 session:
   name: authelia_session
   same_site: lax
-  # Default 4h; family members can tick "remember me" for 7-day sessions.
-  # Admins should NOT tick remember me — 2FA re-auth provides the protection.
+  # Default 4h; admins should NOT tick remember me — 2FA re-auth provides the protection.
   expiration: 4h
   inactivity: 30m
   remember_me: 7d

@@ -1,8 +1,6 @@
 networks:
   infra-net:
     external: true
-  personal-net:
-    external: true
   coolify:
     external: true
 
@@ -13,7 +11,6 @@ services:
     restart: unless-stopped
     networks:
       - infra-net
-      - personal-net
       - coolify
     ports:
       - "127.0.0.1:8023:8080"

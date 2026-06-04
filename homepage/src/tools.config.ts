@@ -69,6 +69,19 @@ export const tools: Tool[] = [
     adminOnly: true,
   },
 
+  // --- Media ---
+  {
+    id: 'jellyfin',
+    name: 'Jellyfin',
+    description: 'Media server — stream movies, series, music, and more',
+    url: 'https://jellyfin.mystackmint.com',
+    icon: '/icons/jellyfin.svg',
+    brandColor: '00A4DC',
+    category: 'DevOps & SaaS',
+    section: 'homelab',
+    tags: ['media', 'streaming', 'movies', 'music', 'series'],
+  },
+
   // --- SaaS Products (own apps) ---
   {
     id: 'codefinderhub',

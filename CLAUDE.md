@@ -91,6 +91,7 @@ labels:
 ├── homepage/             # Astro static site at root domain
 ├── saas/                 # SaaS: umami/, template/, new-saas-app.sh
 ├── infra/                # authelia, portainer, adminer
+├── media/                # jellyfin
 └── scripts/              # harden.sh, verify-security.sh, setup-*.sh
 ```
 
@@ -112,6 +113,7 @@ DB and Redis containers have **no `ports:` section** — reachable only by servi
 | `auth.*` | Authelia SSO | Public (login page) |
 | `portainer.*` | Portainer | Admin + 2FA |
 | `db.*` | Adminer | Admin + 2FA |
+| `jellyfin.*` | Jellyfin Media Server | Jellyfin own auth |
 
 ## Key Patterns
 

@@ -59,6 +59,8 @@ access_control:
     # Public — no authentication required
     - domain: "auth.mystackmint.com"
       policy: bypass
+    - domain: "jellyfin.mystackmint.com"
+      policy: bypass
 
     # Admin-only infra tools — 2FA + admin group required
     - domain:

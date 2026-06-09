@@ -81,6 +81,28 @@ export const tools: Tool[] = [
     section: 'homelab',
     tags: ['media', 'streaming', 'movies', 'music', 'series'],
   },
+  {
+    id: 'navidrome',
+    name: 'Navidrome',
+    description: 'Music streaming server — stream your personal music library',
+    url: 'https://music.mystackmint.com',
+    icon: '/icons/navidrome.svg',
+    brandColor: '0084ff',
+    category: 'DevOps & SaaS',
+    section: 'homelab',
+    tags: ['music', 'streaming', 'audio', 'media'],
+  },
+  {
+    id: 'immich',
+    name: 'Immich',
+    description: 'Photo and video backup — self-hosted Google Photos alternative',
+    url: 'https://photos.mystackmint.com',
+    icon: '/icons/immich.svg',
+    brandColor: 'FA2921',
+    category: 'DevOps & SaaS',
+    section: 'homelab',
+    tags: ['photos', 'videos', 'backup', 'media', 'gallery'],
+  },
 
   // --- SaaS Products (own apps) ---
   {

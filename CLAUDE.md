@@ -4,11 +4,43 @@ This file provides guidance to AI assistants when working with code in this repo
 
 ## Project Overview
 
-**MyStackMint.com** is a self-hosted SaaS platform on a Hetzner VPS (Ubuntu 24.04). Each service is a Docker Compose stack. **Coolify manages Traefik** as the reverse proxy — there is no Nginx on the host. The unified homepage (`homepage/`) is the only custom-developed frontend.
+**MyStackMint.com** is a self-hosted SaaS platform across **two VPS servers**. Each service is a Docker Compose stack. **Coolify manages Traefik** on each server as the reverse proxy — there is no Nginx on the host. The unified homepage (`homepage/`) is the only custom-developed frontend.
+
+## Server Overview
+
+| VPS | IP | SSH Key | Purpose |
+|-----|----|---------|---------|
+| **Hetzner** (Ubuntu 24.04) | `77.42.127.150` | `C:\SSH\id_ed25519` | SaaS apps, AI agents, admin tools |
+| **Contabo** (Ubuntu 24.04) | `13.140.158.27` | `C:\SSH\contabo` | Media & storage-heavy OSS apps |
+
+### What runs where
+
+| Service | VPS | Subdomain |
+|---------|-----|-----------|
+| Homepage | Hetzner | `mystackmint.com` |
+| Authelia SSO | Hetzner | `auth.*` |
+| Portainer | Hetzner | `portainer.*` |
+| Adminer | Hetzner | `db.*` |
+| Jellyfin | Hetzner | `jellyfin.*` |
+| Navidrome | Hetzner | `music.*` |
+| Immich | Hetzner | `photos.*` |
+| Hermes AI agent | Hetzner | `hermes.*` |
+| Personal SaaS apps | Hetzner | `<app>.*` |
+| Future OSS/media apps | Contabo | `<app>.*` |
 
 ## Working with the Infrastructure
 
-All infrastructure lives on the Hetzner VPS at `/srv/mystackmint/` mirroring this repo's structure. SSH: `ssh -i C:\SSH\id_ed25519 root@77.42.127.150`
+All infrastructure lives at `/srv/mystackmint/` on each VPS, mirroring this repo's structure.
+
+**SSH into Hetzner:**
+```powershell
+ssh -i C:\SSH\id_ed25519 root@77.42.127.150
+```
+
+**SSH into Contabo:**
+```powershell
+ssh -i C:\SSH\contabo -p 2222 root@13.140.158.27
+```
 
 **Deploy a stack:**
 ```bash
@@ -23,9 +55,14 @@ docker compose ps
 docker compose pull && docker compose up -d
 ```
 
-**Sync a local file change to VPS:**
+**Sync a local file change to Hetzner:**
 ```powershell
-scp -i C:\SSH\id_ed25519 -P 22 "local\path\file" "root@77.42.127.150:/srv/mystackmint/path/file"
+scp -i C:\SSH\id_ed25519 "local\path\file" "root@77.42.127.150:/srv/mystackmint/path/file"
+```
+
+**Sync a local file change to Contabo:**
+```powershell
+scp -i C:\SSH\contabo -P 2222 "local\path\file" "root@13.140.158.27:/srv/mystackmint/path/file"
 ```
 
 ## Unified Homepage (Astro)
@@ -51,8 +88,10 @@ docker compose build --no-cache && docker compose up -d
 
 ### Traffic Flow
 ```
-Browser → Cloudflare (DNS + DDoS proxy) → Hetzner VPS :443 → Traefik (coolify-proxy) → Docker container
+Browser → Cloudflare (DNS + DDoS proxy) → Hetzner VPS :443  → Traefik (coolify-proxy) → Docker container
+                                        → Contabo VPS :443  → Traefik (coolify-proxy) → Docker container
 ```
+DNS A records in Cloudflare determine which VPS each subdomain routes to.
 
 ### Traefik via Coolify
 Traefik (`coolify-proxy`) is managed by Coolify and holds ports 80/443. Services are discovered via Docker labels. **There is no Nginx on the host.**
@@ -91,7 +130,7 @@ labels:
 ├── homepage/             # Astro static site at root domain
 ├── saas/                 # SaaS: umami/, template/, new-saas-app.sh
 ├── infra/                # authelia, portainer, adminer
-├── media/                # jellyfin
+├── media/                # jellyfin, navidrome, immich
 └── scripts/              # harden.sh, verify-security.sh, setup-*.sh
 ```
 
@@ -107,13 +146,44 @@ Create all networks once: `bash scripts/setup-docker-networks.sh`
 DB and Redis containers have **no `ports:` section** — reachable only by services on the same Docker network.
 
 ### Subdomain Map
-| Subdomain | App | Access |
-|-----------|-----|--------|
-| `mystackmint.com` | Homepage | Public |
-| `auth.*` | Authelia SSO | Public (login page) |
-| `portainer.*` | Portainer | Admin + 2FA |
-| `db.*` | Adminer | Admin + 2FA |
-| `jellyfin.*` | Jellyfin Media Server | Jellyfin own auth |
+| Subdomain | App | VPS | Access |
+|-----------|-----|-----|--------|
+| `mystackmint.com` | Homepage | Hetzner | Public |
+| `auth.*` | Authelia SSO | Hetzner | Public (login page) |
+| `portainer.*` | Portainer | Hetzner | Admin + 2FA |
+| `db.*` | Adminer | Hetzner | Admin + 2FA |
+| `analytics.*` | Umami | Hetzner | Admin + 2FA |
+| `hermes.*` | Hermes AI agent | Hetzner | Admin + 2FA |
+| `jellyfin.*` | Jellyfin Media Server | Hetzner | Jellyfin own auth |
+| `music.*` | Navidrome | Hetzner | Navidrome own auth |
+| `photos.*` | Immich | Hetzner | Immich own auth |
+
+## Hetzner Storage Box
+
+Media storage for Navidrome and Immich is provided by a **Hetzner Storage Box** (1TB, `u589391.your-storagebox.de`, port 23), mounted on the Hetzner VPS via rclone SFTP.
+
+### Mount points on Hetzner VPS
+| Mount | Storage Box path | Used by |
+|-------|-----------------|---------|
+| `/mnt/storagebox/music` | `/Music` | Navidrome |
+| `/mnt/storagebox/media` | `/Media` | Immich upload + external libraries |
+
+### systemd services (auto-start on boot)
+```bash
+systemctl status rclone-storagebox-music
+systemctl status rclone-storagebox-media
+```
+
+### Upload music/photos to Storage Box (from Windows)
+WinSCP or any SFTP client:
+- Host: `u589391.your-storagebox.de` | Port: `23` | User: `u589391`
+- Drop music under `/Music/` — Navidrome scans every hour
+- Drop photos under `/Media/Photos/` or `/Media/FamilyVideos/`
+
+### Immich external libraries
+Immich has the full Storage Box mounted read-only at `/mnt/storagebox` inside the container.
+Add new photo folders via **Administration → Libraries** in the Immich UI — no compose edits needed.
+Paths to use: `/mnt/storagebox/media/Photos`, `/mnt/storagebox/media/FamilyVideos`, etc.
 
 ## Key Patterns
 

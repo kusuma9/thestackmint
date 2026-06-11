@@ -68,6 +68,8 @@ access_control:
         - "portainer.mystackmint.com"
         - "hermes.mystackmint.com"
         - "hermesworkspace.mystackmint.com"
+        - "monitor.mystackmint.com"
+        - "uptime.mystackmint.com"
       policy: two_factor
       subject: "group:admins"
 

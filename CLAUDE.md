@@ -25,6 +25,9 @@ This file provides guidance to AI assistants when working with code in this repo
 | Navidrome | Hetzner | `music.*` |
 | Immich | Hetzner | `photos.*` |
 | Hermes AI agent | Hetzner | `hermes.*` |
+| Beszel (hub + agent) | Hetzner | `monitor.*` |
+| Uptime Kuma | Hetzner | `uptime.*` |
+| Beszel agent | Contabo | — (port 45876, Hetzner-only via ufw) |
 | Personal SaaS apps | Hetzner | `<app>.*` |
 | Future OSS/media apps | Contabo | `<app>.*` |
 
@@ -123,6 +126,8 @@ labels:
 | 8001 | authelia | 9091 |
 | 8018 | portainer | 9000 |
 | 8023 | adminer | 8080 |
+| 8025 | beszel | 8090 (127.0.0.1 only) |
+| 8026 | uptime-kuma | 3001 (127.0.0.1 only) |
 
 ### Server Directory Structure
 ```
@@ -131,6 +136,7 @@ labels:
 ├── saas/                 # SaaS: umami/, template/, new-saas-app.sh
 ├── infra/                # authelia, portainer, adminer
 ├── media/                # jellyfin, navidrome, immich
+├── monitoring/           # beszel (hub+agent), uptime-kuma; beszel-agent/ on Contabo
 └── scripts/              # harden.sh, verify-security.sh, setup-*.sh
 ```
 
@@ -157,6 +163,8 @@ DB and Redis containers have **no `ports:` section** — reachable only by servi
 | `jellyfin.*` | Jellyfin Media Server | Hetzner | Jellyfin own auth |
 | `music.*` | Navidrome | Hetzner | Navidrome own auth |
 | `photos.*` | Immich | Hetzner | Immich own auth |
+| `monitor.*` | Beszel | Hetzner | Admin + 2FA |
+| `uptime.*` | Uptime Kuma | Hetzner | Admin + 2FA |
 
 ## Hetzner Storage Box
 

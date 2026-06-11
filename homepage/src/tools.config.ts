@@ -69,6 +69,31 @@ export const tools: Tool[] = [
     adminOnly: true,
   },
 
+  {
+    id: 'beszel',
+    name: 'Beszel',
+    description: 'Server monitoring — CPU, RAM, disk and Docker stats with alerts',
+    url: 'https://monitor.mystackmint.com',
+    icon: '/icons/beszel.svg',
+    brandColor: '22C55E',
+    category: 'DevOps & SaaS',
+    section: 'homelab',
+    tags: ['monitoring', 'metrics', 'disk', 'alerts', 'devops'],
+    adminOnly: true,
+  },
+  {
+    id: 'uptime-kuma',
+    name: 'Uptime Kuma',
+    description: 'Uptime monitoring — alerts when any app stops responding',
+    url: 'https://uptime.mystackmint.com',
+    icon: '/icons/uptime-kuma.svg',
+    brandColor: '5CDD8B',
+    category: 'DevOps & SaaS',
+    section: 'homelab',
+    tags: ['uptime', 'monitoring', 'alerts', 'status', 'devops'],
+    adminOnly: true,
+  },
+
   // --- Media ---
   {
     id: 'jellyfin',

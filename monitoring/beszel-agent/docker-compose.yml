@@ -1,0 +1,14 @@
+# Beszel agent for the Contabo VPS. The hub on Hetzner connects to
+# 13.140.158.27:45876 — restrict that port to the Hetzner IP via ufw:
+#   ufw allow from 77.42.127.150 to any port 45876 proto tcp
+services:
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      LISTEN: "45876"
+      KEY: "${BESZEL_AGENT_KEY}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro

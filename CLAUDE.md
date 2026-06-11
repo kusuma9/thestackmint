@@ -27,7 +27,7 @@ This file provides guidance to AI assistants when working with code in this repo
 | Hermes AI agent | Hetzner | `hermes.*` |
 | Beszel (hub + agent) | Hetzner | `monitor.*` |
 | Uptime Kuma | Hetzner | `uptime.*` |
-| Beszel agent | Contabo | — (port 45876, Hetzner-only via ufw) |
+| Beszel agent | Contabo | — (WebSocket out to `monitor.*`; inbound 45876 blocked upstream by Contabo) |
 | Personal SaaS apps | Hetzner | `<app>.*` |
 | Future OSS/media apps | Contabo | `<app>.*` |
 

@@ -8,11 +8,11 @@ services:
     volumes:
       - jellyfin-config:/config
       - jellyfin-cache:/cache
-      - /mnt/movies:/media/movies:ro
-      - /mnt/music:/media/music:ro
-      - /mnt/series:/media/series:ro
-      - /mnt/videosongs:/media/videosongs:ro
-      - /mnt/comedies:/media/comedies:ro
+      - /mnt/homelaptop/Movies:/media/movies:ro
+      - /mnt/homelaptop/Audio:/media/music:ro
+      - /mnt/homelaptop/ShowSeries:/media/series:ro
+      - /mnt/homelaptop/VideoSongs:/media/videosongs:ro
+      - /mnt/homelaptop/Comedies:/media/comedies:ro
     networks:
       - coolify
     labels:

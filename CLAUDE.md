@@ -174,6 +174,27 @@ systemctl status rclone-storagebox-music
 systemctl status rclone-storagebox-media
 ```
 
+## Home Laptop Media Mount (Jellyfin)
+
+Jellyfin media is served from the **home laptop** (`desktop-2a2oj5t`, Tailscale IP `100.119.69.2`) — its `G:` drive is mounted read-only on the Hetzner VPS at `/mnt/homelaptop` via rclone SFTP over Tailscale (`rclone-homelaptop.service`). **Playback only works while the laptop is on and connected to Tailscale.**
+
+| Container path | Laptop folder |
+|----------------|---------------|
+| `/media/movies` | `G:\Movies` |
+| `/media/series` | `G:\ShowSeries` |
+| `/media/music` | `G:\Audio` |
+| `/media/videosongs` | `G:\VideoSongs` |
+| `/media/comedies` | `G:\Comedies` |
+
+A watchdog (`rclone-homelaptop-watchdog.timer`, every 2 min, runs `scripts/rclone-watchdog.sh`) clears stale FUSE mounts and restarts the mount service, so it self-heals within ~2 minutes of the laptop coming back online. The mount uses aggressive rclone timeouts so reads **fail fast** instead of hanging Jellyfin when the laptop is off. Unit files are tracked in `media/jellyfin/`.
+
+```bash
+systemctl status rclone-homelaptop
+systemctl list-timers rclone-homelaptop-watchdog.timer
+```
+
+Laptop-side requirements: Tailscale set to "Run unattended", SSH server auto-start, never sleep on AC power.
+
 ### Upload music/photos to Storage Box (from Windows)
 WinSCP or any SFTP client:
 - Host: `u589391.your-storagebox.de` | Port: `23` | User: `u589391`

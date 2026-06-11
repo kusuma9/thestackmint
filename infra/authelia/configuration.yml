@@ -62,6 +62,19 @@ access_control:
     - domain: "jellyfin.mystackmint.com"
       policy: bypass
 
+    # App API/websocket paths — bypass Authelia (apps enforce their own token
+    # auth). Without this, background fetch/SSE/WS requests get 401 + Basic
+    # challenge → browser shows a native sign-in popup after session timeout.
+    - domain: "monitor.mystackmint.com"
+      resources:
+        - "^/api/.*"
+      policy: bypass
+    - domain: "uptime.mystackmint.com"
+      resources:
+        - "^/socket.io/.*"
+        - "^/api/.*"
+      policy: bypass
+
     # Admin-only infra tools — 2FA + admin group required
     - domain:
         - "db.mystackmint.com"

@@ -21,7 +21,9 @@ This file provides guidance to AI assistants when working with code in this repo
 | Authelia SSO | Hetzner | `auth.*` |
 | Portainer | Hetzner | `portainer.*` |
 | Adminer | Hetzner | `db.*` |
-| Jellyfin | Hetzner | `jellyfin.*` |
+| Jellyfin | Home laptop → proxied via Hetzner Traefik | `jellyfin.*` |
+| Coolify | Hetzner | `coolhetz.*` |
+| Coolify | Contabo | `coolcontb.*` |
 | Navidrome | Hetzner | `music.*` |
 | Immich | Hetzner | `photos.*` |
 | Hermes AI agent | Hetzner | `hermes.*` |
@@ -160,7 +162,9 @@ DB and Redis containers have **no `ports:` section** — reachable only by servi
 | `db.*` | Adminer | Hetzner | Admin + 2FA |
 | `analytics.*` | Umami | Hetzner | Admin + 2FA |
 | `hermes.*` | Hermes AI agent | Hetzner | Admin + 2FA |
-| `jellyfin.*` | Jellyfin Media Server | Hetzner | Jellyfin own auth |
+| `jellyfin.*` | Jellyfin Media Server | Home laptop (Traefik proxy via Hetzner) | Jellyfin own auth |
+| `coolhetz.*` | Coolify | Hetzner | Admin + 2FA |
+| `coolcontb.*` | Coolify | Contabo | Admin + 2FA |
 | `music.*` | Navidrome | Hetzner | Navidrome own auth |
 | `photos.*` | Immich | Hetzner | Immich own auth |
 | `monitor.*` | Beszel | Hetzner | Admin + 2FA |
@@ -182,26 +186,28 @@ systemctl status rclone-storagebox-music
 systemctl status rclone-storagebox-media
 ```
 
-## Home Laptop Media Mount (Jellyfin)
+## Jellyfin (Home Laptop — Direct)
 
-Jellyfin media is served from the **home laptop** (`desktop-2a2oj5t`, Tailscale IP `100.119.69.2`) — its `G:` drive is mounted read-only on the Hetzner VPS at `/mnt/homelaptop` via rclone SFTP over Tailscale (`rclone-homelaptop.service`). **Playback only works while the laptop is on and connected to Tailscale.**
+Jellyfin runs directly on the **media laptop** (`desktop-2a2oj5t`, Tailscale IP `100.119.69.2`). Files are local to the laptop — no rclone mount needed. Traefik on Hetzner proxies `jellyfin.mystackmint.com` to the laptop over Tailscale.
 
-| Container path | Laptop folder |
-|----------------|---------------|
-| `/media/movies` | `G:\Movies` |
-| `/media/series` | `G:\ShowSeries` |
-| `/media/music` | `G:\Audio` |
-| `/media/videosongs` | `G:\VideoSongs` |
-| `/media/comedies` | `G:\Comedies` |
+**Active Traefik route:** `/data/coolify/proxy/dynamic/jellyfin.yaml` on Hetzner VPS (tracked in `media/jellyfin/traefik-route.yaml`).
 
-A watchdog (`rclone-homelaptop-watchdog.timer`, every 2 min, runs `scripts/rclone-watchdog.sh`) clears stale FUSE mounts and restarts the mount service, so it self-heals within ~2 minutes of the laptop coming back online. The mount uses aggressive rclone timeouts so reads **fail fast** instead of hanging Jellyfin when the laptop is off. Unit files are tracked in `media/jellyfin/`.
+**Laptop requirements:**
+- Tailscale running (unattended)
+- Jellyfin service running on port 8096
+- Windows Firewall rule allowing port 8096 from Tailscale CGNAT range (`100.64.0.0/10`):
+  ```powershell
+  New-NetFirewallRule -DisplayName "Jellyfin - Tailscale" -Direction Inbound `
+    -Protocol TCP -LocalPort 8096 -RemoteAddress 100.64.0.0/10 -Action Allow
+  ```
 
+**To update the Traefik route** (e.g. if laptop IP changes):
 ```bash
-systemctl status rclone-homelaptop
-systemctl list-timers rclone-homelaptop-watchdog.timer
+# Edit /data/coolify/proxy/dynamic/jellyfin.yaml on Hetzner VPS
+# Traefik hot-reloads the file provider — no restart needed
 ```
 
-Laptop-side requirements: Tailscale set to "Run unattended", SSH server auto-start, never sleep on AC power.
+**4K playback:** Enable hardware transcoding in Jellyfin → Dashboard → Playback → Transcoding. Use Intel QuickSync / NVENC / AMF depending on laptop GPU. Or use a native Jellyfin app (Windows/iOS/Android) for direct play without transcoding.
 
 ### Upload music/photos to Storage Box (from Windows)
 WinSCP or any SFTP client:

@@ -301,129 +301,18 @@ const canonicalUrl = 'https://thestackmint.com/familyhealth';
       </div>
     </section>
 
-    <!-- ── Privacy Policy ── -->
-    <section id="privacy" class="section-alt">
-      <div class="legal">
-        <h1>Privacy Policy</h1>
-        <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Effective: June 2026</p>
-        <div class="notice">
-          <strong>Health data notice.</strong> Family Healthcare stores sensitive personal health information on your behalf.
-          We treat this data with the highest level of care and never sell, share, or use it for advertising purposes.
+    <!-- ── Legal ── -->
+    <section id="legal" class="section-alt">
+      <div class="wrap" style="text-align:center;padding:64px 0">
+        <p class="kicker reveal">Legal</p>
+        <h2 class="reveal">Privacy &amp; Terms</h2>
+        <p class="section-intro reveal">
+          We're committed to protecting your family's health data and being transparent about how we operate.
+        </p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+          <a class="btn btn-ghost reveal d1" href="/privacy">Privacy Policy →</a>
+          <a class="btn btn-ghost reveal d2" href="/terms">Terms of Service →</a>
         </div>
-        <h2>1. Who we are</h2>
-        <p>Family Healthcare is a product of <strong>thestackmint</strong>, a solo software studio based in India.
-        Contact: <a href="mailto:familyhealth@thestackmint.com">familyhealth@thestackmint.com</a>.</p>
-        <h2>2. What data we collect</h2>
-        <h3>Account data</h3>
-        <ul>
-          <li>Phone number (OTP authentication)</li>
-          <li>Email address (optional, for Google Sign-In)</li>
-          <li>Display name and profile photo (optional)</li>
-          <li>Language and timezone preferences</li>
-        </ul>
-        <h3>Health data (entered by you)</h3>
-        <ul>
-          <li>Medications, dosage schedules, and dose logs</li>
-          <li>Medical appointments and linked doctor/hospital details</li>
-          <li>Vital measurements (blood pressure, blood sugar, weight, oxygen saturation, etc.)</li>
-          <li>Health record files you upload (prescriptions, lab reports, discharge summaries)</li>
-          <li>Family member profiles and caretaker assignment relationships</li>
-        </ul>
-        <h3>Technical data</h3>
-        <ul>
-          <li>Anonymised crash reports via Sentry (no health data)</li>
-          <li>Subscription plan status and change history</li>
-          <li>Security audit logs — retained 90 days</li>
-        </ul>
-        <p>We do <strong>not</strong> collect advertising identifiers, location data, contact lists, microphone audio, or browsing history.</p>
-        <h2>3. How we use your data</h2>
-        <ul>
-          <li>Core app functionality (medications, appointments, vitals, records)</li>
-          <li>Medication and appointment reminders you have enabled</li>
-          <li>Subscription plan enforcement and self-serve plan changes</li>
-          <li>Bug detection and security monitoring</li>
-          <li>Legal compliance</li>
-        </ul>
-        <p>We do <strong>not</strong> use your data for advertising, profiling, or sale to third parties.</p>
-        <h2>4. Data storage &amp; security</h2>
-        <ul>
-          <li>Stored in <strong>Supabase</strong> (PostgreSQL + Object Storage), AES-256 at rest, TLS 1.2+ in transit</li>
-          <li>Row Level Security (RLS) — users access only their own family's data</li>
-          <li>Private storage buckets — only the uploading family can access files</li>
-          <li>Certificate pinning, Android FLAG_SECURE, 10-minute session timeout, biometric lock</li>
-        </ul>
-        <h2>5. Third-party processors</h2>
-        <ul>
-          <li><strong>Supabase</strong> — database, auth, file storage</li>
-          <li><strong>Sentry</strong> — anonymised crash reporting (no health data)</li>
-          <li><strong>Google Sign-In</strong> — optional OAuth (no health data shared)</li>
-        </ul>
-        <h2>6. Your rights (GDPR — EU/EEA)</h2>
-        <ul>
-          <li>Access, erasure, portability, restriction, rectification, objection, and consent withdrawal</li>
-        </ul>
-        <p>Email <a href="mailto:familyhealth@thestackmint.com">familyhealth@thestackmint.com</a> — we respond within 30 days.</p>
-        <h2>7. FTC Health Breach Notification (US)</h2>
-        <p>In the event of a breach affecting US residents, we notify each individual and the FTC within <strong>60 days</strong>.</p>
-        <h2>8. India DPDPA 2023</h2>
-        <p>We comply with India's Digital Personal Data Protection Act 2023 — collecting only necessary data
-        and enabling account deletion at any time.</p>
-        <h2>9. Data retention</h2>
-        <ul>
-          <li>Active accounts: retained while active</li>
-          <li>Deleted accounts: all data permanently deleted within <strong>30 days</strong></li>
-          <li>Security logs: 90 days; crash reports: 12 months</li>
-        </ul>
-        <h2>10. Children's privacy</h2>
-        <p>Accounts must be created by adults (18+). Contact us immediately if you believe a child under 13 provided data without consent.</p>
-        <h2>11. Changes</h2>
-        <p>Material changes notified via in-app notice at least 7 days before taking effect.</p>
-        <h2>12. Contact</h2>
-        <p><a href="mailto:familyhealth@thestackmint.com">familyhealth@thestackmint.com</a></p>
-      </div>
-    </section>
-
-    <!-- ── Terms of Service ── -->
-    <section id="terms">
-      <div class="legal">
-        <h1>Terms of Service</h1>
-        <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Effective: June 2026</p>
-        <h2>1. Acceptance</h2>
-        <p>By using Family Healthcare, you agree to these Terms, forming a binding agreement with thestackmint, India.</p>
-        <h2>2. Account registration</h2>
-        <ul>
-          <li>Provide accurate information; keep credentials secure</li>
-          <li>Notify us immediately of any unauthorised access</li>
-          <li>Must be 18+ to create an account</li>
-        </ul>
-        <h2>3. Acceptable use</h2>
-        <p>Do not upload malware, reverse-engineer the app, circumvent security, impersonate others, scrape data, or harm infrastructure.</p>
-        <h2>4. Health disclaimer</h2>
-        <div class="notice">
-          <strong>Not medical advice.</strong> Family Healthcare is a personal health record tool, not a medical device or healthcare provider.
-          Always consult a qualified healthcare professional before any health or medication decision.
-        </div>
-        <h2>5. Subscription &amp; billing</h2>
-        <ul>
-          <li>Free, Premium (₹199/mo), Family Pro (₹499/mo) — billed monthly in INR</li>
-          <li>Upgrade/downgrade anytime from the app; downgrading preserves existing data in read-only mode</li>
-        </ul>
-        <h2>6. Your data</h2>
-        <p>You own all health data you enter. You can export and permanently delete it at any time from Privacy Settings.</p>
-        <h2>7. Intellectual property</h2>
-        <p>The App, design, and branding are the exclusive property of thestackmint.</p>
-        <h2>8. Termination</h2>
-        <p>We may suspend accounts violating these Terms. You may delete your account at any time; data is deleted within 30 days.</p>
-        <h2>9. Liability</h2>
-        <p>The App is provided "as is". Our total liability shall not exceed the greater of ₹5,000 or amounts paid in the prior 12 months.</p>
-        <h2>10. Indemnification</h2>
-        <p>You agree to indemnify thestackmint from claims arising from your use of the App or violation of these Terms.</p>
-        <h2>11. Governing law</h2>
-        <p>Governed by the laws of <strong>India</strong>. Disputes subject to Indian courts.</p>
-        <h2>12. Changes</h2>
-        <p>Material changes notified via in-app notice at least <strong>7 days</strong> before taking effect.</p>
-        <h2>13. Contact</h2>
-        <p><strong>thestackmint</strong> · <a href="mailto:familyhealth@thestackmint.com">satish.technology9@gmail.com</a></p>
       </div>
     </section>
 
@@ -447,7 +336,7 @@ const canonicalUrl = 'https://thestackmint.com/familyhealth';
             <span class="icon">🐛</span>
             <h3>Report a bug</h3>
             <p>Spotted something broken? Tell us what happened, on which screen, and we'll fix it in the next release.</p>
-            <a class="btn btn-ghost" href="mailto:familyhealth@thestackmint.com?subject=Bug%20Report%20%E2%80%94%20VitaFamily%20Health">Report a bug →</a>
+            <a class="btn btn-ghost" href="mailto:familyhealth@thestackmint.com?subject=Bug%20Report%20%E2%80%94%20Family%20Healthcare">Report a bug →</a>
           </div>
         </div>
       </div>

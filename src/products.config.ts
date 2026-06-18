@@ -43,6 +43,6 @@ export const products: Product[] = [
     externalUrl: 'https://codefinderhub.com',
     platform: 'web',
     status: 'live',
-    primaryCta: 'Try it free →',
+    primaryCta: 'Check it now →',
   },
 ];

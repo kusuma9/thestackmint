@@ -16,15 +16,15 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    id: 'vitafamily',
-    name: 'VitaFamily Health',
+    id: 'familyhealth',
+    name: 'Family Healthcare',
     tagline: "One private app for your whole family's health.",
     description:
       'Track medications, appointments, vitals, and health records for parents, children, and grandparents — together, in one secure place.',
     emoji: '🌿',
     iconBg: '#e3efe7',
     badge: 'Health · Family',
-    pageUrl: '/vitafamily',
+    pageUrl: '/familyhealth',
     platform: 'android',
     status: 'live',
     primaryCta: 'Explore app →',

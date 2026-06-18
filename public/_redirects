@@ -1,1 +1,3 @@
 https://www.thestackmint.com/* https://thestackmint.com/:splat 301
+/vitafamily /familyhealth 301
+/vitafamily/* /familyhealth/:splat 301

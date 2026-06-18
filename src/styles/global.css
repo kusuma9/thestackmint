@@ -662,7 +662,7 @@ h2 {
   display: flex; align-items: center; justify-content: center;
   padding: 32px;
 }
-.product-card.vitafamily .pc-visual {
+.product-card.familyhealth .pc-visual {
   background: linear-gradient(145deg, #1b6b3a 0%, #0d3d20 100%);
 }
 .product-card.codefinderhub .pc-visual {

@@ -1,36 +1,36 @@
 ---
 interface Props {
-  brand?: 'mystackmint' | 'vitafamily' | 'codefinderhub';
+  brand?: 'thestackmint' | 'familyhealth' | 'codefinderhub';
 }
-const { brand = 'mystackmint' } = Astro.props;
+const { brand = 'thestackmint' } = Astro.props;
 ---
 
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        {brand === 'mystackmint' && (
+        {brand === 'thestackmint' && (
           <>
             <a class="brand" href="/" style="display:inline-flex;margin-bottom:14px">
-              <span class="brand-mark">M</span>
-              <span class="brand-name" style="color:#fff">mystack<em>mint</em></span>
+              <span class="brand-mark">T</span>
+              <span class="brand-name" style="color:#fff">thestack<em>mint</em></span>
             </a>
             <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
               Solo-crafted apps built with care. Based in India, shipped globally.
             </p>
           </>
         )}
-        {brand === 'vitafamily' && (
+        {brand === 'familyhealth' && (
           <>
-            <a class="brand" href="/vitafamily" style="display:inline-flex;margin-bottom:14px">
+            <a class="brand" href="/familyhealth" style="display:inline-flex;margin-bottom:14px">
               <span class="brand-mark">🌿</span>
-              <span class="brand-name" style="color:#fff">Vita<em>Family</em> Health</span>
+              <span class="brand-name" style="color:#fff">Family <em>Healthcare</em></span>
             </a>
             <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
-              Private family health management — a product of mystackmint.
+              Private family health management — a product of thestackmint.
             </p>
             <p style="margin-top:12px">
-              <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to mystackmint</a>
+              <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to thestackmint</a>
             </p>
           </>
         )}
@@ -41,21 +41,21 @@ const { brand = 'mystackmint' } = Astro.props;
               <span class="brand-name" style="color:#fff">Code<em>FinderHub</em></span>
             </a>
             <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
-              India's free Pincode &amp; IFSC lookup tool — a product of mystackmint.
+              India's free Pincode &amp; IFSC lookup tool — a product of thestackmint.
             </p>
             <p style="margin-top:12px">
-              <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to mystackmint</a>
+              <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to thestackmint</a>
             </p>
           </>
         )}
       </div>
 
-      {brand === 'mystackmint' && (
+      {brand === 'thestackmint' && (
         <>
           <div>
             <h4>Products</h4>
             <ul>
-              <li><a href="/vitafamily">VitaFamily Health</a></li>
+              <li><a href="/familyhealth">Family Healthcare</a></li>
               <li><a href="/codefinderhub">CodeFinderHub</a></li>
               <li style="color:#555f58;font-style:italic;font-size:0.9rem">More coming soon…</li>
             </ul>
@@ -63,8 +63,8 @@ const { brand = 'mystackmint' } = Astro.props;
           <div>
             <h4>Legal</h4>
             <ul>
-              <li><a href="/vitafamily#privacy">Privacy Policy</a></li>
-              <li><a href="/vitafamily#terms">Terms of Service</a></li>
+              <li><a href="/familyhealth#privacy">Privacy Policy</a></li>
+              <li><a href="/familyhealth#terms">Terms of Service</a></li>
             </ul>
           </div>
           <div>
@@ -76,7 +76,7 @@ const { brand = 'mystackmint' } = Astro.props;
         </>
       )}
 
-      {brand === 'vitafamily' && (
+      {brand === 'familyhealth' && (
         <>
           <div>
             <h4>App</h4>
@@ -97,7 +97,7 @@ const { brand = 'mystackmint' } = Astro.props;
             <h4>Support</h4>
             <ul>
               <li><a href="#contact">Contact us</a></li>
-              <li><a href="mailto:satish.technology9@gmail.com">Email support</a></li>
+              <li><a href="mailto:familyhealth@thestackmint.com">Email support</a></li>
             </ul>
           </div>
         </>
@@ -132,8 +132,8 @@ const { brand = 'mystackmint' } = Astro.props;
     </div>
 
     <div class="footer-note">
-      <span>© <span data-year></span> mystackmint. All rights reserved.</span>
-      <span>Made with ♥ in India{brand === 'vitafamily' ? ' — for families everywhere' : ''}</span>
+      <span>© <span data-year></span> thestackmint. All rights reserved.</span>
+      <span>Made with ♥ in India{brand === 'familyhealth' ? ' — for families everywhere' : ''}</span>
     </div>
   </div>
 </footer>

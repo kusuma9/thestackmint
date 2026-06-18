@@ -1,25 +1,25 @@
 ---
 interface Props {
-  brand?: 'mystackmint' | 'vitafamily' | 'codefinderhub';
+  brand?: 'thestackmint' | 'familyhealth' | 'codefinderhub';
   backLink?: string;
 }
 
-const { brand = 'mystackmint', backLink } = Astro.props;
+const { brand = 'thestackmint', backLink } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
 <header class="site-header">
   <div class="wrap nav">
-    {brand === 'mystackmint' && (
+    {brand === 'thestackmint' && (
       <a class="brand" href="/">
-        <span class="brand-mark">M</span>
-        <span class="brand-name">mystack<em>mint</em></span>
+        <span class="brand-mark">T</span>
+        <span class="brand-name">thestack<em>mint</em></span>
       </a>
     )}
-    {brand === 'vitafamily' && (
-      <a class="brand" href="/vitafamily">
+    {brand === 'familyhealth' && (
+      <a class="brand" href="/familyhealth">
         <span class="brand-mark">🌿</span>
-        <span class="brand-name">Vita<em>Family</em> Health</span>
+        <span class="brand-name">Family <em>Healthcare</em></span>
       </a>
     )}
     {brand === 'codefinderhub' && (
@@ -34,17 +34,17 @@ const currentPath = Astro.url.pathname;
     <ul class="nav-links">
       {backLink && (
         <li>
-          <a href={backLink} style="font-size:0.82rem;color:#8d988f">← mystackmint</a>
+          <a href={backLink} style="font-size:0.82rem;color:#8d988f">← thestackmint</a>
         </li>
       )}
-      {brand === 'mystackmint' && (
+      {brand === 'thestackmint' && (
         <>
           <li><a href="#products" aria-current={currentPath === '/' ? 'page' : undefined}>Products</a></li>
           <li><a href="#about">About</a></li>
           <li><a href={`mailto:satish.technology9@gmail.com`}>Contact</a></li>
         </>
       )}
-      {brand === 'vitafamily' && (
+      {brand === 'familyhealth' && (
         <>
           <li><a href="#features">Features</a></li>
           <li><a href="#pricing">Pricing</a></li>

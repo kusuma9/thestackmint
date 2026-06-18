@@ -4,7 +4,7 @@ import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 
 const title = "CodeFinderHub — India's Pincode & IFSC Lookup";
-const description = "Instant Indian postal and banking code lookups. Find Pincode details, IFSC codes, bank branches and post offices in milliseconds — free web UI and REST API.";
+const description = "Free web tool to look up Indian Pincodes, IFSC codes, and bank branches instantly. No sign-up needed — search postal codes, find branch details, and verify banking information.";
 const canonicalUrl = 'https://thestackmint.com/codefinderhub';
 ---
 
@@ -23,25 +23,25 @@ const canonicalUrl = 'https://thestackmint.com/codefinderhub';
       <div class="wrap hero-grid">
         <div>
           <span class="eyebrow reveal in" style="background:var(--amber-soft);color:var(--amber)">
-            Built for India's developers &amp; businesses
+            Free · No sign-up · India-wide coverage
           </span>
           <h1 class="reveal in d1" style="color:var(--ink)">
-            Find any Pincode or IFSC in <span class="accent" style="color:var(--amber);font-style:italic">milliseconds.</span>
+            India's Pincode &amp; IFSC lookup, <span style="color:var(--amber);font-style:italic">made simple.</span>
           </h1>
           <p class="lede reveal in d2">
-            India has 19,000+ IFSC codes and 30,000+ Pincodes. CodeFinderHub lets your app — or your team — look them all up instantly.
-            Clean REST API. Batch processing. Dead-simple web UI. Always free to start.
+            Three tools in one place — search any Indian Pincode, find IFSC codes with full branch details,
+            or browse bank branches by name or location. Free to use, no account needed.
           </p>
           <div class="hero-ctas reveal in d3">
             <a class="btn btn-amber" href="https://codefinderhub.com" target="_blank" rel="noopener">Try it free →</a>
-            <a class="btn btn-ghost" style="border-color:var(--amber);color:var(--amber)" href="#features">See what it does</a>
+            <a class="btn btn-ghost" style="border-color:var(--amber);color:var(--amber)" href="#tools">See the tools</a>
           </div>
         </div>
         <div class="reveal in d2" style="display:flex;align-items:center;justify-content:center">
           <div style="background:linear-gradient(145deg,#92400e,#78350f);border-radius:28px;padding:28px;box-shadow:0 40px 80px rgba(120,53,15,0.35)">
             <div style="background:var(--cream);border-radius:18px;padding:20px;min-width:260px">
               <div style="font-family:var(--font-display);font-weight:700;font-size:0.95rem;margin-bottom:14px;color:var(--ink)">
-                🔍 Try a lookup
+                🔍 Quick lookup
               </div>
               <div style="background:#fff;border:1.5px solid var(--amber);border-radius:10px;padding:12px 14px;font-size:0.9rem;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
                 <span style="color:var(--ink-soft)">600001</span>
@@ -52,7 +52,7 @@ const canonicalUrl = 'https://thestackmint.com/codefinderhub';
                 <div style="color:var(--ink-soft);font-size:0.8rem">Tamil Nadu · Chennai District</div>
                 <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
                   <span style="background:var(--amber-soft);color:var(--amber);font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:5px">PINCODE</span>
-                  <span style="background:var(--green-soft);color:var(--green);font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:5px">7 Post Offices</span>
+                  <span style="background:var(--green-soft);color:var(--green);font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:5px">Post Offices</span>
                 </div>
               </div>
               <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:0.85rem">
@@ -60,7 +60,7 @@ const canonicalUrl = 'https://thestackmint.com/codefinderhub';
                 <div style="color:var(--ink-soft);font-size:0.8rem">State Bank of India · Fort Branch</div>
                 <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
                   <span style="background:var(--amber-soft);color:var(--amber);font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:5px">IFSC</span>
-                  <span style="background:var(--green-soft);color:var(--green);font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:5px">NEFT · RTGS</span>
+                  <span style="background:var(--green-soft);color:var(--green);font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:5px">Branch details</span>
                 </div>
               </div>
             </div>
@@ -69,73 +69,62 @@ const canonicalUrl = 'https://thestackmint.com/codefinderhub';
       </div>
     </section>
 
-    <!-- ── Features ── -->
-    <section id="features" class="section-alt">
+    <!-- ── Tools ── -->
+    <section id="tools" class="section-alt">
       <div class="wrap">
-        <p class="kicker reveal" style="color:var(--amber)">Everything included</p>
-        <h2 class="reveal">One tool. Every code.<br>All of India.</h2>
+        <p class="kicker reveal" style="color:var(--amber)">Three tools, one place</p>
+        <h2 class="reveal">Everything you need to look up<br>Indian postal &amp; banking codes.</h2>
         <p class="section-intro reveal">
-          Whether you're a developer integrating address validation, a fintech verifying bank details,
-          or an ops team looking up branches — CodeFinderHub has you covered.
+          Whether you're verifying a delivery address, checking a bank branch before a transfer,
+          or looking up which post offices serve an area — it's all here, free.
         </p>
         <div class="cards">
           <div class="card amber reveal d1">
             <span class="icon">📍</span>
-            <h3>Pincode lookup</h3>
-            <p>Enter any 6-digit Indian postal code and get the district, state, division, region, and all post offices in that pin — in one response.</p>
+            <h3>Pincode search</h3>
+            <p>Enter any 6-digit Indian postal code to get the district, state, region, and all post offices served by that pin — instantly.</p>
+            <a class="btn btn-amber" style="margin-top:auto;display:inline-block" href="https://codefinderhub.com" target="_blank" rel="noopener">Search Pincodes →</a>
           </div>
           <div class="card reveal d2">
             <span class="icon">🏦</span>
             <h3>IFSC lookup</h3>
-            <p>Find any bank's IFSC code with full branch details — bank name, branch address, city, district, NEFT/RTGS/IMPS support status.</p>
+            <p>Find any bank's IFSC code with full branch details — bank name, branch address, city, and district. Useful before initiating bank transfers.</p>
+            <a class="btn btn-ghost" style="margin-top:auto;display:inline-block;border-color:var(--amber);color:var(--amber)" href="https://codefinderhub.com" target="_blank" rel="noopener">Search IFSC →</a>
           </div>
           <div class="card amber reveal d3">
-            <span class="icon">⚡</span>
-            <h3>Instant results</h3>
-            <p>Sub-100ms response times. No spinning loaders, no rate-limiting surprises, no timeouts. Your users won't notice the lookup is even happening.</p>
-          </div>
-          <div class="card reveal d1">
-            <span class="icon">🔌</span>
-            <h3>REST API</h3>
-            <p>Clean JSON endpoints for Pincode and IFSC lookups. OpenAPI docs included. Authentication via API key — one line to integrate.</p>
-          </div>
-          <div class="card amber reveal d2">
-            <span class="icon">📦</span>
-            <h3>Batch processing</h3>
-            <p>Send up to 500 codes in a single request. Perfect for validating shipping addresses at import time or enriching existing datasets.</p>
-          </div>
-          <div class="card reveal d3">
-            <span class="icon">🔍</span>
-            <h3>Reverse lookup</h3>
-            <p>Search by city name, bank name, or district to get all matching pincodes or IFSC codes — useful for search-as-you-type address forms.</p>
+            <span class="icon">🗺️</span>
+            <h3>Bank branch finder</h3>
+            <p>Search by bank name or location to find all matching branches across India. Handy when you know the bank but not the branch code.</p>
+            <a class="btn btn-amber" style="margin-top:auto;display:inline-block" href="https://codefinderhub.com" target="_blank" rel="noopener">Find branches →</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── Use Cases ── -->
-    <section id="use-cases">
+    <!-- ── Why ── -->
+    <section id="why">
       <div class="wrap">
-        <p class="kicker reveal" style="color:var(--amber)">Who uses it</p>
-        <h2 class="reveal">Built for the teams<br>that run India's internet.</h2>
+        <p class="kicker reveal" style="color:var(--amber)">Why CodeFinderHub</p>
+        <h2 class="reveal">No clutter. No sign-up.<br>Just the answer you need.</h2>
         <p class="section-intro reveal">
-          From D2C startups to enterprise fintech — CodeFinderHub handles the postal and banking data layer so you don't have to.
+          Most Pincode and IFSC sites are cluttered with ads, require accounts, or return stale data.
+          CodeFinderHub is built to be fast, clean, and always free.
         </p>
         <div class="cards" style="margin-top:44px">
           <div class="card reveal d1">
-            <span class="icon" style="background:var(--amber-soft);font-size:28px">🛒</span>
-            <h3>E-commerce &amp; D2C</h3>
-            <p>Validate delivery pincodes at checkout. Auto-fill city and state from a 6-digit code. Cut COD failures with real-time serviceability checks.</p>
+            <span class="icon">⚡</span>
+            <h3>Instant results</h3>
+            <p>No loading screens. Type a code and the result appears. Built for speed so you can get on with your work.</p>
           </div>
           <div class="card amber reveal d2">
-            <span class="icon">🏛️</span>
-            <h3>Fintech &amp; BFSI</h3>
-            <p>Verify IFSC codes before initiating NEFT/RTGS transfers. Validate bank branch details for KYC flows. Enrich account data with branch addresses.</p>
+            <span class="icon">🆓</span>
+            <h3>Always free</h3>
+            <p>No account, no subscription, no credit card. Open the site and start searching — that's it.</p>
           </div>
           <div class="card reveal d3">
-            <span class="icon" style="background:var(--amber-soft);font-size:28px">👨‍💻</span>
-            <h3>Developers &amp; SaaS</h3>
-            <p>Drop our REST API into any stack in minutes. Use in address autocomplete, onboarding forms, loan applications, or logistics dashboards.</p>
+            <span class="icon">🇮🇳</span>
+            <h3>All of India covered</h3>
+            <p>30,000+ Pincodes and 19,000+ IFSC codes across every state and bank in India, kept up to date.</p>
           </div>
         </div>
       </div>
@@ -147,17 +136,11 @@ const canonicalUrl = 'https://thestackmint.com/codefinderhub';
         <div class="cta-band reveal" style="background:linear-gradient(135deg, #92400e 0%, #451a03 100%)">
           <h2>Start looking up codes for free.</h2>
           <p>
-            No sign-up required to try the web UI. API access takes under 5 minutes to set up.
-            Free tier included — no credit card.
+            No sign-up. No account. Just open the site and search — Pincodes, IFSC codes, and bank branches all in one place.
           </p>
-          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-            <a class="btn" style="background:#fff;color:#92400e;font-weight:800" href="https://codefinderhub.com" target="_blank" rel="noopener">
-              Try it free →
-            </a>
-            <a class="btn" style="background:rgba(255,255,255,0.12);color:#fff;border:1.5px solid rgba(255,255,255,0.3)" href="https://codefinderhub.com/api" target="_blank" rel="noopener">
-              View API docs
-            </a>
-          </div>
+          <a class="btn" style="background:#fff;color:#92400e;font-weight:800" href="https://codefinderhub.com" target="_blank" rel="noopener">
+            Open CodeFinderHub →
+          </a>
         </div>
       </div>
     </section>
@@ -168,19 +151,19 @@ const canonicalUrl = 'https://thestackmint.com/codefinderhub';
         <p class="kicker reveal" style="color:var(--amber)">Questions?</p>
         <h2 class="reveal">We're happy to help.</h2>
         <p class="section-intro reveal">
-          Need a higher rate limit, a custom data export, or enterprise SLA? Reach out directly.
+          Found wrong data, or have a suggestion to improve the tool? Reach out directly.
         </p>
         <div class="contact-grid">
           <div class="contact-card reveal d1">
             <span class="icon">📧</span>
             <h3>General enquiries</h3>
-            <p>Questions about the API, pricing, or integration? We respond within 1–2 business days.</p>
+            <p>Questions, feedback, or suggestions? We respond within 1–2 business days.</p>
             <a class="btn btn-amber" href="mailto:satish.technology9@gmail.com">satish.technology9@gmail.com</a>
           </div>
           <div class="contact-card reveal d2">
             <span class="icon">🐛</span>
-            <h3>Report an issue</h3>
-            <p>Found a code that returns wrong data? Tell us the code and what's incorrect — we'll fix it.</p>
+            <h3>Report wrong data</h3>
+            <p>Found a Pincode or IFSC that returns incorrect information? Let us know and we'll fix it.</p>
             <a class="btn btn-ghost" style="border-color:var(--amber);color:var(--amber)" href="mailto:satish.technology9@gmail.com?subject=CodeFinderHub%20Data%20Issue">Report an issue →</a>
           </div>
         </div>

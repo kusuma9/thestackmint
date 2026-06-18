@@ -33,17 +33,16 @@ export const products: Product[] = [
   {
     id: 'codefinderhub',
     name: 'CodeFinderHub',
-    tagline: "India's fastest Pincode & IFSC lookup.",
+    tagline: "India's Pincode & IFSC lookup, made simple.",
     description:
-      'Instant Indian postal and banking code lookups for developers, fintechs, and e-commerce businesses. Clean web UI, REST API, and batch processing.',
+      'Search any Indian Pincode, IFSC code, or bank branch instantly — free web tool, no sign-up needed. All of India covered.',
     emoji: '📮',
     iconBg: '#fdf0e3',
-    badge: 'Developer · Fintech',
+    badge: 'Pincode · IFSC · Free',
     pageUrl: '/codefinderhub',
     externalUrl: 'https://codefinderhub.com',
     platform: 'web',
     status: 'live',
     primaryCta: 'Try it free →',
-    secondaryCta: 'View API docs',
   },
 ];

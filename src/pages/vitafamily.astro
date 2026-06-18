@@ -1,0 +1,459 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+
+const title = "VitaFamily Health — One app for your whole family's health";
+const description = 'Track medications, appointments, vitals and health records for everyone you love — parents, kids and grandparents — in one private, secure family app.';
+const canonicalUrl = 'https://thestackmint.com/vitafamily';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  ogImage="/og-vitafamily.png"
+>
+  <Header brand="vitafamily" backLink="/" />
+
+  <main>
+
+    <!-- ── Hero ── -->
+    <section id="hero" class="hero">
+      <span class="hero-leaf">🌿</span>
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow reveal in">Made for families in India &amp; beyond</span>
+          <h1 class="reveal in d1">
+            Every dose, every visit, <span class="accent">every heartbeat</span> — one family app.
+          </h1>
+          <p class="lede reveal in d2">
+            Amma's blood-pressure pills. Appa's cardiology appointment. Your daughter's vaccination card.
+            VitaFamily Health keeps your whole family's health organised, reminded and safe — together in one place.
+          </p>
+          <div class="hero-ctas reveal in d3">
+            <a class="btn btn-primary" href="#download">Download for Android</a>
+            <a class="btn btn-ghost" href="#features">See how it works</a>
+          </div>
+        </div>
+        <div class="reveal in d2">
+          <div class="phone" aria-hidden="true">
+            <div class="phone-screen">
+              <div class="ps-header">Good morning, Priya 🌤️</div>
+              <div class="ps-banner">💊 2 doses due — Amma · 8:00 AM</div>
+              <div class="ps-card">
+                <span class="dot" style="background:#e3efe7">💊</span>
+                <div><strong>Metformin 500 mg</strong><span>Amma · after breakfast</span></div>
+              </div>
+              <div class="ps-card">
+                <span class="dot" style="background:#fdf0e3">🏥</span>
+                <div><strong>Dr. Rao — Cardiology</strong><span>Appa · tomorrow 10:30 AM</span></div>
+              </div>
+              <div class="ps-card">
+                <span class="dot" style="background:#ede9fe">🩺</span>
+                <div><strong>BP logged: 124/82</strong><span>Appa · today 7:12 AM</span></div>
+              </div>
+              <div class="ps-card">
+                <span class="dot" style="background:#e3efe7">💉</span>
+                <div><strong>MMR Booster due</strong><span>Anaya · next week</span></div>
+              </div>
+              <div class="ps-card">
+                <span class="dot" style="background:#fdf0e3">📄</span>
+                <div><strong>Lab report uploaded</strong><span>Lipid profile · 2 days ago</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Features ── -->
+    <section id="features" class="section-alt">
+      <div class="wrap">
+        <p class="kicker reveal">Everything included</p>
+        <h2 class="reveal">Health care is a family affair.<br>Your app should be too.</h2>
+        <p class="section-intro reveal">
+          Most health apps track one person. Real life doesn't work that way — you care for parents, children and grandparents all at once.
+        </p>
+        <div class="cards">
+          <div class="card reveal d1">
+            <span class="icon">💊</span>
+            <h3>Medications &amp; reminders</h3>
+            <p>Schedules for every family member with smart reminders, dose logging and missed-dose alerts that notify caretakers.</p>
+          </div>
+          <div class="card amber reveal d2">
+            <span class="icon">🏥</span>
+            <h3>Appointments &amp; doctors</h3>
+            <p>A shared family calendar of visits, linked to your own directory of doctors and hospitals.</p>
+          </div>
+          <div class="card reveal d3">
+            <span class="icon">🩺</span>
+            <h3>Vitals tracking</h3>
+            <p>Blood pressure, blood sugar, weight, oxygen — log any vital and see trends over 7, 30, or 90 days.</p>
+          </div>
+          <div class="card reveal d1">
+            <span class="icon">📂</span>
+            <h3>Health records</h3>
+            <p>Upload prescriptions, lab reports and discharge summaries. Private, encrypted, always accessible from anywhere.</p>
+          </div>
+          <div class="card amber reveal d2">
+            <span class="icon">🚨</span>
+            <h3>Alerts hub</h3>
+            <p>Critical, High, Medium and Low urgency alerts — colour-coded and prioritised so nothing slips through the cracks.</p>
+          </div>
+          <div class="card reveal d3">
+            <span class="icon">🆘</span>
+            <h3>Emergency QR</h3>
+            <p>One tap generates a full-screen QR with critical health info — readable by any paramedic, even without internet.</p>
+          </div>
+          <div class="card reveal d1">
+            <span class="icon">🤝</span>
+            <h3>Caretaker access</h3>
+            <p>Invite a nurse, professional caretaker, or trusted relative with time-limited, role-limited, revocable access.</p>
+          </div>
+          <div class="card amber reveal d2">
+            <span class="icon">👨‍👩‍👧‍👦</span>
+            <h3>Family roles</h3>
+            <p>Admin, caretaker, member, and patient roles with fine-grained permissions — everyone sees exactly what they should.</p>
+          </div>
+          <div class="card reveal d3">
+            <span class="icon">🗂️</span>
+            <h3>Private directories</h3>
+            <p>Your own private directory of doctors, hospitals, pharmacies and medicines — no generic database, just what matters to you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roles strip -->
+    <section class="section-green">
+      <div class="wrap">
+        <p class="kicker reveal">Family roles</p>
+        <h2 style="color:#fff" class="reveal">Right access for<br>the right person.</h2>
+        <p class="section-intro reveal">Four role levels keep your family's data private and properly shared.</p>
+        <div class="roles">
+          <div class="role reveal d1">
+            <span class="emoji">👑</span>
+            <strong>Admin</strong>
+            <span>Full access — manages members, billing and all family data</span>
+          </div>
+          <div class="role reveal d2">
+            <span class="emoji">🤝</span>
+            <strong>Caretaker</strong>
+            <span>Can view and log for assigned members only</span>
+          </div>
+          <div class="role reveal d3">
+            <span class="emoji">👤</span>
+            <strong>Member</strong>
+            <span>Manages their own health data within the family group</span>
+          </div>
+          <div class="role reveal d4">
+            <span class="emoji">🧓</span>
+            <strong>Patient</strong>
+            <span>Read-only — ideal for elderly who don't operate the app themselves</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Pricing ── -->
+    <section id="pricing">
+      <div class="wrap">
+        <p class="kicker reveal">Simple, honest pricing</p>
+        <h2 class="reveal">Free to start.<br>Upgrade when you grow.</h2>
+        <p class="section-intro reveal">
+          All plans include the core features. Premium plans add more members, more storage, and caretaker access.
+          Switch plans any time from inside the app — no calls required.
+        </p>
+
+        <div class="plans">
+          <div class="plan reveal d1">
+            <span class="tier-emoji">🌱</span>
+            <h3>Free</h3>
+            <p style="color:var(--ink-soft);font-size:0.9rem;margin:6px 0 0">Perfect for a small family getting started</p>
+            <div class="price">₹0 <small>/mo</small></div>
+            <ul>
+              <li>3 family members</li>
+              <li>3 medications per member</li>
+              <li>100 MB health record storage</li>
+              <li>Vitals history — 90 days</li>
+              <li>1 family group</li>
+              <li class="no">Caretaker access</li>
+              <li class="no">Data export (PDF/CSV)</li>
+              <li class="no">Priority support</li>
+            </ul>
+            <a class="btn btn-ghost" href="#download" style="text-align:center;width:100%">Download free</a>
+          </div>
+          <div class="plan featured reveal d2">
+            <div class="plan-flag">Most popular</div>
+            <span class="tier-emoji">⭐</span>
+            <h3>Premium</h3>
+            <p style="color:var(--ink-soft);font-size:0.9rem;margin:6px 0 0">For larger families needing more</p>
+            <div class="price">₹199 <small>/mo</small></div>
+            <ul>
+              <li>10 family members</li>
+              <li>Unlimited medications</li>
+              <li>5 GB health record storage</li>
+              <li>Vitals history — 1 year</li>
+              <li>2 family groups</li>
+              <li>1 caretaker</li>
+              <li class="no">Data export (PDF/CSV)</li>
+              <li class="no">Priority support</li>
+            </ul>
+            <a class="btn btn-primary" href="#download" style="text-align:center;width:100%">Get started</a>
+          </div>
+          <div class="plan reveal d3">
+            <span class="tier-emoji">👑</span>
+            <h3>Family Pro</h3>
+            <p style="color:var(--ink-soft);font-size:0.9rem;margin:6px 0 0">For care professionals &amp; extended families</p>
+            <div class="price">₹499 <small>/mo</small></div>
+            <ul>
+              <li>Unlimited members</li>
+              <li>Unlimited medications</li>
+              <li>50 GB health record storage</li>
+              <li>Unlimited vitals history</li>
+              <li>Unlimited family groups</li>
+              <li>Unlimited caretakers</li>
+              <li>Data export (PDF/CSV)</li>
+              <li>Priority support</li>
+            </ul>
+            <a class="btn btn-amber" href="#download" style="text-align:center;width:100%">Go pro</a>
+          </div>
+        </div>
+
+        <table class="compare reveal" aria-label="Full feature comparison">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Free</th>
+              <th>Premium ₹199</th>
+              <th>Family Pro ₹499</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Family members</td><td>3</td><td>10</td><td>Unlimited</td></tr>
+            <tr><td>Caretakers</td><td>—</td><td>1</td><td>Unlimited</td></tr>
+            <tr><td>Medications per member</td><td>3</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><td>Health record storage</td><td>100 MB</td><td>5 GB</td><td>50 GB</td></tr>
+            <tr><td>Families per account</td><td>1</td><td>2</td><td>Unlimited</td></tr>
+            <tr><td>Vitals history</td><td>90 days</td><td>1 year</td><td>Unlimited</td></tr>
+            <tr><td>Data export (PDF/CSV)</td><td>—</td><td>—</td><td>✓</td></tr>
+            <tr><td>Priority support</td><td>—</td><td>—</td><td>✓</td></tr>
+            <tr><td>Emergency QR</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>Appointment reminders</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>Doctor &amp; hospital directory</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>In-app plan switching</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>Medication dose logging</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td>Vitals charts &amp; trends</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          </tbody>
+        </table>
+        <p style="text-align:center;color:var(--ink-soft);font-size:0.88rem;margin-top:22px">
+          All prices in Indian Rupees (INR). Plans renew monthly. Downgrade anytime — existing data is always preserved.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Download ── -->
+    <section id="download" class="section-alt">
+      <div class="wrap">
+        <p class="kicker reveal">Get the app</p>
+        <h2 class="reveal">Download VitaFamily Health<br>for Android.</h2>
+        <div class="dl-panel reveal">
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:18px">Get started in 3 minutes</h3>
+            <ol class="steps">
+              <li>Download the APK file below (Android 7.0+)</li>
+              <li>Open the file — allow "Install from unknown sources" if prompted</li>
+              <li>Sign in with your phone number or Google account</li>
+              <li>Create your family group and add members</li>
+            </ol>
+            <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+              <a class="btn btn-primary" href="#" aria-label="Download VitaFamily Health APK">⬇ Download APK</a>
+              <span style="display:inline-flex;align-items:center;gap:8px;color:var(--ink-soft);font-size:0.9rem">
+                <span style="font-size:20px">🤖</span> Coming to Google Play Store
+              </span>
+            </div>
+            <p style="color:var(--ink-soft);font-size:0.82rem;margin-top:18px">
+              Requires Android 7.0 (Nougat) or later. iOS version planned for Phase 2.
+            </p>
+          </div>
+          <div style="text-align:center">
+            <div style="background:var(--green-soft);border-radius:22px;padding:40px 28px;display:inline-block">
+              <div style="font-size:80px;margin-bottom:16px">📱</div>
+              <p style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--green)">Free to download</p>
+              <p style="color:var(--ink-soft);font-size:0.88rem;margin-top:6px">No credit card required.<br>Start on the Free plan instantly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA band -->
+    <section style="padding:40px 0 80px">
+      <div class="wrap">
+        <div class="cta-band reveal">
+          <h2>Start protecting your family's<br>health today.</h2>
+          <p>Join families across India and beyond who use VitaFamily Health as their private family health hub.</p>
+          <a class="btn" style="background:#fff;color:var(--green-deep);font-weight:800" href="#download">
+            Download for free →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Privacy Policy ── -->
+    <section id="privacy" class="section-alt">
+      <div class="legal">
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Effective: June 2026</p>
+        <div class="notice">
+          <strong>Health data notice.</strong> VitaFamily Health stores sensitive personal health information on your behalf.
+          We treat this data with the highest level of care and never sell, share, or use it for advertising purposes.
+        </div>
+        <h2>1. Who we are</h2>
+        <p>VitaFamily Health is a product of <strong>mystackmint</strong>, a solo software studio based in India.
+        Contact: <a href="mailto:familyhealth@thestackmint.com">familyhealth@thestackmint.com</a>.</p>
+        <h2>2. What data we collect</h2>
+        <h3>Account data</h3>
+        <ul>
+          <li>Phone number (OTP authentication)</li>
+          <li>Email address (optional, for Google Sign-In)</li>
+          <li>Display name and profile photo (optional)</li>
+          <li>Language and timezone preferences</li>
+        </ul>
+        <h3>Health data (entered by you)</h3>
+        <ul>
+          <li>Medications, dosage schedules, and dose logs</li>
+          <li>Medical appointments and linked doctor/hospital details</li>
+          <li>Vital measurements (blood pressure, blood sugar, weight, oxygen saturation, etc.)</li>
+          <li>Health record files you upload (prescriptions, lab reports, discharge summaries)</li>
+          <li>Family member profiles and caretaker assignment relationships</li>
+        </ul>
+        <h3>Technical data</h3>
+        <ul>
+          <li>Anonymised crash reports via Sentry (no health data)</li>
+          <li>Subscription plan status and change history</li>
+          <li>Security audit logs — retained 90 days</li>
+        </ul>
+        <p>We do <strong>not</strong> collect advertising identifiers, location data, contact lists, microphone audio, or browsing history.</p>
+        <h2>3. How we use your data</h2>
+        <ul>
+          <li>Core app functionality (medications, appointments, vitals, records)</li>
+          <li>Medication and appointment reminders you have enabled</li>
+          <li>Subscription plan enforcement and self-serve plan changes</li>
+          <li>Bug detection and security monitoring</li>
+          <li>Legal compliance</li>
+        </ul>
+        <p>We do <strong>not</strong> use your data for advertising, profiling, or sale to third parties.</p>
+        <h2>4. Data storage &amp; security</h2>
+        <ul>
+          <li>Stored in <strong>Supabase</strong> (PostgreSQL + Object Storage), AES-256 at rest, TLS 1.2+ in transit</li>
+          <li>Row Level Security (RLS) — users access only their own family's data</li>
+          <li>Private storage buckets — only the uploading family can access files</li>
+          <li>Certificate pinning, Android FLAG_SECURE, 10-minute session timeout, biometric lock</li>
+        </ul>
+        <h2>5. Third-party processors</h2>
+        <ul>
+          <li><strong>Supabase</strong> — database, auth, file storage</li>
+          <li><strong>Sentry</strong> — anonymised crash reporting (no health data)</li>
+          <li><strong>Google Sign-In</strong> — optional OAuth (no health data shared)</li>
+        </ul>
+        <h2>6. Your rights (GDPR — EU/EEA)</h2>
+        <ul>
+          <li>Access, erasure, portability, restriction, rectification, objection, and consent withdrawal</li>
+        </ul>
+        <p>Email <a href="mailto:familyhealth@thestackmint.com">familyhealth@thestackmint.com</a> — we respond within 30 days.</p>
+        <h2>7. FTC Health Breach Notification (US)</h2>
+        <p>In the event of a breach affecting US residents, we notify each individual and the FTC within <strong>60 days</strong>.</p>
+        <h2>8. India DPDPA 2023</h2>
+        <p>We comply with India's Digital Personal Data Protection Act 2023 — collecting only necessary data
+        and enabling account deletion at any time.</p>
+        <h2>9. Data retention</h2>
+        <ul>
+          <li>Active accounts: retained while active</li>
+          <li>Deleted accounts: all data permanently deleted within <strong>30 days</strong></li>
+          <li>Security logs: 90 days; crash reports: 12 months</li>
+        </ul>
+        <h2>10. Children's privacy</h2>
+        <p>Accounts must be created by adults (18+). Contact us immediately if you believe a child under 13 provided data without consent.</p>
+        <h2>11. Changes</h2>
+        <p>Material changes notified via in-app notice at least 7 days before taking effect.</p>
+        <h2>12. Contact</h2>
+        <p><a href="mailto:familyhealth@thestackmint.com">familyhealth@thestackmint.com</a></p>
+      </div>
+    </section>
+
+    <!-- ── Terms of Service ── -->
+    <section id="terms">
+      <div class="legal">
+        <h1>Terms of Service</h1>
+        <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Effective: June 2026</p>
+        <h2>1. Acceptance</h2>
+        <p>By using VitaFamily Health, you agree to these Terms, forming a binding agreement with mystackmint, India.</p>
+        <h2>2. Account registration</h2>
+        <ul>
+          <li>Provide accurate information; keep credentials secure</li>
+          <li>Notify us immediately of any unauthorised access</li>
+          <li>Must be 18+ to create an account</li>
+        </ul>
+        <h2>3. Acceptable use</h2>
+        <p>Do not upload malware, reverse-engineer the app, circumvent security, impersonate others, scrape data, or harm infrastructure.</p>
+        <h2>4. Health disclaimer</h2>
+        <div class="notice">
+          <strong>Not medical advice.</strong> VitaFamily Health is a personal health record tool, not a medical device or healthcare provider.
+          Always consult a qualified healthcare professional before any health or medication decision.
+        </div>
+        <h2>5. Subscription &amp; billing</h2>
+        <ul>
+          <li>Free, Premium (₹199/mo), Family Pro (₹499/mo) — billed monthly in INR</li>
+          <li>Upgrade/downgrade anytime from the app; downgrading preserves existing data in read-only mode</li>
+        </ul>
+        <h2>6. Your data</h2>
+        <p>You own all health data you enter. You can export and permanently delete it at any time from Privacy Settings.</p>
+        <h2>7. Intellectual property</h2>
+        <p>The App, design, and branding are the exclusive property of mystackmint.</p>
+        <h2>8. Termination</h2>
+        <p>We may suspend accounts violating these Terms. You may delete your account at any time; data is deleted within 30 days.</p>
+        <h2>9. Liability</h2>
+        <p>The App is provided "as is". Our total liability shall not exceed the greater of ₹5,000 or amounts paid in the prior 12 months.</p>
+        <h2>10. Indemnification</h2>
+        <p>You agree to indemnify mystackmint from claims arising from your use of the App or violation of these Terms.</p>
+        <h2>11. Governing law</h2>
+        <p>Governed by the laws of <strong>India</strong>. Disputes subject to Indian courts.</p>
+        <h2>12. Changes</h2>
+        <p>Material changes notified via in-app notice at least <strong>7 days</strong> before taking effect.</p>
+        <h2>13. Contact</h2>
+        <p><strong>mystackmint</strong> · <a href="mailto:familyhealth@thestackmint.com">familyhealth@thestackmint.com</a></p>
+      </div>
+    </section>
+
+    <!-- ── Contact ── -->
+    <section id="contact" class="section-alt">
+      <div class="wrap">
+        <p class="kicker reveal">Get in touch</p>
+        <h2 class="reveal">We're here to help.</h2>
+        <p class="section-intro reveal">
+          Have a question, found a bug, or want to request a feature? Reach out — you'll hear back from the
+          developer directly, not a support bot.
+        </p>
+        <div class="contact-grid">
+          <div class="contact-card reveal d1">
+            <span class="icon">📧</span>
+            <h3>Email support</h3>
+            <p>For technical help, account issues, data requests, or any question about the app. We respond within 1–2 business days.</p>
+            <a class="btn btn-primary" href="mailto:familyhealth@thestackmint.com">familyhealth@thestackmint.com</a>
+          </div>
+          <div class="contact-card reveal d2">
+            <span class="icon">🐛</span>
+            <h3>Report a bug</h3>
+            <p>Spotted something broken? Tell us what happened, on which screen, and we'll fix it in the next release.</p>
+            <a class="btn btn-ghost" href="mailto:familyhealth@thestackmint.com?subject=Bug%20Report%20%E2%80%94%20VitaFamily%20Health">Report a bug →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer brand="vitafamily" />
+</BaseLayout>

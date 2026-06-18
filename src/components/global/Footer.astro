@@ -1,0 +1,138 @@
+---
+interface Props {
+  brand?: 'mystackmint' | 'vitafamily' | 'codefinderhub';
+}
+const { brand = 'mystackmint' } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        {brand === 'mystackmint' && (
+          <>
+            <a class="brand" href="/" style="display:inline-flex;margin-bottom:14px">
+              <span class="brand-mark">M</span>
+              <span class="brand-name" style="color:#fff">mystack<em>mint</em></span>
+            </a>
+            <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
+              Solo-crafted apps built with care. Based in India, shipped globally.
+            </p>
+          </>
+        )}
+        {brand === 'vitafamily' && (
+          <>
+            <a class="brand" href="/vitafamily" style="display:inline-flex;margin-bottom:14px">
+              <span class="brand-mark">🌿</span>
+              <span class="brand-name" style="color:#fff">Vita<em>Family</em> Health</span>
+            </a>
+            <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
+              Private family health management — a product of mystackmint.
+            </p>
+            <p style="margin-top:12px">
+              <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to mystackmint</a>
+            </p>
+          </>
+        )}
+        {brand === 'codefinderhub' && (
+          <>
+            <a class="brand" href="/codefinderhub" style="display:inline-flex;margin-bottom:14px">
+              <span class="brand-mark" style="background:#92400e">📮</span>
+              <span class="brand-name" style="color:#fff">Code<em>FinderHub</em></span>
+            </a>
+            <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
+              India's Pincode & IFSC lookup API — a product of mystackmint.
+            </p>
+            <p style="margin-top:12px">
+              <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to mystackmint</a>
+            </p>
+          </>
+        )}
+      </div>
+
+      {brand === 'mystackmint' && (
+        <>
+          <div>
+            <h4>Products</h4>
+            <ul>
+              <li><a href="/vitafamily">VitaFamily Health</a></li>
+              <li><a href="/codefinderhub">CodeFinderHub</a></li>
+              <li style="color:#555f58;font-style:italic;font-size:0.9rem">More coming soon…</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/vitafamily#privacy">Privacy Policy</a></li>
+              <li><a href="/vitafamily#terms">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="mailto:satish.technology9@gmail.com">satish.technology9@gmail.com</a></li>
+            </ul>
+          </div>
+        </>
+      )}
+
+      {brand === 'vitafamily' && (
+        <>
+          <div>
+            <h4>App</h4>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#download">Download</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="#terms">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#contact">Contact us</a></li>
+              <li><a href="mailto:familyhealth@thestackmint.com">Email support</a></li>
+            </ul>
+          </div>
+        </>
+      )}
+
+      {brand === 'codefinderhub' && (
+        <>
+          <div>
+            <h4>Product</h4>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#use-cases">Use cases</a></li>
+              <li><a href="https://codefinderhub.com" target="_blank" rel="noopener">Live app</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Developer</h4>
+            <ul>
+              <li><a href="https://codefinderhub.com/api" target="_blank" rel="noopener">API docs</a></li>
+              <li><a href="https://codefinderhub.com/batch" target="_blank" rel="noopener">Batch lookup</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="mailto:satish.technology9@gmail.com">satish.technology9@gmail.com</a></li>
+            </ul>
+          </div>
+        </>
+      )}
+    </div>
+
+    <div class="footer-note">
+      <span>© <span data-year></span> mystackmint. All rights reserved.</span>
+      <span>Made with ♥ in India{brand !== 'mystackmint' ? ' — for families everywhere' : ''}</span>
+    </div>
+  </div>
+</footer>

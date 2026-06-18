@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import { SITE } from '../site.config';
+import { products } from '../products.config';
+---
+
+<BaseLayout
+  title={SITE.title}
+  description={SITE.description}
+  canonicalUrl={SITE.url + '/'}
+>
+  <Header brand="mystackmint" />
+
+  <main>
+
+    <!-- Hub Hero -->
+    <section class="hub-hero">
+      <div class="wrap">
+        <div class="hub-brand-mark">M</div>
+        <span class="eyebrow reveal in">{SITE.tagline}</span>
+        <h1 class="reveal in d1">Thoughtfully built apps<br>for everyday life.</h1>
+        <p class="lede reveal in d2">
+          Each product solves one real problem with care — nothing bloated, nothing half-finished.
+        </p>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="section-alt">
+      <div class="wrap">
+        <p class="kicker reveal">Product portfolio</p>
+        <h2 class="reveal">Apps that ship.<br>Problems that are solved.</h2>
+        <p class="section-intro reveal">
+          Every product below is live, maintained, and used by real people every day.
+        </p>
+
+        <div class="product-grid">
+
+          <!-- VitaFamily Health -->
+          <a href="/vitafamily" class="product-card vitafamily reveal">
+            <div class="pc-body">
+              <div class="pc-icon" style={`background:${products[0]!.iconBg}`}>{products[0]!.emoji}</div>
+              <span class="pc-badge">{products[0]!.badge}</span>
+              <h3>{products[0]!.name}</h3>
+              <p>{products[0]!.description}</p>
+              <div class="pc-ctas">
+                <span class="btn btn-primary">{products[0]!.primaryCta}</span>
+                {products[0]!.secondaryCta && (
+                  <span class="btn btn-ghost">{products[0]!.secondaryCta}</span>
+                )}
+              </div>
+            </div>
+            <div class="pc-visual" aria-hidden="true">
+              <div class="mini-phone">
+                <div class="mini-screen">
+                  <div class="ms-header">Good morning 🌤️</div>
+                  <div class="ms-banner">💊 2 doses due — 8:00 AM</div>
+                  <div class="ms-card">
+                    <span class="ms-dot" style="background:#e3efe7">💊</span>
+                    <div><strong>Metformin 500mg</strong><span>Amma · after breakfast</span></div>
+                  </div>
+                  <div class="ms-card">
+                    <span class="ms-dot" style="background:#fdf0e3">🏥</span>
+                    <div><strong>Dr. Rao — Cardiology</strong><span>tomorrow 10:30 AM</span></div>
+                  </div>
+                  <div class="ms-card">
+                    <span class="ms-dot" style="background:#ede9fe">🩺</span>
+                    <div><strong>BP: 124/82</strong><span>Appa · today 7:12 AM</span></div>
+                  </div>
+                  <div class="ms-card">
+                    <span class="ms-dot" style="background:#e3efe7">📄</span>
+                    <div><strong>Lab report uploaded</strong><span>Lipid profile · 2d ago</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- CodeFinderHub -->
+          <a href="/codefinderhub" class="product-card codefinderhub reveal d1">
+            <div class="pc-body">
+              <div class="pc-icon" style={`background:${products[1]!.iconBg}`}>{products[1]!.emoji}</div>
+              <span class="pc-badge amber-badge">{products[1]!.badge}</span>
+              <h3>{products[1]!.name}</h3>
+              <p>{products[1]!.description}</p>
+              <div class="pc-ctas">
+                <span class="btn btn-amber">{products[1]!.primaryCta}</span>
+                {products[1]!.secondaryCta && (
+                  <span class="btn btn-ghost" style="border-color:var(--amber);color:var(--amber)">{products[1]!.secondaryCta}</span>
+                )}
+              </div>
+            </div>
+            <div class="pc-visual" aria-hidden="true">
+              <div class="cf-mockup">
+                <div class="cf-search">🔍 600001</div>
+                <div class="cf-result">
+                  <strong>Mumbai GPO</strong>
+                  Mumbai, Maharashtra
+                  <div>
+                    <span class="cf-badge">PINCODE</span>
+                    <span class="cf-badge">INSTANT</span>
+                  </div>
+                </div>
+                <div class="cf-result">
+                  <strong>SBIN0000300</strong>
+                  SBI Main Branch, Fort
+                  <div>
+                    <span class="cf-badge">IFSC</span>
+                    <span class="cf-badge">NEFT/RTGS</span>
+                  </div>
+                </div>
+                <div class="cf-result">
+                  <strong>REST API ready</strong>
+                  JSON · Batch · Docs
+                  <div>
+                    <span class="cf-badge">DEVELOPER</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Coming soon slot -->
+          <div class="product-card coming-soon reveal d2" aria-label="Next product — coming soon">
+            <div class="pc-body">
+              <div class="pc-icon">🔮</div>
+              <span class="pc-badge" style="background:#e5e7eb;color:#6b7280">Coming 2026</span>
+              <h3 style="color:#9ca3af">Next app is brewing…</h3>
+              <p>
+                Another focused product for everyday life is in development.
+                <a href="mailto:satish.technology9@gmail.com" style="color:var(--green);font-weight:600">Get early access →</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="wrap">
+        <p class="kicker reveal">Who builds this</p>
+        <h2 class="reveal">One developer.<br>Zero compromises.</h2>
+        <p class="section-intro reveal">
+          mystackmint is a solo software studio. Every design decision, line of code, and product call comes from one person who uses these apps daily and cares deeply about getting things right.
+        </p>
+        <div class="cards" style="margin-top:44px">
+          <div class="card reveal d1">
+            <span class="icon">🎯</span>
+            <h3>Focus over features</h3>
+            <p>Each app does one thing exceptionally well. No bloated dashboards, no upsell nags, no dark patterns.</p>
+          </div>
+          <div class="card amber reveal d2">
+            <span class="icon">🔒</span>
+            <h3>Privacy by design</h3>
+            <p>Your data belongs to you. Every app uses encrypted, RLS-protected backends with full GDPR compliance and data-portability.</p>
+          </div>
+          <div class="card reveal d3">
+            <span class="icon">📱</span>
+            <h3>Mobile-first, always</h3>
+            <p>Every product ships as a polished native mobile app — built for how people actually live, not how developers build demos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA band -->
+    <section style="padding:32px 0 84px">
+      <div class="wrap">
+        <div class="cta-band reveal">
+          <h2>Have an everyday problem<br>worth solving?</h2>
+          <p>
+            If you've hit a problem that deserves an elegant software solution, reach out.
+            The next mystackmint product could be yours.
+          </p>
+          <a
+            class="btn"
+            style="background:#fff;color:var(--green-deep);font-weight:800"
+            href="mailto:satish.technology9@gmail.com"
+          >
+            Start a conversation →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer brand="mystackmint" />
+</BaseLayout>

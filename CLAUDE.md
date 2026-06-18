@@ -4,7 +4,94 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**MyStackMint.com** is a self-hosted SaaS platform across **two VPS servers**. Each service is a Docker Compose stack. **Coolify manages Traefik** on each server as the reverse proxy — there is no Nginx on the host. The unified homepage (`homepage/`) is the only custom-developed frontend.
+**thestackmint.com** is the public marketing website for the mystackmint product portfolio — a solo software studio building focused apps for everyday life. The site is a static Astro 4 project deployed to **Cloudflare Pages**.
+
+**Live site:** `https://thestackmint.com`
+**GitHub:** `https://github.com/kusuma9/thestackmint`
+**Stack:** Astro 4 · Tailwind CSS 3 · TypeScript · Cloudflare Pages
+
+## Dev Commands
+
+```bash
+npm install           # install dependencies
+npm run dev           # local dev server at http://localhost:4321
+npm run build         # production static build → dist/
+npm run preview       # preview dist/ locally before deploying
+```
+
+## File Structure
+
+```
+src/
+├── site.config.ts          # site-wide constants (name, URL, email)
+├── products.config.ts      # central product registry — edit to add/update products
+├── env.d.ts
+├── layouts/
+│   └── BaseLayout.astro    # HTML shell: OG meta, fonts, grain overlay, JS scripts
+├── components/
+│   └── global/
+│       ├── Header.astro    # sticky nav; accepts brand= prop
+│       └── Footer.astro    # 4-col grid; accepts brand= prop
+├── styles/
+│   └── global.css          # @tailwind + :root CSS vars + all component classes
+└── pages/
+    ├── index.astro          # / — hub homepage
+    ├── vitafamily.astro     # /vitafamily — VitaFamily Health product page
+    ├── codefinderhub.astro  # /codefinderhub — CodeFinderHub product page
+    └── 404.astro            # custom 404 (CF Pages serves dist/404.html auto)
+
+public/
+├── robots.txt
+├── _headers                # CF Pages security + cache headers
+└── _redirects              # www → apex 301
+```
+
+## Adding a New Product
+
+1. Add an entry to `src/products.config.ts`
+2. Create `src/pages/<product-id>.astro` using `BaseLayout` + `Header brand="<id>"` + `Footer brand="<id>"`
+3. Add the new brand variant to `Header.astro` and `Footer.astro` prop union types
+4. Add the new page URL to the `customPages` array in `astro.config.mjs` (sitemap)
+5. Add OG image `public/og-<product-id>.png` (1200×630px)
+
+## Design Tokens (CSS custom properties in `global.css`)
+
+| Variable | Value | Usage |
+|---|---|---|
+| `--green` | `#1b6b3a` | Primary brand, CTAs |
+| `--green-deep` | `#114a27` | Dark sections |
+| `--green-soft` | `#e3efe7` | Light sage alt sections |
+| `--cream` | `#f8f6f1` | Page background |
+| `--cream-dark` | `#efebe0` | Alt section bg |
+| `--ink` | `#1f2a22` | Body text |
+| `--ink-soft` | `#5b6960` | Secondary text |
+| `--amber` | `#b45309` | CodeFinderHub accent |
+| `--amber-soft` | `#fdf0e3` | Amber background tints |
+| `--line` | `#ddd6c6` | Borders |
+
+**Fonts:** Fraunces (display/headings, variable, optical sizing) + Karla (body). Self-hosted via `@fontsource-variable/fraunces` and `@fontsource/karla` — no Google Fonts CDN. Font `@import` statements must come before `@tailwind` directives in `global.css`.
+
+**Grain texture:** Applied via `body::before` SVG noise — gives the warm paper feel. Do not remove.
+
+## Cloudflare Pages Config
+
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Root directory | `/` |
+| NODE_VERSION | `20` |
+
+`public/_redirects` handles `www → apex` 301.
+`public/_headers` sets security headers and immutable cache on `/_assets/*`.
+
+## Key Patterns
+
+- `Header` and `Footer` accept a `brand` prop: `'mystackmint' | 'vitafamily' | 'codefinderhub'` — switches logo, nav, and footer columns to match the product context.
+- Scroll-reveal: `.reveal` + `.in` CSS classes, driven by Intersection Observer in `BaseLayout.astro`'s `<script>` block.
+- `.d1`, `.d2`, `.d3` add 100ms/200ms/300ms stagger delays.
+- `btn-primary` = green CTA; `btn-amber` = amber CTA; `btn-ghost` = outline.
+- `card amber` variant uses `var(--amber-soft)` background.
 
 ## Server Overview
 

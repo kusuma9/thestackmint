@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to AI assistants when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
@@ -72,11 +72,11 @@ scp -i C:\SSH\contabo -P 2222 "local\path\file" "root@13.140.158.27:/srv/mystack
 
 ## Unified Homepage (Astro)
 
-Located at `homepage/`. Dev commands run locally before building the Docker image.
+Located at `homepage/`. Stack: Astro 4, Tailwind CSS, Fuse.js (fuzzy search). Output is a static site served via Docker + Traefik.
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321
+npm run dev        # http://localhost:4321 (--host flag exposes on LAN)
 npm run build      # production static build
 npm run preview    # preview build locally
 ```
@@ -87,7 +87,7 @@ cd /srv/mystackmint/homepage
 docker compose build --no-cache && docker compose up -d
 ```
 
-**Adding a tool:** edit `homepage/src/tools.config.ts` — one object per tool (`id`, `name`, `description`, `url`, `icon`, `category`, `section`, `tags[]`, optional `adminOnly`). Rebuild the Docker image after changes.
+**Adding a tool:** edit `homepage/src/tools.config.ts` — one object per tool. Required fields: `id`, `name`, `description`, `url`, `icon`, `category`, `section`, `tags[]`. Optional: `adminOnly` (hides from non-admin UI), `brandColor` (6-digit hex without `#`, used for icon tinting). Rebuild the Docker image after changes.
 
 ## Architecture
 
@@ -170,6 +170,17 @@ DB and Redis containers have **no `ports:` section** — reachable only by servi
 | `monitor.*` | Beszel | Hetzner | Admin + 2FA |
 | `uptime.*` | Uptime Kuma | Hetzner | Admin + 2FA |
 
+## Authelia Access Control
+
+Authelia uses file-based authentication (`infra/authelia/users_database.yml`) with argon2id password hashing and TOTP/WebAuthn 2FA. Default policy is `deny`.
+
+**Bypass pattern for API/WebSocket paths:** apps that enforce their own token auth (Beszel, Uptime Kuma) must have their API and WebSocket paths bypassed in `infra/authelia/configuration.yml` — otherwise background requests get a 401 + Basic challenge that triggers a native browser sign-in popup after session timeout.
+
+**Add a new user:**
+```bash
+bash infra/authelia/add-user.sh
+```
+
 ## Hetzner Storage Box
 
 Media storage for Navidrome and Immich is provided by a **Hetzner Storage Box** (1TB, `u589391.your-storagebox.de`, port 23), mounted on the Hetzner VPS via rclone SFTP.
@@ -207,8 +218,6 @@ Jellyfin runs directly on the **media laptop** (`desktop-2a2oj5t`, Tailscale IP 
 # Traefik hot-reloads the file provider — no restart needed
 ```
 
-**4K playback:** Enable hardware transcoding in Jellyfin → Dashboard → Playback → Transcoding. Use Intel QuickSync / NVENC / AMF depending on laptop GPU. Or use a native Jellyfin app (Windows/iOS/Android) for direct play without transcoding.
-
 ### Upload music/photos to Storage Box (from Windows)
 WinSCP or any SFTP client:
 - Host: `u589391.your-storagebox.de` | Port: `23` | User: `u589391`
@@ -225,7 +234,7 @@ Paths to use: `/mnt/storagebox/media/Photos`, `/mnt/storagebox/media/FamilyVideo
 **Authelia groups:**
 - `admins` — everything, 2FA always
 
-**Secrets rule:** `.env` files are never committed. Every stack has `.env.example` with all required keys. The `.gitignore` excludes all `.env` files.
+**Secrets rule:** `.env` files are never committed. Every stack has `.env.example` with all required keys.
 
 **New SaaS app:**
 ```bash

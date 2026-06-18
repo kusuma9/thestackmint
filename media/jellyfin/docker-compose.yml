@@ -1,8 +1,0 @@
-# Jellyfin no longer runs as a Docker container on the Hetzner VPS.
-# It runs directly on the media laptop (desktop-2a2oj5t, Tailscale IP 100.119.69.2).
-# Traefik proxies jellyfin.mystackmint.com → http://100.119.69.2:8096 over Tailscale.
-# See traefik-route.yaml for the active routing config.
-#
-# Windows Firewall rule required on the media laptop (run once as Administrator):
-#   New-NetFirewallRule -DisplayName "Jellyfin - Tailscale" -Direction Inbound `
-#     -Protocol TCP -LocalPort 8096 -RemoteAddress 100.64.0.0/10 -Action Allow

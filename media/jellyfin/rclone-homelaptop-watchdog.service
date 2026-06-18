@@ -1,6 +1,0 @@
-[Unit]
-Description=Watchdog for rclone homelaptop mount
-
-[Service]
-Type=oneshot
-ExecStart=/srv/mystackmint/scripts/rclone-watchdog.sh

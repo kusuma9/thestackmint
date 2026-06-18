@@ -41,7 +41,7 @@ const { brand = 'mystackmint' } = Astro.props;
               <span class="brand-name" style="color:#fff">Code<em>FinderHub</em></span>
             </a>
             <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
-              India's Pincode & IFSC lookup API — a product of mystackmint.
+              India's free Pincode &amp; IFSC lookup tool — a product of mystackmint.
             </p>
             <p style="margin-top:12px">
               <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to mystackmint</a>
@@ -97,7 +97,7 @@ const { brand = 'mystackmint' } = Astro.props;
             <h4>Support</h4>
             <ul>
               <li><a href="#contact">Contact us</a></li>
-              <li><a href="mailto:familyhealth@thestackmint.com">Email support</a></li>
+              <li><a href="mailto:satish.technology9@gmail.com">Email support</a></li>
             </ul>
           </div>
         </>
@@ -106,18 +106,19 @@ const { brand = 'mystackmint' } = Astro.props;
       {brand === 'codefinderhub' && (
         <>
           <div>
-            <h4>Product</h4>
+            <h4>Tools</h4>
             <ul>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#use-cases">Use cases</a></li>
-              <li><a href="https://codefinderhub.com" target="_blank" rel="noopener">Live app</a></li>
+              <li><a href="https://codefinderhub.com/pincode?country=IN" target="_blank" rel="noopener">Pincode search</a></li>
+              <li><a href="https://codefinderhub.com/ifsc?country=IN" target="_blank" rel="noopener">IFSC lookup</a></li>
+              <li><a href="https://codefinderhub.com/branches?country=IN" target="_blank" rel="noopener">Bank branches</a></li>
             </ul>
           </div>
           <div>
-            <h4>Developer</h4>
+            <h4>About</h4>
             <ul>
-              <li><a href="https://codefinderhub.com/api" target="_blank" rel="noopener">API docs</a></li>
-              <li><a href="https://codefinderhub.com/batch" target="_blank" rel="noopener">Batch lookup</a></li>
+              <li><a href="#tools">Features</a></li>
+              <li><a href="#why">Why us</a></li>
+              <li><a href="https://codefinderhub.com" target="_blank" rel="noopener">Visit site</a></li>
             </ul>
           </div>
           <div>
@@ -132,7 +133,7 @@ const { brand = 'mystackmint' } = Astro.props;
 
     <div class="footer-note">
       <span>© <span data-year></span> mystackmint. All rights reserved.</span>
-      <span>Made with ♥ in India{brand !== 'mystackmint' ? ' — for families everywhere' : ''}</span>
+      <span>Made with ♥ in India{brand === 'vitafamily' ? ' — for families everywhere' : ''}</span>
     </div>
   </div>
 </footer>

@@ -106,14 +106,15 @@ body::before {
   list-style: none;
   align-items: center;
 }
-.nav-links a {
+.nav-links a:not(.btn) {
   text-decoration: none;
   color: var(--ink-soft);
   font-weight: 600;
   font-size: 0.92rem;
   transition: color 0.2s;
 }
-.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--green); }
+.nav-links a:not(.btn):hover,
+.nav-links a:not(.btn)[aria-current="page"] { color: var(--green); }
 
 .btn {
   display: inline-block;

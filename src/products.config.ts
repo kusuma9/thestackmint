@@ -31,6 +31,20 @@ export const products: Product[] = [
     secondaryCta: 'Download for Android',
   },
   {
+    id: 'safeheir',
+    name: 'SafeHeir',
+    tagline: 'Secure Family Legacy Vault — tell your family where everything is.',
+    description:
+      'Record where your documents, assets, bank accounts, and insurance policies are kept — so your family is never lost when you are gone.',
+    emoji: '⚜',
+    iconBg: '#1A1A2E',
+    badge: 'Legacy · Estate Planning',
+    pageUrl: '/safeheir',
+    platform: 'android',
+    status: 'coming-soon',
+    primaryCta: 'Get Notified →',
+  },
+  {
     id: 'codefinderhub',
     name: 'CodeFinderHub',
     tagline: "India's Pincode & IFSC lookup, made simple.",

@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+---
+
+<BaseLayout
+  title="SafeHeir — Secure Family Legacy Vault"
+  description="Record where your documents, assets, and policies are — so your family is never lost when you are gone. Coming soon on Android & iOS."
+  canonicalUrl="https://thestackmint.com/safeheir"
+>
+  <Header brand="safeheir" />
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="sh-hero">
+      <div class="sh-hero-top"></div>
+
+      <div class="reveal in" style="display:flex;flex-direction:column;align-items:center;width:100%">
+        <div class="sh-emblem">⚜</div>
+        <span class="sh-coming-badge">Coming Soon — Android &amp; iOS</span>
+        <h1>SafeHeir</h1>
+        <p class="sh-hero-sub">Secure Family Legacy Vault</p>
+        <p class="sh-hero-tagline">
+          Your family will know exactly where everything is —
+          even when you can't tell them.
+        </p>
+        <div class="sh-hero-ctas">
+          <a
+            href="mailto:contact@thestackmint.com?subject=SafeHeir%20Early%20Access%20Request"
+            class="btn-safeheir"
+          >
+            Get Notified at Launch →
+          </a>
+          <a href="#problem" class="btn-ghost-light">Learn More</a>
+        </div>
+      </div>
+
+      <!-- Phone mockup -->
+      <div style="margin-top:64px;position:relative;z-index:1" class="reveal in d2">
+        <div class="sh-phone">
+          <div class="sh-screen">
+            <div class="sh-status"><span>9:41</span><span>● ● ●</span></div>
+            <div class="sh-appbar">
+              <span class="sh-appbar-emblem">⚜</span>
+              <span class="sh-appbar-title">SafeHeir</span>
+            </div>
+            <div class="sh-body">
+              <div class="sh-welcome-card">
+                <div class="sh-welcome-name">Satish's Vault</div>
+                <div class="sh-welcome-title">Family Legacy Plan</div>
+                <div class="sh-progress-bar"><div class="sh-progress-fill"></div></div>
+                <div class="sh-progress-label">65% complete · 3 nominees added</div>
+              </div>
+              <div class="sh-module-grid">
+                <div class="sh-module-tile">
+                  <span>👨‍👩‍👧</span>
+                  <span>Family Profiles</span>
+                </div>
+                <div class="sh-module-tile">
+                  <span>🏠</span>
+                  <span>Assets &amp; Property</span>
+                </div>
+                <div class="sh-module-tile">
+                  <span>🏦</span>
+                  <span>Bank &amp; Investments</span>
+                </div>
+                <div class="sh-module-tile">
+                  <span>📋</span>
+                  <span>Insurance &amp; Legal</span>
+                </div>
+                <div class="sh-module-tile">
+                  <span>🔒</span>
+                  <span>Document Vault</span>
+                </div>
+                <div class="sh-module-tile">
+                  <span>🆘</span>
+                  <span>Emergency Access</span>
+                </div>
+                <div class="sh-module-tile full">
+                  <span>📊</span>
+                  <span>Continuity Planner</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROBLEM ═══ -->
+    <section class="sh-problem" id="problem">
+      <div class="sh-problem-inner">
+        <div class="sh-problem-copy reveal">
+          <p class="kicker">The problem no one talks about</p>
+          <h2>When a family head is suddenly gone, everything falls apart.</h2>
+          <p class="lede">
+            Most Indian families have no idea where the important documents are
+            kept, which banks hold accounts, or even who the family lawyer is.
+            The result is months of chaos — on top of grief.
+          </p>
+        </div>
+        <ul class="sh-pain-list reveal d1">
+          <li class="sh-pain-item">
+            <span class="sh-pain-icon">🏦</span>
+            Family doesn't know which banks hold accounts or investments
+          </li>
+          <li class="sh-pain-item">
+            <span class="sh-pain-icon">📋</span>
+            Insurance policies go undiscovered or unclaimed for years
+          </li>
+          <li class="sh-pain-item">
+            <span class="sh-pain-icon">🏠</span>
+            Property documents are locked in unknown locations
+          </li>
+          <li class="sh-pain-item">
+            <span class="sh-pain-icon">⚖️</span>
+            Wills and legal documents are not found in time
+          </li>
+          <li class="sh-pain-item">
+            <span class="sh-pain-icon">📞</span>
+            No one knows the CA, lawyer, or insurance agent to call first
+          </li>
+          <li class="sh-pain-item">
+            <span class="sh-pain-icon">💳</span>
+            EMIs and bills cause defaults before the family even knows they exist
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══ ANSWER ═══ -->
+    <section class="sh-answer">
+      <div class="sh-answer-inner reveal">
+        <div class="sh-answer-rule"></div>
+        <p class="sh-answer-quote">
+          "Store the map to the treasure — not the treasure itself."
+        </p>
+        <p class="sh-answer-sub">
+          SafeHeir records <strong style="color:rgba(255,255,255,0.75)">where</strong> your documents, assets, and accounts are kept.
+          Never account numbers, balances, or passwords — just the information
+          your family needs to find everything quickly.
+        </p>
+        <div class="sh-diff-pills">
+          <span class="sh-diff-pill">✓ No sensitive data stored</span>
+          <span class="sh-diff-pill">✓ Simple enough in 30 minutes</span>
+          <span class="sh-diff-pill">✓ India-first design</span>
+          <span class="sh-diff-pill">✓ Trustworthy by design</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES / MODULES ═══ -->
+    <section class="sh-modules" id="features">
+      <div class="sh-modules-inner">
+        <div class="sh-modules-head reveal">
+          <p class="kicker">7 vault modules</p>
+          <h2>Everything your family needs to find, in one place.</h2>
+        </div>
+
+        <div class="sh-module-cards">
+
+          <div class="sh-module-card reveal">
+            <div class="sh-mod-num">Module 01</div>
+            <div class="sh-mod-icon">👨‍👩‍👧</div>
+            <div class="sh-mod-name">Family Profiles</div>
+            <p class="sh-mod-desc">Add every family member with relationship, contact, and notes. 18 relationship types supported.</p>
+          </div>
+
+          <div class="sh-module-card reveal d1">
+            <div class="sh-mod-num">Module 02</div>
+            <div class="sh-mod-icon">🏠</div>
+            <div class="sh-mod-name">Assets &amp; Properties</div>
+            <p class="sh-mod-desc">Record houses, vehicles, gold, and lockers — with their physical location and where the documents are kept.</p>
+          </div>
+
+          <div class="sh-module-card reveal d2">
+            <div class="sh-mod-num">Module 03</div>
+            <div class="sh-mod-icon">🏦</div>
+            <div class="sh-mod-name">Bank &amp; Investments</div>
+            <p class="sh-mod-desc">16 Indian banks. 11 account types including PPF, NPS, EPF, and Demat. Store the branch and passbook location.</p>
+          </div>
+
+          <div class="sh-module-card reveal">
+            <div class="sh-mod-num">Module 04</div>
+            <div class="sh-mod-icon">📋</div>
+            <div class="sh-mod-name">Insurance &amp; Legal</div>
+            <p class="sh-mod-desc">Log policies, agent contacts, and legal document locations. 11 insurance types and 18 legal document types covered.</p>
+          </div>
+
+          <div class="sh-module-card reveal d1">
+            <div class="sh-mod-num">Module 05</div>
+            <div class="sh-mod-icon">🔒</div>
+            <div class="sh-mod-name">Document Vault</div>
+            <p class="sh-mod-desc">Photograph and store scanned copies of important documents. Full-screen zoomable viewer with category filters.</p>
+          </div>
+
+          <div class="sh-module-card reveal d2">
+            <div class="sh-mod-num">Module 06</div>
+            <div class="sh-mod-icon">🆘</div>
+            <div class="sh-mod-name">Emergency Access</div>
+            <p class="sh-mod-desc">Nominees can request emergency access. A 72-hour timer gives the owner time to cancel — or it unlocks automatically.</p>
+          </div>
+
+          <div class="sh-module-card full-width reveal">
+            <div>
+              <div class="sh-mod-num">Module 07</div>
+              <div class="sh-mod-icon">📊</div>
+            </div>
+            <div>
+              <div class="sh-mod-name">Continuity Planner</div>
+              <p class="sh-mod-desc">
+                A prioritised checklist of everything your nominees need to do after an emergency — from claiming insurance to transferring accounts.
+                Includes 10 pre-built Indian family starter tasks with real-time progress tracking.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ HOW IT WORKS ═══ -->
+    <section class="sh-how">
+      <div class="sh-how-inner">
+        <div class="sh-how-head reveal">
+          <p class="kicker">Simple by design</p>
+          <h2>Three steps. Done in under an hour.</h2>
+        </div>
+        <div class="sh-steps">
+          <div class="sh-step reveal">
+            <div class="sh-step-num">1</div>
+            <div>
+              <div class="sh-step-title">You fill it in — once</div>
+              <p class="sh-step-desc">
+                Add your assets, bank accounts, insurance policies, and legal documents.
+                You only record <em>what</em> exists and <em>where</em> to find it —
+                never any sensitive numbers or passwords.
+              </p>
+            </div>
+          </div>
+          <div class="sh-step reveal d1">
+            <div class="sh-step-num">2</div>
+            <div>
+              <div class="sh-step-title">Invite your nominees</div>
+              <p class="sh-step-desc">
+                Add your spouse, children, or any trusted person by phone number.
+                Choose full access or limited emergency-only access for each.
+                They can view in read-only mode at any time.
+              </p>
+            </div>
+          </div>
+          <div class="sh-step reveal d2">
+            <div class="sh-step-num">3</div>
+            <div>
+              <div class="sh-step-title">They always have the map</div>
+              <p class="sh-step-desc">
+                In any situation — planned or unplanned — your family knows exactly
+                where to look, who to call, and what to do. No chaos, no guessing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PRICING ═══ -->
+    <section class="sh-pricing" id="pricing">
+      <div class="sh-pricing-head reveal">
+        <p class="kicker">Pricing</p>
+        <h2>Start free. Upgrade when you're ready.</h2>
+      </div>
+      <div class="sh-plans">
+
+        <div class="sh-plan reveal">
+          <div class="sh-plan-name">Free</div>
+          <div class="sh-plan-price">₹0 <small>forever</small></div>
+          <p class="sh-plan-desc">Try the core vault</p>
+          <ul class="sh-plan-features">
+            <li>3 modules unlocked</li>
+            <li>1 nominee</li>
+            <li>500 MB document storage</li>
+          </ul>
+          <a href="mailto:contact@thestackmint.com?subject=SafeHeir Early Access" class="sh-plan-cta">Get Notified</a>
+        </div>
+
+        <div class="sh-plan featured reveal d1">
+          <span class="sh-plan-flag">Most Popular</span>
+          <div class="sh-plan-name">Family Plan</div>
+          <div class="sh-plan-price">₹299 <small>/month</small></div>
+          <p class="sh-plan-desc">Or ₹1,999/year — save 44%</p>
+          <ul class="sh-plan-features">
+            <li>All 7 vault modules</li>
+            <li>Up to 5 nominees</li>
+            <li>Unlimited records</li>
+            <li>Document photo upload</li>
+            <li>Emergency access protocol</li>
+          </ul>
+          <a href="mailto:contact@thestackmint.com?subject=SafeHeir Early Access" class="sh-plan-cta">Get Notified</a>
+        </div>
+
+        <div class="sh-plan reveal d2">
+          <div class="sh-plan-name">Lifetime</div>
+          <div class="sh-plan-price">₹4,999 <small>one-time</small></div>
+          <p class="sh-plan-desc">Pay once, own it forever</p>
+          <ul class="sh-plan-features">
+            <li>Everything in Family Plan</li>
+            <li>All future updates included</li>
+            <li>No recurring charges — ever</li>
+          </ul>
+          <a href="mailto:contact@thestackmint.com?subject=SafeHeir Early Access" class="sh-plan-cta">Get Notified</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ NOTIFY CTA ═══ -->
+    <section class="sh-notify reveal" id="notify">
+      <h2>"Be the first to know when SafeHeir launches."</h2>
+      <p>Drop us an email and we'll notify you the day it's live on the Play Store.</p>
+      <a
+        href="mailto:contact@thestackmint.com?subject=SafeHeir%20Early%20Access%20Request&body=Hi%2C%20I'd%20like%20to%20be%20notified%20when%20SafeHeir%20launches."
+        class="btn-safeheir"
+      >
+        ✉ Notify Me at Launch
+      </a>
+    </section>
+
+  </main>
+
+  <Footer brand="safeheir" />
+</BaseLayout>

@@ -1,6 +1,6 @@
 ---
 interface Props {
-  brand?: 'thestackmint' | 'familyhealth' | 'codefinderhub';
+  brand?: 'thestackmint' | 'familyhealth' | 'codefinderhub' | 'safeheir';
   backLink?: string;
 }
 
@@ -26,6 +26,12 @@ const currentPath = Astro.url.pathname;
       <a class="brand" href="/codefinderhub">
         <span class="brand-mark" style="background:#92400e">📮</span>
         <span class="brand-name">Code<em>FinderHub</em></span>
+      </a>
+    )}
+    {brand === 'safeheir' && (
+      <a class="brand" href="/safeheir">
+        <span class="brand-mark" style="background:#1A1A2E;color:#C9A84C;font-size:20px">⚜</span>
+        <span class="brand-name">Safe<em style="color:#C9A84C">Heir</em></span>
       </a>
     )}
 
@@ -58,6 +64,14 @@ const currentPath = Astro.url.pathname;
           <li><a href="#tools">Tools</a></li>
           <li><a href="#why">Why us</a></li>
           <li><a href="https://codefinderhub.com" target="_blank" rel="noopener" class="btn btn-amber">Check it now →</a></li>
+        </>
+      )}
+      {brand === 'safeheir' && (
+        <>
+          <li><a href="#problem">Why SafeHeir</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="mailto:contact@thestackmint.com?subject=SafeHeir Early Access" class="btn btn-safeheir">Get Notified</a></li>
         </>
       )}
     </ul>

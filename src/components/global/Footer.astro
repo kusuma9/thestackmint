@@ -1,6 +1,6 @@
 ---
 interface Props {
-  brand?: 'thestackmint' | 'familyhealth' | 'codefinderhub';
+  brand?: 'thestackmint' | 'familyhealth' | 'codefinderhub' | 'safeheir';
 }
 const { brand = 'thestackmint' } = Astro.props;
 ---
@@ -42,6 +42,20 @@ const { brand = 'thestackmint' } = Astro.props;
             </a>
             <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
               India's free Pincode &amp; IFSC lookup tool — a product of thestackmint.
+            </p>
+            <p style="margin-top:12px">
+              <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to thestackmint</a>
+            </p>
+          </>
+        )}
+        {brand === 'safeheir' && (
+          <>
+            <a class="brand" href="/safeheir" style="display:inline-flex;margin-bottom:14px">
+              <span class="brand-mark" style="background:#1A1A2E;color:#C9A84C;font-size:20px;border:1px solid rgba(201,168,76,0.3)">⚜</span>
+              <span class="brand-name" style="color:#fff">Safe<em style="color:#C9A84C">Heir</em></span>
+            </a>
+            <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
+              Secure Family Legacy Vault — a product of thestackmint.
             </p>
             <p style="margin-top:12px">
               <a href="/" style="color:#8d988f;font-size:0.84rem">← Back to thestackmint</a>
@@ -102,6 +116,31 @@ const { brand = 'thestackmint' } = Astro.props;
         </>
       )}
 
+      {brand === 'safeheir' && (
+        <>
+          <div>
+            <h4>Features</h4>
+            <ul>
+              <li><a href="#features">7 Vault Modules</a></li>
+              <li><a href="#features">Emergency Access</a></li>
+              <li><a href="#features">Continuity Planner</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="mailto:contact@thestackmint.com">contact@thestackmint.com</a></li>
+            </ul>
+          </div>
+        </>
+      )}
       {brand === 'codefinderhub' && (
         <>
           <div>

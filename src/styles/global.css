@@ -2444,3 +2444,147 @@ h2 {
   .sh-plans { grid-template-columns: 1fr; max-width: 420px; }
   .sh-step { grid-template-columns: 48px 1fr; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   HOMEPAGE — SafeHeir coming-soon featured card
+   ═══════════════════════════════════════════════════════════════ */
+
+.pdc-safeheir {
+  background: linear-gradient(135deg, #1A1A2E 0%, #0F0F1E 100%);
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 56px;
+  padding: 56px 60px;
+  margin-top: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.pdc-safeheir:hover {
+  border-color: rgba(201,168,76,0.45);
+  box-shadow: 0 24px 60px rgba(201,168,76,0.08);
+}
+.pdc-safeheir::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--sh-gold), var(--sh-gold-l), var(--sh-gold));
+}
+/* Subtle gold grid overlay */
+.pdc-safeheir::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(201,168,76,0.03) 0, rgba(201,168,76,0.03) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(0deg,  rgba(201,168,76,0.03) 0, rgba(201,168,76,0.03) 1px, transparent 1px, transparent 60px);
+  pointer-events: none;
+}
+
+.pdc-safeheir-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.pdc-safeheir-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--sh-gold-l);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 99px;
+  width: fit-content;
+  margin-bottom: 22px;
+}
+.pdc-safeheir-emblem {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 12px rgba(201,168,76,0.4));
+}
+.pdc-safeheir-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.pdc-safeheir-name em {
+  font-style: normal;
+  color: var(--sh-gold-l);
+}
+.pdc-safeheir-desc {
+  font-size: 0.97rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 42ch;
+}
+.pdc-safeheir-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.pdc-safeheir-features li {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.65);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pdc-safeheir-features li::before {
+  content: '◆';
+  color: var(--sh-gold);
+  font-size: 0.5em;
+  flex-shrink: 0;
+}
+.pdc-safeheir-cta {
+  display: inline-block;
+  background: var(--sh-gold);
+  color: #1A1A2E;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 12px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  width: fit-content;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 6px 20px rgba(201,168,76,0.25);
+}
+.pdc-safeheir-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,168,76,0.4); }
+
+.pdc-safeheir-mockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero pill for SafeHeir */
+.hero-pill.safeheir {
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--sh-gold-l);
+}
+.hero-pill.safeheir:hover { background: rgba(201,168,76,0.2); }
+
+@media (max-width: 860px) {
+  .pdc-safeheir { grid-template-columns: 1fr; padding: 40px 28px; gap: 36px; }
+  .pdc-safeheir-mockup { justify-content: flex-start; }
+}

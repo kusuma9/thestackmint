@@ -17,8 +17,9 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "@types/node": "^22.10.7",
     "@astrojs/check": "^0.9.4",
+    "@types/node": "^22.10.7",
+    "playwright": "^1.61.0",
     "typescript": "^5.7.3"
   }
 }

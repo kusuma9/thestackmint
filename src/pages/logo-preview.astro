@@ -1,0 +1,658 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Logo Preview — thestackmint" description="Logo design options">
+  <style>
+    body { background: #0d0d0d; }
+
+    .pg {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 24px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pg-title {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 64px;
+    }
+
+    /* ── Section heading ── */
+    .sect {
+      margin-bottom: 72px;
+    }
+    .sect-label {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 36px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    /* ── Logo card ── */
+    .logo-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 20px;
+      padding: 48px 52px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .logo-card.light {
+      background: #f8f6f1;
+      border-color: #e5e7eb;
+    }
+    .logo-card.mid {
+      background: #1a1a2e;
+      border-color: #2d2d4e;
+    }
+    .card-note {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.7rem;
+      color: #444;
+      margin-top: 8px;
+      letter-spacing: 0.05em;
+    }
+    .logo-card.light .card-note { color: #aaa; }
+
+    /* ══════════════════════════════════════════
+       BASE WORDMARK STRUCTURE
+    ══════════════════════════════════════════ */
+    .wm {
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+      text-decoration: none;
+      gap: 0;
+    }
+
+    /* "the" — now properly visible */
+    .wm .t {
+      font-family: 'Fraunces Variable', Georgia, serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      margin-right: 0.22em;
+      align-self: flex-end;
+      padding-bottom: 0.18em;
+    }
+
+    /* Stack + Mint — main display */
+    .wm .s, .wm .m {
+      font-family: 'Fraunces Variable', Georgia, serif;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    /* Sizes */
+    .wm.xl  .s, .wm.xl  .m { font-size: 3.4rem; }
+    .wm.xl  .t              { font-size: 1.3rem; }
+    .wm.lg  .s, .wm.lg  .m { font-size: 2.6rem; }
+    .wm.lg  .t              { font-size: 1.05rem; }
+    .wm.md  .s, .wm.md  .m { font-size: 1.9rem; }
+    .wm.md  .t              { font-size: 0.82rem; }
+    .wm.sm  .s, .wm.sm  .m { font-size: 1.35rem; }
+    .wm.sm  .t              { font-size: 0.6rem; }
+
+    /* Gradient text utility */
+    .grad-text {
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ══════════════════════════════════════════
+       CONCEPT 1 — 3D BLOCK EXTRUSION
+       Purple-blue Stack · Teal-green Mint
+       Warm coral "the"
+    ══════════════════════════════════════════ */
+
+    /* "the" */
+    .c1 .t {
+      background: linear-gradient(135deg, #fb923c, #f43f5e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Stack — purple to blue, 3D extruded down-right */
+    .c1 .s {
+      background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #4f46e5 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(1px 1px 0 #3730a3)
+        drop-shadow(2px 2px 0 #312e81)
+        drop-shadow(3px 3px 0 #2e1065)
+        drop-shadow(4px 4px 0 #1e1b4b)
+        drop-shadow(6px 7px 14px rgba(79,70,229,0.5));
+    }
+
+    /* Mint — teal to emerald, 3D extruded down-right */
+    .c1 .m {
+      background: linear-gradient(135deg, #5eead4 0%, #10b981 50%, #059669 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(1px 1px 0 #065f46)
+        drop-shadow(2px 2px 0 #064e3b)
+        drop-shadow(3px 3px 0 #022c22)
+        drop-shadow(4px 4px 0 #011a16)
+        drop-shadow(6px 7px 14px rgba(16,185,129,0.5));
+    }
+
+    /* ══════════════════════════════════════════
+       CONCEPT 2 — NEON GLOW
+       Electric on ultra dark
+    ══════════════════════════════════════════ */
+
+    .c2 .t {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 6px rgba(251,191,36,0.8)) drop-shadow(0 0 18px rgba(245,158,11,0.5));
+    }
+
+    .c2 .s {
+      background: linear-gradient(90deg, #e879f9, #c026d3, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(0 0 4px rgba(232,121,249,0.9))
+        drop-shadow(0 0 12px rgba(192,38,211,0.7))
+        drop-shadow(0 0 28px rgba(168,85,247,0.5));
+    }
+
+    .c2 .m {
+      background: linear-gradient(90deg, #34d399, #10b981, #06b6d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(0 0 4px rgba(52,211,153,0.9))
+        drop-shadow(0 0 12px rgba(16,185,129,0.7))
+        drop-shadow(0 0 28px rgba(6,182,212,0.5));
+    }
+
+    /* ══════════════════════════════════════════
+       CONCEPT 3 — METALLIC PREMIUM
+       Gold "the", chrome Stack, copper Mint
+    ══════════════════════════════════════════ */
+
+    .c3 .t {
+      background: linear-gradient(135deg, #fef08a, #fbbf24, #d97706);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 2px 4px rgba(217,119,6,0.6));
+    }
+
+    .c3 .s {
+      background: linear-gradient(160deg,
+        #e2e8f0 0%,
+        #94a3b8 20%,
+        #e2e8f0 40%,
+        #94a3b8 60%,
+        #f8fafc 80%,
+        #94a3b8 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(1px 1px 0 #334155)
+        drop-shadow(2px 2px 0 #1e293b)
+        drop-shadow(3px 3px 0 #0f172a)
+        drop-shadow(5px 6px 10px rgba(0,0,0,0.7));
+    }
+
+    .c3 .m {
+      background: linear-gradient(160deg,
+        #86efac 0%,
+        #16a34a 25%,
+        #4ade80 50%,
+        #15803d 75%,
+        #86efac 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(1px 1px 0 #14532d)
+        drop-shadow(2px 2px 0 #052e16)
+        drop-shadow(3px 3px 0 #021707)
+        drop-shadow(5px 6px 10px rgba(0,0,0,0.7));
+    }
+
+    /* ══════════════════════════════════════════
+       CONCEPT 4 — PRISMATIC / HOLOGRAPHIC
+       Rainbow shift across the full wordmark
+    ══════════════════════════════════════════ */
+
+    .c4-wrap {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0;
+      text-decoration: none;
+    }
+
+    .c4-wrap .t {
+      font-family: 'Fraunces Variable', Georgia, serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      margin-right: 0.22em;
+      align-self: flex-end;
+      padding-bottom: 0.18em;
+      background: linear-gradient(135deg, #f0abfc, #818cf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 6px rgba(192,38,211,0.5));
+    }
+
+    .c4-main {
+      font-family: 'Fraunces Variable', Georgia, serif;
+      font-weight: 900;
+      font-size: 3rem;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      /* Prismatic gradient across full word */
+      background: linear-gradient(90deg,
+        #f43f5e 0%,
+        #fb923c 15%,
+        #fbbf24 30%,
+        #34d399 50%,
+        #22d3ee 65%,
+        #818cf8 80%,
+        #e879f9 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(0 0 1px rgba(255,255,255,0.2))
+        drop-shadow(2px 3px 0 rgba(0,0,0,0.6))
+        drop-shadow(4px 6px 16px rgba(0,0,0,0.5));
+    }
+
+    .c4-main.lg { font-size: 2.2rem; }
+    .c4-main.sm-size { font-size: 1.4rem; }
+    .c4-wrap.sm .t { font-size: 0.65rem; }
+
+    /* ══════════════════════════════════════════
+       CONCEPT 5 — STACKED (2-line) 3D
+       "the" on its own line above
+    ══════════════════════════════════════════ */
+
+    .c5-wrap {
+      display: inline-flex;
+      flex-direction: column;
+      text-decoration: none;
+      line-height: 1;
+      gap: 4px;
+    }
+
+    .c5-the {
+      font-family: 'Fraunces Variable', Georgia, serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      background: linear-gradient(90deg, #fb923c, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 1px 4px rgba(251,146,60,0.5));
+      padding-left: 0.1em;
+    }
+
+    .c5-main {
+      display: inline-flex;
+      gap: 0;
+    }
+
+    .c5-stack {
+      font-family: 'Fraunces Variable', Georgia, serif;
+      font-weight: 900;
+      font-size: 2.8rem;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(135deg, #c084fc 0%, #818cf8 55%, #6366f1 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(1px 2px 0 #3730a3)
+        drop-shadow(2px 3px 0 #2e1065)
+        drop-shadow(4px 6px 12px rgba(79,70,229,0.6));
+    }
+
+    .c5-mint {
+      font-family: 'Fraunces Variable', Georgia, serif;
+      font-weight: 900;
+      font-size: 2.8rem;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(135deg, #34d399 0%, #10b981 55%, #059669 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter:
+        drop-shadow(1px 2px 0 #065f46)
+        drop-shadow(2px 3px 0 #022c22)
+        drop-shadow(4px 6px 12px rgba(16,185,129,0.6));
+    }
+
+    .c5-wrap.sm .c5-the { font-size: 0.75rem; }
+    .c5-wrap.sm .c5-stack,
+    .c5-wrap.sm .c5-mint { font-size: 1.8rem; }
+
+    /* ── size comparison row ── */
+    .sizes-row {
+      display: flex;
+      gap: 56px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .sz-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sz-label {
+      font-family: 'Karla', sans-serif;
+      font-size: 0.65rem;
+      color: #444;
+      letter-spacing: 0.08em;
+    }
+    .logo-card.light .sz-label { color: #aaa; }
+
+    /* on-light overrides */
+    .on-light.c1 .s {
+      filter:
+        drop-shadow(1px 1px 0 #6d28d9)
+        drop-shadow(2px 2px 0 #4c1d95)
+        drop-shadow(3px 3px 0 #2e1065)
+        drop-shadow(5px 6px 12px rgba(79,70,229,0.35));
+    }
+    .on-light.c1 .m {
+      filter:
+        drop-shadow(1px 1px 0 #047857)
+        drop-shadow(2px 2px 0 #064e3b)
+        drop-shadow(3px 3px 0 #022c22)
+        drop-shadow(5px 6px 12px rgba(5,150,105,0.35));
+    }
+    .on-light.c1 .t {
+      filter: drop-shadow(0 1px 4px rgba(244,63,94,0.3));
+    }
+  </style>
+
+  <div class="pg">
+    <p class="pg-title">thestackmint · 3D Logo Concepts</p>
+
+    <!-- ══ CONCEPT 1: 3D EXTRUSION ══ -->
+    <div class="sect">
+      <div class="sect-label">Concept 1 — 3D Block Extrusion · Coral "the" · Purple Stack · Teal Mint</div>
+
+      <div class="logo-card">
+        <div class="sizes-row">
+          <div class="sz-group">
+            <span class="sz-label">FULL SIZE</span>
+            <a class="wm xl c1" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <span class="sz-label">HEADER SIZE</span>
+            <a class="wm md c1" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <span class="sz-label">COMPACT</span>
+            <a class="wm sm c1" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+        </div>
+        <p class="card-note">ALL CAPS version below:</p>
+        <div class="sizes-row">
+          <div class="sz-group">
+            <a class="wm xl c1" href="#">
+              <span class="t grad-text">THE</span>
+              <span class="s">STACK</span>
+              <span class="m">MINT</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <a class="wm md c1" href="#">
+              <span class="t grad-text">THE</span>
+              <span class="s">STACK</span>
+              <span class="m">MINT</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Light background version -->
+      <div class="logo-card light">
+        <p class="card-note">On light background</p>
+        <div class="sizes-row">
+          <div class="sz-group">
+            <a class="wm xl c1 on-light" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <a class="wm md c1 on-light" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CONCEPT 2: NEON GLOW ══ -->
+    <div class="sect">
+      <div class="sect-label">Concept 2 — Neon Glow · Amber "the" · Fuchsia Stack · Cyan-Green Mint</div>
+
+      <div class="logo-card" style="background:#040406">
+        <div class="sizes-row">
+          <div class="sz-group">
+            <span class="sz-label">FULL SIZE</span>
+            <a class="wm xl c2" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <span class="sz-label">HEADER SIZE</span>
+            <a class="wm md c2" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+        </div>
+        <p class="card-note">ALL CAPS:</p>
+        <div class="sizes-row">
+          <div class="sz-group">
+            <a class="wm xl c2" href="#">
+              <span class="t grad-text">THE</span>
+              <span class="s">STACK</span>
+              <span class="m">MINT</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <a class="wm md c2" href="#">
+              <span class="t grad-text">THE</span>
+              <span class="s">STACK</span>
+              <span class="m">MINT</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CONCEPT 3: METALLIC PREMIUM ══ -->
+    <div class="sect">
+      <div class="sect-label">Concept 3 — Metallic Premium · Gold "the" · Chrome Stack · Emerald Mint · 3D Drop</div>
+
+      <div class="logo-card" style="background:#0a0a0a">
+        <div class="sizes-row">
+          <div class="sz-group">
+            <span class="sz-label">FULL SIZE</span>
+            <a class="wm xl c3" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <span class="sz-label">HEADER SIZE</span>
+            <a class="wm md c3" href="#">
+              <span class="t grad-text">the</span>
+              <span class="s">Stack</span>
+              <span class="m">Mint</span>
+            </a>
+          </div>
+        </div>
+        <p class="card-note">ALL CAPS:</p>
+        <div class="sizes-row">
+          <div class="sz-group">
+            <a class="wm xl c3" href="#">
+              <span class="t grad-text">THE</span>
+              <span class="s">STACK</span>
+              <span class="m">MINT</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CONCEPT 4: PRISMATIC ══ -->
+    <div class="sect">
+      <div class="sect-label">Concept 4 — Prismatic / Rainbow · Full spectrum across the wordmark</div>
+
+      <div class="logo-card" style="background:#050505">
+        <div class="sizes-row">
+          <div class="sz-group">
+            <span class="sz-label">FULL SIZE</span>
+            <a class="c4-wrap" href="#">
+              <span class="t" style="font-family:'Fraunces Variable',Georgia,serif;font-style:italic;font-weight:700;font-size:1.3rem;letter-spacing:0.02em;margin-right:0.18em;align-self:flex-end;padding-bottom:0.2em;background:linear-gradient(135deg,#f0abfc,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 6px rgba(192,38,211,0.5))">the</span>
+              <span class="c4-main">StackMint</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <span class="sz-label">HEADER</span>
+            <a class="c4-wrap" href="#">
+              <span class="t" style="font-family:'Fraunces Variable',Georgia,serif;font-style:italic;font-weight:700;font-size:0.9rem;letter-spacing:0.02em;margin-right:0.18em;align-self:flex-end;padding-bottom:0.16em;background:linear-gradient(135deg,#f0abfc,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent">the</span>
+              <span class="c4-main lg">StackMint</span>
+            </a>
+          </div>
+        </div>
+        <p class="card-note">ALL CAPS:</p>
+        <div class="sizes-row">
+          <div class="sz-group">
+            <a class="c4-wrap" href="#">
+              <span class="t" style="font-family:'Fraunces Variable',Georgia,serif;font-style:italic;font-weight:700;font-size:1.3rem;letter-spacing:0.02em;margin-right:0.18em;align-self:flex-end;padding-bottom:0.2em;background:linear-gradient(135deg,#f0abfc,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent">THE</span>
+              <span class="c4-main">STACKMINT</span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <a class="c4-wrap" href="#">
+              <span class="t" style="font-family:'Fraunces Variable',Georgia,serif;font-style:italic;font-weight:700;font-size:0.9rem;letter-spacing:0.02em;margin-right:0.18em;align-self:flex-end;padding-bottom:0.16em;background:linear-gradient(135deg,#f0abfc,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent">THE</span>
+              <span class="c4-main lg">STACKMINT</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CONCEPT 5: STACKED 2-LINE ══ -->
+    <div class="sect">
+      <div class="sect-label">Concept 5 — Stacked 2-Line · "the" on its own line · Biggest visual impact</div>
+
+      <div class="logo-card" style="background:#07070a">
+        <div class="sizes-row">
+          <div class="sz-group">
+            <span class="sz-label">FULL SIZE</span>
+            <a class="c5-wrap" href="#">
+              <span class="c5-the">the</span>
+              <span class="c5-main">
+                <span class="c5-stack">Stack</span>
+                <span class="c5-mint">Mint</span>
+              </span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <span class="sz-label">HEADER SIZE (compact)</span>
+            <a class="c5-wrap sm" href="#">
+              <span class="c5-the">the</span>
+              <span class="c5-main">
+                <span class="c5-stack">Stack</span>
+                <span class="c5-mint">Mint</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <p class="card-note">ALL CAPS:</p>
+        <div class="sizes-row">
+          <div class="sz-group">
+            <a class="c5-wrap" href="#">
+              <span class="c5-the">THE</span>
+              <span class="c5-main">
+                <span class="c5-stack">STACK</span>
+                <span class="c5-mint">MINT</span>
+              </span>
+            </a>
+          </div>
+          <div class="sz-group">
+            <a class="c5-wrap sm" href="#">
+              <span class="c5-the">THE</span>
+              <span class="c5-main">
+                <span class="c5-stack">STACK</span>
+                <span class="c5-mint">MINT</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

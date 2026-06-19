@@ -11,9 +11,9 @@ const currentPath = Astro.url.pathname;
 <header class="site-header">
   <div class="wrap nav">
     {brand === 'thestackmint' && (
-      <a class="brand" href="/">
-        <span class="brand-mark">T</span>
-        <span class="brand-name">thestack<em>mint</em></span>
+      <a class="logo-stacked" href="/">
+        <span class="lst-the">THE</span>
+        <span class="lst-main">STACKMINT</span>
       </a>
     )}
     {brand === 'familyhealth' && (
@@ -41,7 +41,7 @@ const currentPath = Astro.url.pathname;
         <>
           <li><a href="#products" aria-current={currentPath === '/' ? 'page' : undefined}>Products</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href={`mailto:satish.technology9@gmail.com`}>Contact</a></li>
+          <li><a href={`mailto:contact@thestackmint.com`}>Contact</a></li>
         </>
       )}
       {brand === 'familyhealth' && (

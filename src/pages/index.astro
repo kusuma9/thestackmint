@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 import { SITE } from '../site.config';
-import { products } from '../products.config';
 ---
 
 <BaseLayout
@@ -15,176 +14,223 @@ import { products } from '../products.config';
 
   <main>
 
-    <!-- Hub Hero -->
-    <section class="hub-hero">
-      <div class="wrap">
-        <div class="hub-brand-mark">T</div>
-        <span class="eyebrow reveal in">{SITE.tagline}</span>
-        <h1 class="reveal in d1">Thoughtfully built apps<br>for everyday life.</h1>
-        <p class="lede reveal in d2">
-          Each product solves one real problem with care — nothing bloated, nothing half-finished.
+    <!-- ═══ HERO — animated orbs + prismatic stacked logo ═══ -->
+    <section class="new-hero">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+
+      <div class="new-hero-content reveal in">
+        <!-- Large stacked logo -->
+        <div class="logo-stacked" style="pointer-events:none;margin-bottom:8px">
+          <span class="lst-the xl">THE</span>
+          <span class="lst-main xl">STACKMINT</span>
+        </div>
+
+        <p class="new-hero-tagline">
+          Apps that do one thing well.<br>Nothing more, nothing less.
         </p>
+
+        <div class="hero-pills">
+          <a href="/familyhealth" class="hero-pill green">🌿&nbsp; Family Healthcare</a>
+          <a href="/codefinderhub" class="hero-pill amber">📮&nbsp; CodeFinderHub</a>
+        </div>
+      </div>
+
+      <div class="scroll-cue">
+        <span class="scroll-cue-label">scroll</span>
+        <div class="scroll-cue-line"></div>
       </div>
     </section>
 
-    <!-- Products -->
-    <section id="products" class="section-alt">
-      <div class="wrap">
-        <p class="kicker reveal">Product portfolio</p>
-        <h2 class="reveal">Apps that ship.<br>Problems that are solved.</h2>
-        <p class="section-intro reveal">
-          Every product below is live, maintained, and used by real people every day.
-        </p>
+    <!-- ═══ PRODUCTS — tilted duo cards ═══ -->
+    <section id="products" class="products-section">
+      <div class="products-section-head reveal">
+        <p class="kicker">The portfolio</p>
+        <h2>Two apps. Two problems solved.</h2>
+      </div>
 
-        <div class="product-grid">
+      <div class="products-duo">
 
-          <!-- VitaFamily Health -->
-          <a href="/familyhealth" class="product-card familyhealth reveal">
-            <div class="pc-body">
-              <div class="pc-icon" style={`background:${products[0]!.iconBg}`}>{products[0]!.emoji}</div>
-              <span class="pc-badge">{products[0]!.badge}</span>
-              <h3>{products[0]!.name}</h3>
-              <p>{products[0]!.description}</p>
-              <div class="pc-ctas">
-                <span class="btn btn-primary">{products[0]!.primaryCta}</span>
-                {products[0]!.secondaryCta && (
-                  <span class="btn btn-ghost">{products[0]!.secondaryCta}</span>
-                )}
-              </div>
-            </div>
-            <div class="pc-visual" aria-hidden="true">
-              <div class="mini-phone">
-                <div class="mini-screen">
-                  <div class="ms-header">Good morning 🌤️</div>
-                  <div class="ms-banner">💊 2 doses due — 8:00 AM</div>
-                  <div class="ms-card">
-                    <span class="ms-dot" style="background:#e3efe7">💊</span>
-                    <div><strong>Metformin 500mg</strong><span>Amma · after breakfast</span></div>
-                  </div>
-                  <div class="ms-card">
-                    <span class="ms-dot" style="background:#fdf0e3">🏥</span>
-                    <div><strong>Dr. Rao — Cardiology</strong><span>tomorrow 10:30 AM</span></div>
-                  </div>
-                  <div class="ms-card">
-                    <span class="ms-dot" style="background:#ede9fe">🩺</span>
-                    <div><strong>BP: 124/82</strong><span>Appa · today 7:12 AM</span></div>
-                  </div>
-                  <div class="ms-card">
-                    <span class="ms-dot" style="background:#e3efe7">📄</span>
-                    <div><strong>Lab report uploaded</strong><span>Lipid profile · 2d ago</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-
-          <!-- CodeFinderHub -->
-          <a href="/codefinderhub" class="product-card codefinderhub reveal d1">
-            <div class="pc-body">
-              <div class="pc-icon" style={`background:${products[1]!.iconBg}`}>{products[1]!.emoji}</div>
-              <span class="pc-badge amber-badge">{products[1]!.badge}</span>
-              <h3>{products[1]!.name}</h3>
-              <p>{products[1]!.description}</p>
-              <div class="pc-ctas">
-                <span class="btn btn-amber">{products[1]!.primaryCta}</span>
-                {products[1]!.secondaryCta && (
-                  <span class="btn btn-ghost" style="border-color:var(--amber);color:var(--amber)">{products[1]!.secondaryCta}</span>
-                )}
-              </div>
-            </div>
-            <div class="pc-visual" aria-hidden="true">
-              <div class="cf-mockup">
-                <div class="cf-search">🔍 600001</div>
-                <div class="cf-result">
-                  <strong>Mumbai GPO</strong>
-                  Mumbai, Maharashtra
-                  <div>
-                    <span class="cf-badge">PINCODE</span>
-                    <span class="cf-badge">INSTANT</span>
-                  </div>
-                </div>
-                <div class="cf-result">
-                  <strong>SBIN0000300</strong>
-                  SBI Main Branch, Fort
-                  <div>
-                    <span class="cf-badge">IFSC</span>
-                    <span class="cf-badge">NEFT/RTGS</span>
-                  </div>
-                </div>
-                <div class="cf-result">
-                  <strong>REST API ready</strong>
-                  JSON · Batch · Docs
-                  <div>
-                    <span class="cf-badge">DEVELOPER</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-
-          <!-- Coming soon slot -->
-          <div class="product-card coming-soon reveal d2" aria-label="Next product — coming soon">
-            <div class="pc-body">
-              <div class="pc-icon">🔮</div>
-              <span class="pc-badge" style="background:#e5e7eb;color:#6b7280">Coming 2026</span>
-              <h3 style="color:#9ca3af">Next app is brewing…</h3>
-              <p>
-                Another focused product for everyday life is in development.
-                <a href="mailto:satish.technology9@gmail.com" style="color:var(--green);font-weight:600">Get early access →</a>
-              </p>
-            </div>
+        <!-- Family Healthcare card -->
+        <div class="product-duo-card pdc-health reveal">
+          <div class="pdc-content">
+            <span class="pdc-badge">Android App · Live</span>
+            <div class="pdc-name">Family Healthcare</div>
+            <p class="pdc-desc">
+              Health tracking for your entire family — medications, appointments,
+              vitals, and emergency records, all in one private space.
+            </p>
+            <ul class="pdc-features">
+              <li>Medication reminders &amp; refill tracking</li>
+              <li>Appointment calendar for every family member</li>
+              <li>Vitals monitoring — BP, sugar, weight &amp; more</li>
+              <li>Emergency QR with complete medical history</li>
+              <li>Role-based access for caretakers</li>
+            </ul>
+            <a href="/familyhealth" class="pdc-cta">View App →</a>
           </div>
 
+          <!-- Phone mockup strip -->
+          <div class="pdc-mockup-strip">
+            <div class="phone-frame">
+              <div class="phone-frame-screen">
+                <div class="pf-status"><span>9:41 AM</span><span>● ● ●</span></div>
+                <div class="pf-appbar">
+                  <span class="pf-appbar-title">Family Health</span>
+                  <span class="pf-appbar-icon">🔔</span>
+                </div>
+                <div class="pf-body">
+                  <div>
+                    <div class="pf-greeting">Good morning, Satish</div>
+                    <div class="pf-sub">3 members · 2 reminders due</div>
+                  </div>
+                  <div class="pf-pills">
+                    <span class="pf-pill active">Satish</span>
+                    <span class="pf-pill">Priya</span>
+                    <span class="pf-pill">Arjun</span>
+                  </div>
+                  <div class="pf-card">
+                    <div class="pf-card-icon">💊</div>
+                    <div>
+                      <div class="pf-card-title">Aspirin 75mg · 8:00 AM</div>
+                      <div class="pf-card-sub">Due in 2 hours · Satish</div>
+                    </div>
+                  </div>
+                  <div class="pf-card">
+                    <div class="pf-card-icon" style="background:#e3f0ff">📅</div>
+                    <div>
+                      <div class="pf-card-title">Dr. Kumar · Cardiology</div>
+                      <div class="pf-card-sub">Tomorrow · 10:30 AM</div>
+                    </div>
+                  </div>
+                  <div class="pf-vitals">
+                    <div>
+                      <div class="pf-vital-label">Blood Pressure</div>
+                      <div class="pf-vital-value">120/80</div>
+                    </div>
+                    <div class="pf-vital-badge">✓ Normal</div>
+                  </div>
+                </div>
+                <div class="pf-bottom-nav">
+                  <div class="pf-nav-item active"><span class="pf-nav-icon">🏠</span>Home</div>
+                  <div class="pf-nav-item"><span class="pf-nav-icon">💊</span>Meds</div>
+                  <div class="pf-nav-item"><span class="pf-nav-icon">📅</span>Calendar</div>
+                  <div class="pf-nav-item"><span class="pf-nav-icon">👤</span>Family</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CodeFinderHub card -->
+        <div class="product-duo-card pdc-code reveal d1">
+          <div class="pdc-content">
+            <span class="pdc-badge">Web Tool · Free</span>
+            <div class="pdc-name">CodeFinderHub</div>
+            <p class="pdc-desc">
+              India's most complete pincode and IFSC lookup — instant results,
+              always accurate, and completely free.
+            </p>
+            <ul class="pdc-features">
+              <li>Pincode → post office, district, taluk &amp; state</li>
+              <li>IFSC → bank name, branch, city &amp; contact</li>
+              <li>Search any bank branch by name or city</li>
+              <li>REST API for developers — JSON, batch support</li>
+            </ul>
+            <a href="/codefinderhub" class="pdc-cta">Try it Free →</a>
+          </div>
+
+          <!-- Browser mockup strip -->
+          <div class="pdc-mockup-strip">
+            <div class="browser-frame">
+              <div class="bf-chrome">
+                <div class="bf-dots">
+                  <div class="bf-dot" style="background:#ff5f57"></div>
+                  <div class="bf-dot" style="background:#febc2e"></div>
+                  <div class="bf-dot" style="background:#28c840"></div>
+                </div>
+                <div class="bf-url-bar">
+                  <span class="bf-url-bar-icon">🔒</span>
+                  codefinderhub.com
+                </div>
+              </div>
+              <div class="bf-content">
+                <div class="bf-brand-row">
+                  <span class="bf-brand-icon">📮</span>
+                  <span class="bf-brand-name">CodeFinderHub</span>
+                </div>
+                <div class="bf-tabs">
+                  <span class="bf-tab active">Pincode</span>
+                  <span class="bf-tab">IFSC</span>
+                  <span class="bf-tab">Bank Branches</span>
+                </div>
+                <div class="bf-search-row">
+                  <input class="bf-input" type="text" value="400053" readonly />
+                  <button class="bf-search-btn">Search</button>
+                </div>
+                <div class="bf-results">
+                  <div class="bf-result-row">
+                    <span class="bf-result-label">District</span>
+                    <span class="bf-result-value">Mumbai Suburban</span>
+                  </div>
+                  <div class="bf-result-row">
+                    <span class="bf-result-label">State</span>
+                    <span class="bf-result-value">Maharashtra</span>
+                  </div>
+                  <div class="bf-result-row">
+                    <span class="bf-result-label">Post Office</span>
+                    <span class="bf-result-value">Andheri West SO</span>
+                  </div>
+                  <div class="bf-result-row">
+                    <span class="bf-result-label">Taluk</span>
+                    <span class="bf-result-value">Andheri</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ MANIFESTO — who I am and what I believe ═══ -->
+    <section id="about" class="manifesto-section">
+      <p class="manifesto-quote reveal">
+        "I build software the way I'd want to use it — focused,
+        private, and actually finished."
+      </p>
+      <p class="manifesto-author reveal d1">— Sathish Kusuma, Founder · thestackmint</p>
+
+      <div class="principles-strip">
+        <div class="principle reveal">
+          <span class="principle-icon">🎯</span>
+          <div class="principle-title">Focus over features</div>
+          <p class="principle-desc">Each app solves one problem exceptionally well. No bloat, no dark patterns.</p>
+        </div>
+        <div class="principle reveal d1">
+          <span class="principle-icon">🔒</span>
+          <div class="principle-title">Privacy by design</div>
+          <p class="principle-desc">Your data belongs to you — encrypted, never profiled, always portable.</p>
+        </div>
+        <div class="principle reveal d2">
+          <span class="principle-icon">📱</span>
+          <div class="principle-title">Mobile-first, always</div>
+          <p class="principle-desc">Built for real life, on phones, with one hand — not for developer demos.</p>
         </div>
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about">
-      <div class="wrap">
-        <p class="kicker reveal">Who builds this</p>
-        <h2 class="reveal">One developer.<br>Zero compromises.</h2>
-        <p class="section-intro reveal">
-          thestackmint is a solo software studio. Every design decision, line of code, and product call comes from one person who uses these apps daily and cares deeply about getting things right.
-        </p>
-        <div class="cards" style="margin-top:44px">
-          <div class="card reveal d1">
-            <span class="icon">🎯</span>
-            <h3>Focus over features</h3>
-            <p>Each app does one thing exceptionally well. No bloated dashboards, no upsell nags, no dark patterns.</p>
-          </div>
-          <div class="card amber reveal d2">
-            <span class="icon">🔒</span>
-            <h3>Privacy by design</h3>
-            <p>Your data belongs to you. Every app uses encrypted, RLS-protected backends with full GDPR compliance and data-portability.</p>
-          </div>
-          <div class="card reveal d3">
-            <span class="icon">📱</span>
-            <h3>Mobile-first, always</h3>
-            <p>Every product ships as a polished native mobile app — built for how people actually live, not how developers build demos.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA band -->
-    <section style="padding:32px 0 84px">
-      <div class="wrap">
-        <div class="cta-band reveal">
-          <h2>Have an everyday problem<br>worth solving?</h2>
-          <p>
-            If you've hit a problem that deserves an elegant software solution, reach out.
-            The next thestackmint product could be yours.
-          </p>
-          <a
-            class="btn"
-            style="background:#fff;color:var(--green-deep);font-weight:800"
-            href="mailto:satish.technology9@gmail.com"
-          >
-            Start a conversation →
-          </a>
-        </div>
-      </div>
+    <!-- ═══ CTA — reach out ═══ -->
+    <section class="cta-final">
+      <h2 class="reveal">Have a problem<br>worth solving?</h2>
+      <p class="cta-sub reveal d1">
+        I build focused apps that make everyday life a little simpler. Let's talk.
+      </p>
+      <a href="mailto:contact@thestackmint.com" class="cta-email-btn reveal d2">
+        contact@thestackmint.com →
+      </a>
     </section>
 
   </main>

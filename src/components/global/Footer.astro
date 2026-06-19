@@ -11,12 +11,12 @@ const { brand = 'thestackmint' } = Astro.props;
       <div>
         {brand === 'thestackmint' && (
           <>
-            <a class="brand" href="/" style="display:inline-flex;margin-bottom:14px">
-              <span class="brand-mark">T</span>
-              <span class="brand-name" style="color:#fff">thestack<em>mint</em></span>
+            <a class="logo-stacked" href="/" style="margin-bottom:14px">
+              <span class="lst-the">THE</span>
+              <span class="lst-main">STACKMINT</span>
             </a>
             <p style="font-size:0.88rem;color:#8d988f;margin-top:10px;max-width:22rem">
-              Solo-crafted apps built with care. Based in India, shipped globally.
+              Solo-crafted apps for everyday life.
             </p>
           </>
         )}
@@ -70,7 +70,7 @@ const { brand = 'thestackmint' } = Astro.props;
           <div>
             <h4>Contact</h4>
             <ul>
-              <li><a href="mailto:satish.technology9@gmail.com">satish.technology9@gmail.com</a></li>
+              <li><a href="mailto:contact@thestackmint.com">contact@thestackmint.com</a></li>
             </ul>
           </div>
         </>
@@ -123,7 +123,7 @@ const { brand = 'thestackmint' } = Astro.props;
           <div>
             <h4>Contact</h4>
             <ul>
-              <li><a href="mailto:satish.technology9@gmail.com">satish.technology9@gmail.com</a></li>
+              <li><a href="mailto:contact@thestackmint.com">contact@thestackmint.com</a></li>
             </ul>
           </div>
         </>
@@ -132,7 +132,9 @@ const { brand = 'thestackmint' } = Astro.props;
 
     <div class="footer-note">
       <span>© <span data-year></span> thestackmint. All rights reserved.</span>
-      <span>Made with ♥ in India{brand === 'familyhealth' ? ' — for families everywhere' : ''}</span>
+      <div class="footer-author">
+        Made with ♥ by <strong>Sathish Kusuma</strong>&nbsp;·&nbsp;Founder &amp; Developer
+      </div>
     </div>
   </div>
 </footer>
